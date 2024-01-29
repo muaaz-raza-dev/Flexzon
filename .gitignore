@@ -2,3 +2,4 @@
 ./Records Client/node_modules
 ./Records Client/.env
 ./Records server/.env
+.MongoConfig.js
