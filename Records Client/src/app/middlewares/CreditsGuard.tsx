@@ -46,8 +46,8 @@ const CreditsGuard: FC<{ children: ReactNode }> = ({ children }) => {
   let Credits = useAppSelector((state) => state.credits);
   let navigate = useNavigate();
   useEffect(() => {
-      if (!Credits.isLogined) {
-        navigate("/auth/login");
+     if (!Credits.isLoading&&!Credits.isLogined) {
+       navigate("/auth/login");
       }
   }, [Credits]);
   if (Credits.isLogined) {

@@ -18,7 +18,10 @@ export interface IChangeHandler{
 }
 const ContactNumberDetails:FC<IChangeHandler> = ({ChangeHandler}) => {
 const [ContactState, setContactState] = useState({value:"",display:false});
-    let {email} = useAppSelector(state=>state.credits.Info)
+    let {contact} = useAppSelector(state=>state.credits.Info)
+    useEffect(() => {
+      contact&& setContactState(contact)
+    }, []);
     useEffect(() => {
       ChangeHandler<typeof ContactState>({payload:{Header:"contact",data:ContactState}})
     }, [ContactState]);
@@ -28,13 +31,13 @@ const [ContactState, setContactState] = useState({value:"",display:false});
         <div className="flex gap-x-4 items-center justify-between w-[80%]">
 
         <div className="md:w-[90%]  flex  flex-col gap-y0.5 justify-center">
-<Input onChange={(e)=>setContactState({...ContactState,value:e.target.value})} type="number" id="Contact" className=" focus-visible:ring-0 focus-visible:border-black border" name="Contact" placeholder="contact number " defaultValue={email}/>
+<Input onChange={(e)=>setContactState({...ContactState,value:e.target.value})} type="number" id="Contact" className=" focus-visible:ring-0 focus-visible:border-black border" name="Contact" placeholder="contact number " defaultValue={contact?.value}/>
         </div>
         <div className="flex flex-col center ">
             <Label className="font-bold text-xs "> Visiblity </Label>
         <Switch 
         onCheckedChange={e=>setContactState({...ContactState,display:e,})}
-        checked={ContactState.display}
+        defaultChecked={contact?.display}
         className="!bg-[var(--light)] ToggleShadCn aspect-square mb-2"
         />
         </div>
@@ -48,6 +51,15 @@ export const GenderDetails:FC<IChangeHandler> = ({ChangeHandler}) => {
   const [GenderState, setGenderState] = useState({value:"",display:false});
   const [DobState, setDobState] = useState({value:"",display:false});
       let {gender,dob} = useAppSelector(state=>state.credits.Info)
+      useEffect(() => {
+        if (gender) {
+          setGenderState(gender)
+        }
+        if (dob) {
+          setDobState(dob)
+          
+        }
+      }, [gender,dob]);
       useEffect(() => {
         ChangeHandler<typeof GenderState>({payload:{Header:"gender",data:GenderState}})
       }, [GenderState]);
@@ -80,7 +92,8 @@ return<DropdownMenuItem className="cursor-pointer border-b-2" onClick={()=>setGe
               <Label className="font-bold text-xs "> Visiblity </Label>
           <Switch 
           onCheckedChange={e=>setGenderState({...GenderState,display:e,})}
-          checked={GenderState.display}
+        defaultChecked={gender?.display}
+
           className="!bg-[var(--light)] ToggleShadCn aspect-square mb-2"
           />
           </div>
@@ -97,7 +110,7 @@ return<DropdownMenuItem className="cursor-pointer border-b-2" onClick={()=>setGe
             <Switch 
             id="dobTOggle"
             onCheckedChange={e=>setDobState({...DobState,display:e,})}
-            checked={DobState.display}
+            defaultChecked={dob?.display}
             className="!bg-[var(--light)] ToggleShadCn aspect-square mb-2"
             />
             </div>
@@ -113,7 +126,10 @@ export const WebsiteDetails:FC<IChangeHandler> = ({ChangeHandler})=>{
     const [Website, setWebsite] = useState({url:"",altText:""});
     let {website} = useAppSelector(state=>state.credits.Info)
     useEffect(() => {
-      ChangeHandler<typeof Website>({payload:{Header:"webiste",data:Website}})
+      website&&setWebsite(website)
+    }, []);
+    useEffect(() => {
+      ChangeHandler<typeof Website>({payload:{Header:"website",data:Website}})
 
     }, [Website]);
 return(
@@ -121,7 +137,7 @@ return(
         <label htmlFor="Website" className="hFont text-xl py-2" >Portfolio/Webiste</label>
         <div className="flex gap-x-4 items-center justify-between w-[80%]">
         <div className="md:w-[60%]  flex  flex-col gap-y0.5 justify-center">
-<Input onChange={(e)=>setWebsite({...Website,url:e.target.value})} type="contact" id="Website" className=" focus-visible:ring-0 focus-visible:border-black border" name="Website" placeholder="Url i.e https://blogger.vercel.app " defaultValue={website?.url}/>
+<Input onChange={(e)=>setWebsite({...Website,url:e.target.value})} type="contact" id="Website" className=" focus-visible:ring-0 focus-visible:border-black border" name="Website"  placeholder="Url i.e https://Records.vercel.app " defaultValue={website?.url}/>
         </div>
         <div className="flex flex-col center w-[40%]">
         <Input onChange={(e)=>setWebsite({...Website,altText:e.target.value})} type="contact" id="Website" className=" focus-visible:ring-0 focus-visible:border-black border" name="Website" placeholder="Alt text i.e My portfolio" defaultValue={website?.altText}/>
@@ -139,25 +155,31 @@ return(
     const [ToggleState, setToggleState] = useState<{toggle:boolean,refrence:"fb"|"insta"|"linkedIn"}>({toggle:false,refrence:"fb"});
     let {Links} = useAppSelector(state=>state.credits.Info)
     useEffect(() => {
-      ChangeHandler<typeof SocialMedia>({payload:{Header:"webiste",data:SocialMedia}})
+      setSocialMedia({fb:Links?.fb||"",insta:Links?.insta||"",linkedIn:Links?.linkedIn||"",})
+    }, []);
+    useEffect(() => {
+      ChangeHandler<typeof SocialMedia>({payload:{Header:"Links",data:SocialMedia}})
     }, [SocialMedia]);
 return(
 <section className="flex gap-x-4 flex-col ">
         <label htmlFor="Website" className="hFont text-xl py-2" >Social Media</label>
 
-        <div className="flex gap-x-4 items-center  w-[80%]">
+        <div className="flex flex-col gap-y-4 items-center  w-[80%]">
           {
             ToggleState.toggle&&
-        <Input onChange={(e)=>setSocialMedia({...SocialMedia,[ToggleState.refrence]:e.target.value})} type="number" id="Contact" className=" focus-visible:ring-0 focus-visible:border-black border" name="Contact" placeholder="contact number " defaultValue={Links&&Links[ToggleState.refrence]||""} />
+        <Input  onChange={(e)=>setSocialMedia({...SocialMedia,[ToggleState.refrence]:e.target.value})} type="text" id="Contact" value={SocialMedia[ToggleState.refrence]||""} className=" focus-visible:ring-0 focus-visible:border-black border" name="Contact" placeholder={ToggleState.refrence} />
           }
-          <div onClick={(e)=>setToggleState({toggle:!ToggleState.toggle,refrence:"linkedIn"})} className={`w-[7%] border-2 ${Links?.linkedIn==""||!Links?.linkedIn? "border-red-500":"border-green-500"}  max-md:w-[12%] cursor-pointer  text-white  primary aspect-square center rounded-full`}>
+          <div className="flex items-center w-full gap-x-5">
+
+          <div onClick={()=>setToggleState({toggle:true,refrence:"linkedIn"})} className={`w-[7%] border-2 ${!SocialMedia?.linkedIn? "border-red-500":"border-green-500"}  max-md:w-[12%] cursor-pointer  text-white  primary aspect-square center rounded-full`}>
             <Linkedin className="max-md:w-6"/>
           </div>
-          <div onClick={(e)=>setToggleState({toggle:!ToggleState.toggle,refrence:"insta"})} className={`w-[7%] border-2 ${Links?.insta==""||!Links?.insta? "border-red-500":"border-green-500"}  max-md:w-[12%] cursor-pointer   text-white primary aspect-square center rounded-full`}>
+          <div onClick={()=>setToggleState({toggle:true,refrence:"insta"})} className={`w-[7%] border-2 ${!SocialMedia?.insta? "border-red-500":"border-green-500"}  max-md:w-[12%] cursor-pointer   text-white primary aspect-square center rounded-full`}>
             <Instagram className="max-md:w-6"/>
           </div>
-          <div onClick={(e)=>setToggleState({toggle:!ToggleState.toggle,refrence:"fb"})} className={`w-[7%] max-md:w-[12%] border-2 ${Links?.fb==""||!Links?.fb? "border-red-500":"border-green-500"}  cursor-pointer  text-white  primary aspect-square center rounded-full`}>
+          <div onClick={()=>setToggleState({toggle:true,refrence:"fb"})} className={`w-[7%] max-md:w-[12%] border-2 ${!SocialMedia?.fb? "border-red-500":"border-green-500"}  cursor-pointer  text-white  primary aspect-square center rounded-full`}>
             <Facebook className="max-md:w-6"/>
+          </div>
           </div>
      </div>
       </section>

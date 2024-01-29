@@ -116,27 +116,50 @@ app.post("/verify", async (req, res) => {
 app.post("/login", async (req, res) => {
   let { username, password } = req.body;
   try {
+
+    
     let result = await Member.findOne({ username,isDeleted:false }).populate(["followers",
     "following",
     "Posts",
     "saved",
     "interests",
     "liked",]);
+    
     if (!result) {
-      res
-        .status(StatusCodes.NOT_FOUND)
-        .json({ success: false, msg: "Invalid username" });
-    } else {
-      let verification = await bcrypt.compare(password, result.password);
-      if (verification) {
-        let token = await jwt.sign({ id: result._id }, JWT_SECRET);
-        res
-          .status(StatusCodes.ACCEPTED)
-          .json({ success: true, token, msg: "logined successfully",payload:result });
-      } else {
-        res.json({ success: false, msg: "Invalid password" });
+       result =  await Member.findOne({ email:username,isDeleted:false }).populate(["followers",
+       "following",
+       "Posts",
+       "saved",
+       "interests",
+       "liked",]);
+       if (!result) {
+         res
+         .status(StatusCodes.NOT_FOUND)
+         .json({ success: false, msg: "Invalid username or email" });
+        }
+        else {
+        let verification = await bcrypt.compare(password, result.password);
+        if (verification) {
+          let token = await jwt.sign({ id: result._id }, JWT_SECRET);
+          res
+            .status(StatusCodes.ACCEPTED)
+            .json({ success: true, token, msg: "logined successfully",payload:result });
+        } else {
+          res.json({ success: false, msg: "Invalid password" });
+        }
       }
-    }
+      }
+      else{
+        let verification = await bcrypt.compare(password, result.password);
+        if (verification) {
+          let token = await jwt.sign({ id: result._id }, JWT_SECRET);
+          res
+            .status(StatusCodes.ACCEPTED)
+            .json({ success: true, token, msg: "logined successfully",payload:result });
+        } else {
+          res.json({ success: false, msg: "Invalid password" });
+        }
+      }
   } catch (error) {
     console.log(error);
     res
@@ -177,11 +200,11 @@ app.post("/verifyUsername", async (req, res) => {
 });
 //!Update
 app.put("/update", VerifyMember, async (req, res) => {
-  let { Name, username, bio, email, avatar ,age,interests,Links,website , gender } = req.body;
+  let { Name, username, bio, email, avatar ,age,interests,Links,website , gender,contact,dob } = req.body;
   try {
     await Member.findByIdAndUpdate(
       { _id: req.AdminId },
-      { Name, username, bio, email, avatar ,age,interests,Links,website,gender }
+      { Name, username, bio, email, avatar ,age,interests,Links,website,gender,contact,dob }
     );
     res
       .status(StatusCodes.OK)

@@ -8,7 +8,7 @@ import Cookies from "js-cookie";
 import { ChangeEvent } from "react";
 import { toast } from "react-hot-toast";
 import { useMutation } from "react-query";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 
 const LoginFile = () => {
@@ -52,7 +52,7 @@ function inputHandler(purpose:string,e:ChangeEvent<HTMLInputElement>) {
       <div className="lg:w-1/2 bg-[var(--bg)] text-black w-full flex items-center justify-center text-center md:px-16 px-0 z-0">
       
         <div className="w-full py-6 z-20">
-          <h1 className="my-6 text-4xl hFont">Login to Blogger</h1>
+          <h1 className="my-6 text-4xl hFont">Login to Records</h1>
 
           <form onSubmit={(e)=>{
             e.preventDefault()
@@ -65,7 +65,7 @@ function inputHandler(purpose:string,e:ChangeEvent<HTMLInputElement>) {
                 name="username"
                 onChange={(e) => inputHandler("login",e)}
                 id="email"
-                placeholder="username"
+                placeholder="username or email"
                 className="block w-full p-4 text-lg rounded border-[var(--secondary)] border-2 focus:border-black "
               />
             </div>
@@ -82,7 +82,10 @@ function inputHandler(purpose:string,e:ChangeEvent<HTMLInputElement>) {
                 placeholder="Password"
               />
             </div>
-            <div className="text-right  hover:underline hover:text-gray-100"></div>
+            <div className="text-right   flex w-full justify-between">
+              <Link to={"/auth/register"} className="text-green-800">Create new account</Link>
+              <b className="cursor-pointer">Forgot password?</b>
+              </div>
             <div className="px-4 pb-2 pt-4">
               <button className="uppercase block w-full p-4 text-lg rounded-full bg-[var(--primary)] hover:bg-[black] text-white transition-colors focus:outline-none">
             {

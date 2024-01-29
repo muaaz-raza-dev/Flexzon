@@ -14,7 +14,7 @@ const Navbar = () => {
     <img src="/images/Records2.png" className="aspect-square rounded h-full cursor-pointer" alt="Records" onClick={()=>navigate("/")}/>
     {data.isLogined?
     <LoginedSearchbar/>:
-    <h1 className="text-3xl  BFont cursor-pointer " onClick={()=>navigate("/")}>Blogger</h1>
+    <h1 className="text-3xl  BFont cursor-pointer " onClick={()=>navigate("/")}>Records</h1>
   }
       </section>
 

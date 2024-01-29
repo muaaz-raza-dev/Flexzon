@@ -5,6 +5,7 @@ import { FC } from "react"
 import { Link } from "react-router-dom"
 import { useAppSelector } from "@/app/ReduxHooks"
 import FollowPattren from "./FollowPattren"
+import ProfileDetails from "./ProfileDetails"
 
 const PuserInfoFile:FC = () => {
   let userState = useAppSelector(state=>state.userDetails)
@@ -22,7 +23,7 @@ const PuserInfoFile:FC = () => {
         
         <div className="flex  items-center gap-x-4">
 <h1 className="font-bold text-2xl">{userState.Info.username}</h1>
-<Button className="bg-[var(--secondary)] hover:bg-[var(--primary)] hover:text-white text-white" variant={"outline"}>
+<Button className="bg-transparent hover:bg-[var(--primary)] border border-[black] hover:text-white text-black font-bold" variant={"outline"}>
   {userState.Info._id===credits.Info._id?
   <Link to={"/profile/settings"}>
   Edit profile
@@ -30,6 +31,7 @@ const PuserInfoFile:FC = () => {
   <FollowPattren/>
   }
   </Button>
+<ProfileDetails/>
         </div>
         <div className="flex max-md:w-[95%] md:w-[80%] justify-between">
     <b>{userState.Posts.length} blogs   </b>

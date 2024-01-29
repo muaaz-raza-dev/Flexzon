@@ -8,8 +8,18 @@ app.get("/:id",async(req,res)=>{
     "following",
     "interests",
     "liked",])
-    .select(["-password","-email","-saved","-registeredDate","-liked","-interests","-Name","-__v"])
+    .select(["-password","-saved","-liked","-interests","-__v"])
+ 
     let Post=await Posts.find({author:id,isDeleted:false,anonymous:false}).populate(["author","topic"]).sort({publishDate:-1})
+ if (User._doc.gender.display ===false) {
+    User._doc.gender=null
+ }
+ if (User._doc.contact.display ===false) {
+    User._doc.contact=null
+ }
+ if (User._doc.dob.display ===false) {
+    User._doc.dob=null
+ }
     res.json({ success: true, payload: { ...User._doc, Posts: Post } });
 })
 

@@ -8,7 +8,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog"
-import {useState} from "react"
+import {useEffect, useState} from "react"
 import EditInfo from "@/Queryfunctions/Auth/EditInfo"
 import { useAppDispatch, useAppSelector } from "@/app/ReduxHooks"
 import { CreditsInsertion } from "@/app/Slices/CredentialSlice"
@@ -38,32 +38,43 @@ const PersonalInfoFile = () => {
     contact:{value:"",display:false},
     bio:"",
     website:{url:"",altText:""},
-    Links:[],
+    Links:{fb:"",insta:"",linkedIn:""},
     gender:{value:"",display:false},
     dob:{value:"",display:false},
   });
+  useEffect(() => {
+    setInputState({    Name:Info.Name,
+    username:Info.username,
+    email:Info.email,
+    contact:Info.contact||{value:"",display:false},
+    bio:Info.bio,
+    website:Info.website||{url:"",altText:""},
+    Links:Info.Links||{fb:"",insta:"",linkedIn:''},
+    gender:Info.gender||{value:"",display:false},
+    dob:Info.dob||{value:"",display:false},})
+  }, [Info]);
 const [ImageState, setImageState] = useState<{uri:string,blob?:any}>({uri:"",});
   let dispatch = useAppDispatch()
-  let {username,email,bio,avatar,Name}=Info
-  let {mutate,isLoading} =useMutation({mutationKey:"Save",mutationFn:()=>EditInfo({Name,username,bio,email,avatar}) ,
+  let {avatar} =Info
+  let {username,email,bio,Name,contact,dob,website,gender,Links}=InputState
+  let {mutate,isLoading} =useMutation({mutationKey:"Save",mutationFn:()=>EditInfo({Name,username,bio,email,avatar,contact,dob,website,gender,Links}) ,
 onSuccess() {
   toast.success("Credentials updated")
 },})
 function ChangeHandler <T>({e,payload}:IchangeHandlerInput<T>){
-  if (payload&&["gender","dob","webiste"].includes(payload.Header)) {
+  
+  if (payload&&["gender","dob","website","Links","contact"].includes(payload.Header)) {
     setInputState({...InputState,[payload.Header]:payload.data})
   }
   else{
     if (e) {
       setInputState({...InputState,[e.target.name]:e.target.value})
     }
-    // dispatch(CreditsInsertion({[e.target.name]:e.target.value}))
   }
 }
   return (
     <div className=" w-full py-12 flex justify-center ">
         <div className="md:w-[90%] flex flex-col gap-y-8">
-
       <h1 className="text-3xl hFont"> Edit Profile</h1>
       <section className="">
     <div className="bg-gray-200   md:w-[85%] justify-between p-4 rounded flex gap-x-6 items-center ">
@@ -78,7 +89,7 @@ function ChangeHandler <T>({e,payload}:IchangeHandlerInput<T>){
                setImageState({uri:ImageURI,blob:e.target.files[0]})
               }
             }}/>
-            <input onChange={(e)=>ChangeHandler({e})} className="md:text-xl max-md:text-sm border-black bg-transparent p-1 focus:border-b  outline-none "  name="Name" defaultValue={Name}/>
+            <input onChange={(e)=>ChangeHandler({e})} className="md:text-xl max-md:text-sm border-black bg-transparent p-1 focus:border-b  outline-none "  name="Name" defaultValue={Info.Name}/>
         </div>
         <div className="flex gap-x-1">
 
@@ -105,14 +116,14 @@ function ChangeHandler <T>({e,payload}:IchangeHandlerInput<T>){
       <section className="flex gap-x-4 flex-col ">
         <label htmlFor="email" className="hFont text-xl py-2" >Username </label>
         <div className="md:w-[80%]  flex  flex-col gap-y0.5 justify-center">
-<Input onChange={(e)=>ChangeHandler({e})} type="text" id="email" className=" focus-visible:ring-0 focus-visible:border-black border" name="username" placeholder="username" defaultValue={username}/>
+<Input onChange={(e)=>ChangeHandler({e})} type="text" id="email" className=" focus-visible:ring-0 focus-visible:border-black border" name="username" placeholder="username" defaultValue={Info.username}/>
         </div>
       </section>
 {/* //!Email */}
       <section className="flex gap-x-4 flex-col ">
         <label htmlFor="email" className="hFont text-xl py-2" >Email</label>
         <div className="md:w-[80%]  flex  flex-col gap-y0.5 justify-center">
-<Input onChange={(e)=>ChangeHandler({e})} type="email" id="email" className=" focus-visible:ring-0 focus-visible:border-black border" name="email" placeholder="Email" defaultValue={email}/>
+<Input onChange={(e)=>ChangeHandler({e})} type="email" id="email" className=" focus-visible:ring-0 focus-visible:border-black border" name="email" placeholder="Email" defaultValue={Info.email}/>
   <p className="text-xs  text-gray-500 tracking-tighter">This won't visible on your profile</p>
         </div>
       </section>
@@ -127,7 +138,7 @@ function ChangeHandler <T>({e,payload}:IchangeHandlerInput<T>){
       <section className="flex gap-x-4 flex-col ">
         <label htmlFor="email"  className="hFont text-xl py-2" >About</label>
         <div className="md:w-[80%]  flex  flex-col gap-y0.5 justify-center">
-<Textarea placeholder="write about you" name="bio" className=" focus-visible:ring-0 focus-visible:border-black border" defaultValue={bio} onChange={(e)=>ChangeHandler({e})}/>
+<Textarea placeholder="write about you" name="bio" className=" focus-visible:ring-0 focus-visible:border-black border" defaultValue={Info.bio} onChange={(e)=>ChangeHandler({e})}/>
         </div>
       </section>
 

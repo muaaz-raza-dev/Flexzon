@@ -7,7 +7,7 @@ const PostBlockRenderer:FC<{data:Iblog}> = ({data}) => {
     let credits = useAppSelector(state=>state.credits)
     
         return (
-    <PostBox data={data} Follower={data.FollowerOnly&&(credits.isLogined&& credits.Info.following.some(elm=>elm._id==data._id))}/> 
+    <PostBox data={data} Follower={data.FollowerOnly&&(credits.isLogined&& credits.Info.following.some(elm=>elm._id==data.author._id))}/> 
   )
 }
 

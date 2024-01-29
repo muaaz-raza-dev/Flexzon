@@ -15,9 +15,9 @@ const Orderschema = new mongoose.Schema({
     liked:{type:[ObjectId],ref:"Posts"},
     isDeleted:{type:Boolean,default:false},
     registeredDate:{type:Date,default:Date.now},
-    dob:{value:Date,display:{type:Boolean,default:false}}, 
+    dob:{value:String,display:{type:Boolean,default:false}}, 
     website:{url:String,altText:String},
-    contact:{value:String,altText:String},
+    contact:{value:String,display:{type:Boolean,default:false}},
     Links:{fb:String,insta:String,linkedIn:String} ,
     gender:{value:String,display:{type:Boolean,default:false}},
     });

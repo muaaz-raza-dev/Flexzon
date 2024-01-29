@@ -9,13 +9,15 @@ const AuthenticationComponent:FC<Iparent> = ({children}) => {
   let navigate =useNavigate()
   if (data.isLogined) {
  return (
-      <div>
+      <main>
       {children}
-    </div>
+    </main>
   )
 }
 else{
+
 navigate("/auth/login")
+
 }
 }
 

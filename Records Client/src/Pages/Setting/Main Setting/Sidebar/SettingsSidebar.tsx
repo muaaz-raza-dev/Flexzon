@@ -2,7 +2,7 @@ import { useAppDispatch, useAppSelector } from "@/app/ReduxHooks"
 import { CreditsInsertion } from "@/app/Slices/CredentialSlice"
 import { SettingInsert } from "@/app/Slices/SettingsSlice"
 import Cookies from "js-cookie"
-import {LogOut } from "lucide-react"
+import {Bell, Briefcase, LogOut, User } from "lucide-react"
 import { Link, useNavigate } from "react-router-dom"
 
 const SettingsSidebar = () => {
@@ -15,16 +15,27 @@ const SettingsSidebar = () => {
         {
                 tabs.map(elm=>{
         return <Link to={`/profile/settings${elm.route}`} className={`w-full flex gap-x-2 ${elm.name==selectedTab.name&&"bg-gray-200"} transition md:p-2 max-md:p-0.5 rounded  shadow-sm max-md:rounded-full `} onClick={()=>dispatch(SettingInsert({selectedTab:elm}))}>
+                <SideBarIcons route={elm.route}/>
         <p className="max-md:hidden" >
                 {elm.name}
         </p>
          </Link>
-
                 })
         }
        <LogOutBtn/>
     </div>
   )
+}
+const SideBarIcons = ({route}:{route:string})=>{
+if (route =="/") {
+    return <User/>   
+}
+else if (route =="/notification") {
+    return    <Bell/>
+}
+else if (route =="/education") {
+      return  <Briefcase/>
+}
 }
 const LogOutBtn = ()=>{
   let dispatch =useAppDispatch()

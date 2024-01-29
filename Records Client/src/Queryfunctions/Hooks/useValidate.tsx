@@ -11,11 +11,12 @@ const useValidate = async() => {
     if (!data.isLogined) {
         if (token) {
             let response =await Axios.post("/auth/verify",{token})
-                dispatch(CreditsInsertion({Info:response.data.payload,isLogined:true}))
+                dispatch(CreditsInsertion({Info:response.data.payload,isLogined:true,isLoading:false}))
                 dispatch(insertion({tabs:response.data.payload.interests}))
     }
 }
     else{
+        dispatch(CreditsInsertion({isLoading:false}))
 
     }
 }

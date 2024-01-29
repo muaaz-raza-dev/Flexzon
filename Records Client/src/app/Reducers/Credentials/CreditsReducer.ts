@@ -15,7 +15,8 @@ interface IpaylaodCredits {
     email?:string,
     Name?:string,
     bio?:string,
-    interests?:Itopic[]
+    interests?:Itopic[],
+    isLoading?:boolean
 }
 const CreditsReducer = (
   state: Icredits,
@@ -24,6 +25,9 @@ const CreditsReducer = (
     let {payload}=action
 if (payload.isLogined!==undefined) {
     state.isLogined=payload.isLogined
+}
+if (payload.isLoading!==undefined) {
+    state.isLoading=payload.isLoading
 }
 if (payload.interests!==undefined) {
     state.Info.interests=payload.interests

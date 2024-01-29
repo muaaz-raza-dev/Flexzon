@@ -19,6 +19,7 @@ export  const Credits :Icredits = {
       registeredDate:"",
     } ,
     isLogined:false,
+    isLoading:true
 }
 export const CredentialsSlice = createSlice({
     name:"Credentials",
