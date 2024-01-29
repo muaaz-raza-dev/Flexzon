@@ -91,11 +91,11 @@ onError(){
                   onClick={()=>{
                     mutate(true)
                    }}
-                  className={`uppercase block w-full p-1 text-lg rounded-full bg-[var(--primary)]hover:bg-[black] text-white transition-colors focus:outline-none ${writeState.FollowerOnly&&"grayscale  cursor-not-allowed "} `}
+                  className={` block w-full p-1 text-lg rounded-full bg-[var(--primary)] hover:bg-[black] text-white transition-colors focus:outline-none ${writeState.FollowerOnly&&"grayscale  cursor-not-allowed "} `}
                 >
                   <TooltipProvider>
                     <Tooltip>
-                      <TooltipTrigger className={`${writeState.FollowerOnly&&"grayscale  cursor-not-allowed "}`}>{!isLoading?"👽 Post Anonymously":<LightLoader/>} 
+                      <TooltipTrigger >{!isLoading?"👽 Post Anonymously":<LightLoader/>} 
                       </TooltipTrigger>
                       <TooltipContent className="" >
                         <p>
