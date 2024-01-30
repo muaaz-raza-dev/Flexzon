@@ -3,7 +3,7 @@ import PuserInfoFile from "./User Info/PuserInfoFile"
 import PUserPost from "./User's Posts/PUserPost"
 import { useParams } from "react-router-dom"
 import { useQuery } from "react-query"
-import FetchIndividualUser from "@/Queryfunctions/Detail/FetchIndividualUser"
+import FetchIndividualUser  from "@/Queryfunctions/Detail/FetchIndividualUser"
 import { useAppDispatch, useAppSelector } from "@/app/ReduxHooks"
 import { userDetailsInsertion } from "@/app/Slices/UserDetailsSilce"
 import { SmallLoader } from "@/Essentials/Loader"
@@ -16,7 +16,7 @@ const ProfileFile:FC = () => {
   queryFn:()=>FetchIndividualUser(Params?.id||""),onSuccess(data) {
   dispatch(userDetailsInsertion({Info:data.payload,isAdmin:data.payload._id===credits.Info._id ,Posts:data.payload.Posts, Follower:data.payload?.followers , Following:data?.payload.following
   }))
-  },})  
+  },     refetchOnWindowFocus: false})  
   
 
 if (isLoading) {

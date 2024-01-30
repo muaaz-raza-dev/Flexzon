@@ -62,7 +62,6 @@ onSuccess() {
   toast.success("Credentials updated")
 },})
 function ChangeHandler <T>({e,payload}:IchangeHandlerInput<T>){
-  
   if (payload&&["gender","dob","website","Links","contact"].includes(payload.Header)) {
     setInputState({...InputState,[payload.Header]:payload.data})
   }
@@ -76,7 +75,7 @@ function ChangeHandler <T>({e,payload}:IchangeHandlerInput<T>){
     <div className=" w-full py-12 flex justify-center ">
         <div className="md:w-[90%] flex flex-col gap-y-8">
       <h1 className="text-3xl hFont"> Edit Profile</h1>
-      <section className="">
+      <section className="flex gap-x-4 flex-col">
     <div className="bg-gray-200   md:w-[85%] justify-between p-4 rounded flex gap-x-6 items-center ">
         <div className="flex gap-x-2 items-center">
 
@@ -130,7 +129,7 @@ function ChangeHandler <T>({e,payload}:IchangeHandlerInput<T>){
 
 {/* //!Contact */}
 <ContactNumberDetails ChangeHandler={ChangeHandler}/>
-{/* //!Gender*/}
+{/* //!Gender */}
 <GenderDetails ChangeHandler={ChangeHandler}/>
 <WebsiteDetails ChangeHandler={ChangeHandler}/>
 <SocialMediaDetails ChangeHandler={ChangeHandler}/>

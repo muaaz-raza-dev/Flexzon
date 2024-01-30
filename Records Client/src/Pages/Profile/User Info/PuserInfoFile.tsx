@@ -6,6 +6,7 @@ import { Link } from "react-router-dom"
 import { useAppSelector } from "@/app/ReduxHooks"
 import FollowPattren from "./FollowPattren"
 import ProfileDetails from "./ProfileDetails"
+import { FollowerandFollowingDialog } from "./FollowerandFollowingDialog"
 
 const PuserInfoFile:FC = () => {
   let userState = useAppSelector(state=>state.userDetails)
@@ -35,13 +36,16 @@ const PuserInfoFile:FC = () => {
         </div>
         <div className="flex max-md:w-[95%] md:w-[80%] justify-between">
     <b>{userState.Posts.length} blogs   </b>
-    <b>{userState.Follower.length} Followers</b>
+    <FollowerandFollowingDialog type="follower">
+    <b>{userState.Follower.length} Follower{userState.Follower.length>1&&"s"}</b>
+    </FollowerandFollowingDialog>
+    <FollowerandFollowingDialog type="following">
     <b>{userState.Following.length} Following</b>
+    </FollowerandFollowingDialog>
 </div>
 <p className="text-gray-500">
 {userState.Info?.bio}
 </p>
-
       </div>
         </section>
         <Separator/>

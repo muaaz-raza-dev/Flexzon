@@ -4,7 +4,7 @@ import SettingsInsertion from "../Reducers/Setting/SettingReducer";
 export  const settingState :Isetting = {
     tabs:[
         {name:"Personal Information",route:"/"}
-        ,{name:"Notification", route:"/notification"},{name:"Education/Skills",route:"/education"}
+        ,{name:"Stats", route:"/stats"},{name:"Education/Skills",route:"/education"}
     ],
     selectedTab:{name:"Personal Information",route:"/"}
 }

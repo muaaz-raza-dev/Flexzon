@@ -2,7 +2,7 @@ import { useAppDispatch, useAppSelector } from "@/app/ReduxHooks"
 import { CreditsInsertion } from "@/app/Slices/CredentialSlice"
 import { SettingInsert } from "@/app/Slices/SettingsSlice"
 import Cookies from "js-cookie"
-import {Bell, Briefcase, LogOut, User } from "lucide-react"
+import {BarChart4, Briefcase, LogOut, User } from "lucide-react"
 import { Link, useNavigate } from "react-router-dom"
 
 const SettingsSidebar = () => {
@@ -30,8 +30,8 @@ const SideBarIcons = ({route}:{route:string})=>{
 if (route =="/") {
     return <User/>   
 }
-else if (route =="/notification") {
-    return    <Bell/>
+else if (route =="/stats") {
+    return    <BarChart4 />
 }
 else if (route =="/education") {
       return  <Briefcase/>

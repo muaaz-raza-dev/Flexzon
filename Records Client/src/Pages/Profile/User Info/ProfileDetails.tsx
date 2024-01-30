@@ -1,3 +1,4 @@
+import { CatchProfileviewer } from "@/Queryfunctions/Detail/FetchIndividualUser"
 import { useAppSelector } from "@/app/ReduxHooks"
 import { Button } from "@/components/ui/button"
 import {
@@ -9,7 +10,12 @@ import {
     DialogTrigger,
   } from "@/components/ui/dialog"
 import {  ArrowUpLeftFromCircle, ArrowUpRight, CalendarDays, Contact, Facebook, Instagram, Linkedin, Mail, PanelTop, UserRoundIcon } from "lucide-react"
+import { useQuery } from "react-query"
+import { useParams } from "react-router-dom"
 const ProfileDetails = () => {
+let credits = useAppSelector(state=>state.credits)
+let Params = useParams()
+  let CatchPV =useQuery({queryKey:[credits.Info._id,"Viewer"],queryFn:()=>CatchProfileviewer(Params?.id||"") ,staleTime:1000*60*60*60 ,     refetchOnWindowFocus: false})
   let {Info} = useAppSelector(state=>state.userDetails)
 let {Name,email,contact,website,dob,gender,registeredDate,Links} =Info
   return (

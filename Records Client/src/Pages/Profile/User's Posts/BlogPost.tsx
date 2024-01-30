@@ -40,7 +40,7 @@ setIsFollower(data.FollowerOnly&&(credits.isLogined&& credits.Info.following.som
         <div className="flex  w-full">
 
         <section className="flex w-full items-center gap-x-2 py-2">
-        <p className="text-gray-800 md:text-sm max-md:text-xs tracking-tighter">{data?.timeToRead}</p>
+        <p className="md:text-sm max-md:text-xs tracking-tighter text-blue-500 border p-1">{data?.timeToRead} </p>
 <p className="text-gray-800 md:text-sm max-md:text-xs tracking-tighter">{timeAgo.format(new Date(data?.publishDate))}</p>
 
         </section>
@@ -52,7 +52,7 @@ setIsFollower(data.FollowerOnly&&(credits.isLogined&& credits.Info.following.som
      {data?.likes} 
   
 <div className="cursor-not-allowed ">
-  <Heart size={20}/>
+  <Heart size={18} className="max-md:w-6"/>
 
 </div>
   </div>
