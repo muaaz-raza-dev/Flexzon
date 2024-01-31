@@ -57,7 +57,8 @@ function inputHandler(purpose:string,e:ChangeEvent<HTMLInputElement>) {
           <form onSubmit={(e)=>{
             e.preventDefault()
           mutate()
-          }} className="sm:w-2/3 w-full px-4 lg:px-0 mx-auto">
+          }} className="sm:w-[75%] w-full px-4 lg:px-0 mx-auto">
+            <div className="">
             <div className="pb-2 pt-4">
               <input
               value={dataAuth.login.username}
@@ -83,9 +84,12 @@ function inputHandler(purpose:string,e:ChangeEvent<HTMLInputElement>) {
               />
             </div>
             <div className="text-right   flex w-full justify-between">
-              <Link to={"/auth/register"} className="text-green-800">Create new account</Link>
-              <b className="cursor-pointer">Forgot password?</b>
+              <Link to={"/auth/register"} className="text-green-700">Create new account</Link>
+              <Link to={"/auth/Forgot"} className="cursor-pointer">Forgot password?</Link>
               </div>
+              </div>
+
+
             <div className="px-4 pb-2 pt-4">
               <button className="uppercase block w-full p-4 text-lg rounded-full bg-[var(--primary)] hover:bg-[black] text-white transition-colors focus:outline-none">
             {

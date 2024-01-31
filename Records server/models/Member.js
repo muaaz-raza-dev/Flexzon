@@ -3,7 +3,7 @@ const mongoose= require("mongoose");
 const Orderschema = new mongoose.Schema({
     username:{type:String,required:true,unique:true,text:true},
     avatar:{type:String,},
-    email:{type:String,required:true},
+    email:{type:String,required:true,unique:true},
     password:{type:String,required:true},
     Name:{type:String,required:true},
     bio:{type:"string"},
@@ -20,6 +20,7 @@ const Orderschema = new mongoose.Schema({
     contact:{value:String,display:{type:Boolean,default:false}},
     Links:{fb:String,insta:String,linkedIn:String} ,
     gender:{value:String,display:{type:Boolean,default:false}},
+    OTP:Number,
     profileViews: [{viewer: {type: ObjectId, ref: "Member"}, date: {type: Date, default: Date.now}}],
     });
 module.exports = mongoose.model("Member", Orderschema);

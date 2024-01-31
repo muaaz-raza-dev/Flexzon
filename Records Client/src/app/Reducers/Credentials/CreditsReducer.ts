@@ -16,7 +16,9 @@ interface IpaylaodCredits {
     Name?:string,
     bio?:string,
     interests?:Itopic[],
-    isLoading?:boolean
+    isLoading?:boolean;
+    OTPRequest?:boolean;
+
 }
 const CreditsReducer = (
   state: Icredits,
@@ -25,6 +27,9 @@ const CreditsReducer = (
     let {payload}=action
 if (payload.isLogined!==undefined) {
     state.isLogined=payload.isLogined
+}
+if (payload.    OTPRequest!==undefined) {
+    state.    OTPRequest=payload.OTPRequest
 }
 if (payload.isLoading!==undefined) {
     state.isLoading=payload.isLoading

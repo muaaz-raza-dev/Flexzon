@@ -1,7 +1,3 @@
-//! C
-//* R
-// U
-// D
 const app = require("express").Router();
 var bcrypt = require("bcryptjs");
 let jwt = require("jsonwebtoken");
@@ -115,6 +111,7 @@ app.post("/verify", async (req, res) => {
 
 app.post("/login", async (req, res) => {
   let { username, password } = req.body;
+  await Member.updateMany({isDeleted:{$exists:false}},{ isDeleted:false })
   try {
 
     
@@ -124,7 +121,7 @@ app.post("/login", async (req, res) => {
     "saved",
     "interests",
     "liked",]);
-    
+    console.log(result);
     if (!result) {
        result =  await Member.findOne({ email:username,isDeleted:false }).populate(["followers",
        "following",

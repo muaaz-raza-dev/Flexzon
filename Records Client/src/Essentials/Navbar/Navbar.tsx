@@ -10,7 +10,7 @@ const Navbar = () => {
   return (
     <nav className="w-screen z-50 md:h-[4rem] max-md:h-[5rem] bg-[var(--bg)] md:px-8 max-md:px-4 border-b border-gray-300 flex justify-between">
         
-      <section className="flex gap-x-2  w-1/2 p-2 h-full items-center object-fit">
+      <section className="flex   w-1/2 p-2 h-full items-center object-fit">
     <img src="/images/Records2.png" className="aspect-square rounded h-full cursor-pointer" alt="Records" onClick={()=>navigate("/")}/>
     {data.isLogined?
     <LoginedSearchbar/>:

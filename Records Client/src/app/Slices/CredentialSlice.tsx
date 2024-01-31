@@ -1,6 +1,7 @@
 import {createSlice} from "@reduxjs/toolkit"
 import { Icredits } from "../Types/ICredits";
 import CreditsReducer from "../Reducers/Credentials/CreditsReducer";
+import Cookies from "js-cookie";
 export  const Credits :Icredits = {
   Info:{
         _id:"",
@@ -19,7 +20,8 @@ export  const Credits :Icredits = {
       registeredDate:"",
     } ,
     isLogined:false,
-    isLoading:true
+    isLoading:true,
+    OTPRequest:Cookies.get("ROR")?true:false
 }
 export const CredentialsSlice = createSlice({
     name:"Credentials",

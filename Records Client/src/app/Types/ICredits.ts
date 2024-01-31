@@ -26,5 +26,6 @@ export interface Iinfo{
 export interface Icredits {
     Info:Iinfo
     isLogined:boolean;
-    isLoading:boolean
+    isLoading:boolean;
+    OTPRequest:boolean;
 }

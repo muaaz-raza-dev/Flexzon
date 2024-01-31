@@ -26,6 +26,7 @@ app.use("/api/profile",require("./Routes/Member/ReadUserProfile"))
 app.use("/api/save",require("./Routes/Posts/Save"))
 app.use("/api/connections",require("./Routes/Member/FollowPattren"))
 app.use("/api/comments",require("./Routes/Posts/Comments"))
+app.use("/api/otp",require("./Routes/Member/OTP"))
 
 
 server.listen(Port, () => {
