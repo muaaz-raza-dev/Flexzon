@@ -21,6 +21,7 @@ export interface Iinfo{
     contact?:{value:string,display:boolean},
     Links?:{fb:string,insta:string,linkedIn:string},
     gender?:{value:string,display:boolean},
+    profileViews?:any[]
 }
 export interface Icredits {
     Info:Iinfo

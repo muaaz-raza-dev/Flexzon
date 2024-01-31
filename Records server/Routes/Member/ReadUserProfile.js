@@ -34,7 +34,6 @@ app.get("/:id",async(req,res)=>{
 
 app.get("/viewer/:id",VerifyMember,async(req,res)=>{
    let id= req.params.id;
-console.log("I am  calling");
    if (id!==req.AdminId) {
       await Member.findByIdAndUpdate( id,{$push:{profileViews:{viewer:req.AdminId, date: new Date()}}})
    }

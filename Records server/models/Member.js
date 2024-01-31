@@ -20,7 +20,6 @@ const Orderschema = new mongoose.Schema({
     contact:{value:String,display:{type:Boolean,default:false}},
     Links:{fb:String,insta:String,linkedIn:String} ,
     gender:{value:String,display:{type:Boolean,default:false}},
-    
     profileViews: [{viewer: {type: ObjectId, ref: "Member"}, date: {type: Date, default: Date.now}}],
     });
 module.exports = mongoose.model("Member", Orderschema);

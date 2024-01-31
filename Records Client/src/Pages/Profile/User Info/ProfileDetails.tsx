@@ -15,7 +15,7 @@ import { useParams } from "react-router-dom"
 const ProfileDetails = () => {
 let credits = useAppSelector(state=>state.credits)
 let Params = useParams()
-  let CatchPV =useQuery({queryKey:[credits.Info._id,"Viewer"],queryFn:()=>CatchProfileviewer(Params?.id||"") ,staleTime:1000*60*60*60 ,     refetchOnWindowFocus: false})
+  useQuery({queryKey:[credits.Info._id,"Viewer"],queryFn:()=>CatchProfileviewer(Params?.id||"") ,staleTime:1000*60*60*60 ,     refetchOnWindowFocus: false})
   let {Info} = useAppSelector(state=>state.userDetails)
 let {Name,email,contact,website,dob,gender,registeredDate,Links} =Info
   return (
@@ -66,7 +66,7 @@ let {Name,email,contact,website,dob,gender,registeredDate,Links} =Info
             <div className="flex gap-x-2">
                 <PanelTop size={18}/>
             <a href={website?.url} target="blank" className="text-md flex gap-x-1 ">
-                Website:  <b className=" text-blue-500 "> {website?.altText||""} </b>
+                Website:  <b className=" text-blue-500 "> {website?.altText||"WEBSITE"} </b>
                     <ArrowUpRight size={12}/>
             </a>
             </div>
