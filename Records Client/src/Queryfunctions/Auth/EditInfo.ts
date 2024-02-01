@@ -7,11 +7,11 @@ interface Info {
     email:string,
     Name:string,
     bio:string,
-    contact:any,dob:any,website:any,gender:any,Links:any
+    contact:any,dob:any,website:any,gender:any,Links:any,interests:any
 }
-const EditInfo = async({ Name, username, bio, email, avatar,contact,dob,website,gender,Links}:Info) => {
+const EditInfo = async({ Name, username, bio, email, avatar,contact,dob,website,gender,Links,interests}:Info) => {
     
-let response = await Axios.put("/auth/update",{ Name, username, bio, email, avatar,contact,dob,website,gender,Links},{headers:{"auth-token":Cookies.get("Records_session")}})
+let response = await Axios.put("/auth/update",{ Name, username, bio, email, avatar,contact,dob,website,gender,Links,interests},{headers:{"auth-token":Cookies.get("Records_session")}})
 return response.data
 }
 

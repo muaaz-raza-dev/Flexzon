@@ -12,7 +12,8 @@ export  const Write :Iwrite = {
     topic:"",
     PostType:"",
     FollowerOnly:false,
-    plainText:""
+    plainText:"",
+    
 }
 export const WriteSlice = createSlice({
     name:"Credentials",

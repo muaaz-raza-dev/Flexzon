@@ -146,15 +146,14 @@ html{
 background-color: var(--primary);
 }
 .Headerlp::-webkit-scrollbar{
-  width: 0.1rem;
-  height: 0.1rem;
-  background-color: #B6BBC4;
+  width: 0.4rem;
+  height: 0.4rem;
+  border-radius: 20px;
+  background-color: var(--primary);
+  
 }
 .Headerlp::-webkit-scrollbar-thumb{
-  background-color: #B6BBC4;
-
-  width: 0.1rem;
-  height: 0.1rem;
+  background-color: var(--light);
 }
 
 .ZeroScroll::-webkit-scrollbar{

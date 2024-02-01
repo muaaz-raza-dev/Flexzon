@@ -307,7 +307,7 @@ try {
 }
 })
 app.post("/topics",async(req,res)=>{
-  let paylaod  = await Posts.aggregate([
+  let payload  = await Posts.aggregate([
     {$group: {
       _id: "$topic",
       }}
@@ -321,38 +321,41 @@ app.post("/starter", async (req, res) => {
   try {
     await Posts.updateMany({FollowerOnly:{$exists:false}},{$set:{FollowerOnly:false}})
     let Topics = await Posts.aggregate([
+      {$match: {
+        isDeleted:false
+      }},
+          {$lookup: {
+            from: "topics",
+            localField: "topic",
+            foreignField: "_id",
+            as: "topic"
+          }},
+          {$unwind: {
+            path:"$topic",
+            preserveNullAndEmptyArrays: false
+          }},
+          {$group: {
+            _id: "$topic.title",
+            results: {
+              $sum: 1
+            },
+          }},
+          {$sort: {
+            "results": -1
+          }}
+        ,
       {$lookup: {
-        from: "topics",
-        localField: "topic",
-        foreignField: "_id",
-        as: "topic"
-      }},
-      {$unwind: {
-        path:"$topic",
-        preserveNullAndEmptyArrays: false
-      }},
-      {$group: {
-        _id: "$topic.title",
-        results: {
-          $sum: 1
-        },
-      }},
-      {$sort: {
-        "results": -1
-      }}
-    ,
-  {$lookup: {
-        from: "topics",
-        localField: "_id",
-        foreignField: "title",
-        as: "topic"
-      }},
-      {$unwind: {
-        path:"$topic",
-        preserveNullAndEmptyArrays: false
-      }},
-    
-    ]).limit(20)
+            from: "topics",
+            localField: "_id",
+            foreignField: "title",
+            as: "topic"
+          }},
+          {$unwind: {
+            path:"$topic",
+            preserveNullAndEmptyArrays: false
+          }},
+        
+        ]).limit(20)
     let Trendings = await Posts.find({ isDeleted:false,anonymous:false}).sort({publishDate:-1,likes:-1}).populate(["author","topic"]).sort({likes:-1,publishDate:-1}).limit(6)
     let  Post=await Posts.aggregate([ 
         {$match:{isDeleted:false}},

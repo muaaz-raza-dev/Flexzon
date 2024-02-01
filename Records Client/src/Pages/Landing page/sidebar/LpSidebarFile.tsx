@@ -5,7 +5,7 @@ import { TrendingSection } from "./TrendingSection"
 
 const LpSidebarFile = () => {
   return (
-    <aside className=" flex flex-col w-full z-50  gap-y-7 h-max overflow-auto flex-wrap  md:sticky   ">
+    <aside className=" flex flex-col w-full   gap-y-7 h-max overflow-auto flex-wrap  md:sticky   ">
       <TrendingSection/>
       <RecommendedTopics/>
     <footer className="border-t pr-2 flex gap-x-3 max-md:hidden text-sm">

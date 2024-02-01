@@ -6,6 +6,7 @@ import {
   PenBoxIcon,
   LogOut,
   BookText,
+  LineChart,
 } from "lucide-react";
 import {
   DropdownMenu,
@@ -109,6 +110,7 @@ export const LoginedSearchbar = () => {
   let dispatch=useAppDispatch()
   let data=useAppSelector(state=>state.search)
   const [open, setOpen] = useState(false);
+  let Trendings= useAppSelector(state=>state.landing.Topics)
   const debouced = useDebouncedCallback((output)=>{
     SearchQuery(output).then(data=>{
       dispatch(SearchInsert({topics:data.payload.topics,users:data.payload.users}))
@@ -124,21 +126,23 @@ export const LoginedSearchbar = () => {
   return (
     <>
       <div
-        className="lg:w-[45%] max-lg:w-[30%] max-md:w-[20%] flex rounded-md h-full items-center gap-x-2 text-sm cursor-pointer lg:mx-2 max-lg:ml-1 lg:bg-[#eceaea] lg:p-2"
+        className="lg:w-[45%] max-lg:w-[30%]  max-md:w-[20%] flex rounded-md h-full items-center gap-x-2 text-sm cursor-pointer lg:mx-2 max-lg:ml-1 lg:bg-[#eceaea] lg:p-2"
         onClick={() => setOpen(!open)}
       >
         <Search className="max-md:text-gray-600" />
         <p className="text-gray-800 max-lg:hidden">{data.input||"Search"}</p>
       </div>
-      <CommandDialog open={open} onOpenChange={setOpen}>
-        <div className="flex justify-between px-2">
+      <CommandDialog open={open}   onOpenChange={setOpen}>
+        <div className="flex justify-between px-2 w-full">
 
-        <CommandInput placeholder="Type a topic or author's name..."  value={data.input} onValueChange={(e)=>dispatch(SearchInsert({input:e}))}>
+        <CommandInput placeholder="Type a topic or author's name..." className="w-full" value={data.input} onValueChange={(e)=>dispatch(SearchInsert({input:e}))}>
           </CommandInput>
           <Link to={`/search/${data.input}`} onClick={()=>setOpen(false)}  className={`my-3 mr-8 p-1  cursor-pointer aspect-square transition-colors hover:bg-gray-300 rounded-full `} >
-  <Search size={20} onClick={()=>dispatch(SearchedInsert({TopicSearch:false}))}/>
+  <Search size={18} onClick={()=>dispatch(SearchedInsert({TopicSearch:false}))}/>
     </Link>
         </div>
+{
+        data.input.length!==0?
         <div className="px-4 py-2">
       <b className="text-[grey]">Topics</b>
       <div className="flex gap-3 py-2 flex-col">
@@ -149,23 +153,37 @@ export const LoginedSearchbar = () => {
     <Topic topic={elm.title} />
     </Link>
   }):
-  <h1>0 results found</h1>
-}
+  <h1>0 results found</h1>}
 </div>
     </div>
+  :
+  <div className="flex gap-3 py-2 flex-col">
+  {
+
+    Trendings.slice(0,5).map(elm=>{
+      return <div className="flex gap-3 justify-between">
+    <Topic topic={elm.topic.title} /> 
+  </div>
+})
+}
+</div>
+
+}
     <CommandSeparator/>
+{
+  data.input.length!==0&&
     <div className="px-4 py-2">
       <b className=" text-[gray]">People</b>
       <div className="flex gap-3 py-2 flex-col">
-{
-  data.users.length!==0?
+  {data.users.length!==0?
         data.users.map(elm=>{
           return<User avatar={elm.avatar} id={elm._id} username={elm.username} setOpen={setOpen}/>
         }):
-        <h1>0 results found</h1>
-}
+
+        <h1>0 results found</h1>}
         </div>
     </div>
+}
        
       </CommandDialog>
     </>

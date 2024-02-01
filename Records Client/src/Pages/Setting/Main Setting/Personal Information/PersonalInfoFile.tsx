@@ -26,6 +26,7 @@ import DeleteAccount from "@/Queryfunctions/Auth/verifyPassword"
 import Cookies from "js-cookie"
 import { useNavigate } from "react-router-dom"
 import ContactNumberDetails, { GenderDetails, IchangeHandlerInput, SocialMediaDetails, WebsiteDetails } from "./InputDetails"
+import InputInterests from "./InputInterests"
 
 
 
@@ -57,7 +58,7 @@ const [ImageState, setImageState] = useState<{uri:string,blob?:any}>({uri:"",});
   let dispatch = useAppDispatch()
   let {avatar} =Info
   let {username,email,bio,Name,contact,dob,website,gender,Links}=InputState
-  let {mutate,isLoading} =useMutation({mutationKey:"Save",mutationFn:()=>EditInfo({Name,username,bio,email,avatar,contact,dob,website,gender,Links}) ,
+  let {mutate,isLoading} =useMutation({mutationKey:"Save",mutationFn:()=>EditInfo({Name,username,bio,email,avatar,contact,dob,website,gender,Links,interests:Info.interests}) ,
 onSuccess() {
   toast.success("Credentials updated")
 },})
@@ -133,6 +134,8 @@ function ChangeHandler <T>({e,payload}:IchangeHandlerInput<T>){
 <GenderDetails ChangeHandler={ChangeHandler}/>
 <WebsiteDetails ChangeHandler={ChangeHandler}/>
 <SocialMediaDetails ChangeHandler={ChangeHandler}/>
+<InputInterests/>
+
 {/* //! Bio */}
       <section className="flex gap-x-4 flex-col ">
         <label htmlFor="email"  className="hFont text-xl py-2" >About</label>
@@ -140,7 +143,6 @@ function ChangeHandler <T>({e,payload}:IchangeHandlerInput<T>){
 <Textarea placeholder="write about you" name="bio" className=" focus-visible:ring-0 focus-visible:border-black border" defaultValue={Info.bio} onChange={(e)=>ChangeHandler({e})}/>
         </div>
       </section>
-
 
       <Button className="w-[20%]  text-md  bg-[var(--secondary)] hover:bg-[var(--primary)] hover:text-white text-white" variant={"outline"} onClick={()=>mutate()}>
 {isLoading?<LightLoader/>:"Save"}

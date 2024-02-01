@@ -13,7 +13,7 @@ const SettingsSidebar = () => {
     <div className="h-[95vh] sticky top-0  lg:w-[35vw] max-lg:w-[25vw] max-md:w-[15vw] px-4 md:py-12 max-md:py-4  gap-y-4 border-r flex flex-col">
         <h1 className="text-3xl hFont max-md:hidden">Settings</h1>
         {
-                tabs.map(elm=>{
+                tabs.slice(0,1).map(elm=>{
         return <Link to={`/profile/settings${elm.route}`} className={`w-full flex gap-x-2 ${elm.name==selectedTab.name&&"bg-gray-200"} transition md:p-2 max-md:p-0.5 rounded  shadow-sm max-md:rounded-full `} onClick={()=>dispatch(SettingInsert({selectedTab:elm}))}>
                 <SideBarIcons route={elm.route}/>
         <p className="max-md:hidden" >

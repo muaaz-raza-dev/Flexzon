@@ -201,7 +201,7 @@ app.put("/update", VerifyMember, async (req, res) => {
   try {
     await Member.findByIdAndUpdate(
       { _id: req.AdminId },
-      { Name, username, bio, email, avatar ,age,interests,Links,website,gender,contact,dob }
+      { Name, username, bio, email, avatar ,age,Links,interests:interests.map(elm=>elm._id),website,gender,contact,dob }
     );
     res
       .status(StatusCodes.OK)
@@ -212,8 +212,6 @@ app.put("/update", VerifyMember, async (req, res) => {
       .json({ success: false, msg: "internal server error" });
   }
 });
-
-
 
 app.put("/Delete", VerifyMember, async (req, res) => {
   let {password} =req.body

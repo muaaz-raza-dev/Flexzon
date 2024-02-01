@@ -1,6 +1,6 @@
 export interface Itopic{
     _id:string,
-    title:string
+    title:string;
 }
 
 // interface IAuthor{
