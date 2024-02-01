@@ -6,6 +6,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { Info } from "lucide-react";
 import { ChangeEvent, useEffect } from "react";
+import Polling from "./Poll&Q/Polling";
 const ReadCountCaculator = (plainText: string) => {
   let wordsCount = plainText.split(" ").filter((elm) => elm !== " ").length;
   let avgReader = 200; //238-38 wpm refrence:Google
@@ -13,25 +14,26 @@ const ReadCountCaculator = (plainText: string) => {
   return output > 1
     ? `${Math.round(output)} mins read`
     : `
-        ${Math.round(output * 60)} seconds read`;
-};
-
-
-const AdditionalInfoB = () => {
-  let writeState = useAppSelector((state) => state.write);
-  let dispatch = useAppDispatch();
-  useEffect(() => {
-    let output = ReadCountCaculator(writeState.plainText);
-    dispatch(WriteInsertion({ timeToRead: output }));
-  }, [writeState.plainText]);
-  let InputHandler = (
-    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    dispatch(WriteInsertion({ [e.target.name]: e.target.value }));
+    ${Math.round(output * 60)} seconds read`;
   };
-  return (
-    <div className="w-full">
+  
+  
+  const AdditionalInfoB = () => {
+    let writeState = useAppSelector((state) => state.write);
+    let dispatch = useAppDispatch();
+    useEffect(() => {
+      let output = ReadCountCaculator(writeState.plainText);
+      dispatch(WriteInsertion({ timeToRead: output }));
+    }, [writeState.plainText]);
+    let InputHandler = (
+      e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+      ) => {
+        dispatch(WriteInsertion({ [e.target.name]: e.target.value }));
+      };
+      return (
+        <div className="w-full">
 
+          <Polling/>
       <Input
         placeholder="Title"
         name="title"
@@ -62,6 +64,7 @@ const AdditionalInfoB = () => {
       </div>
       {/* // !FollowerOnly */}
     <FollowerOnlyOption/>
+    
     </div>
   );
 };

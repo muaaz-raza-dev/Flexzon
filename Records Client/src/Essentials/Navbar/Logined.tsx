@@ -6,7 +6,6 @@ import {
   PenBoxIcon,
   LogOut,
   BookText,
-  LineChart,
 } from "lucide-react";
 import {
   DropdownMenu,
