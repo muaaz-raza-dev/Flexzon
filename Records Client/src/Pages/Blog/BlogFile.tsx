@@ -31,7 +31,7 @@ if (isLoading) {
     <div className="md:w-[80%] max-md:w-[95%] flex flex-col gap-y-3 my-8">
     <BlogHeader data={data?.payload.Post} />
     <MainBlog  data={data?.payload.Post}/>
-    <Separator />
+    <Separator className="text-black my-4"/>
     <BlogFooter data={data?.payload}/>
     <Link to={"/"} preventScrollReset>
     <Button variant={"default"} className="rounded-2xl active:scale-95 transition-transform bg-[var(--primary)] hover:bg-[var(--primary)] hover:text-white flex gap-x-2 lg:w-[30%] max-md:w-[50%]">

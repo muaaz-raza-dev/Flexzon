@@ -106,6 +106,8 @@ export const PostBox: FC<IblogProp> = ({ data ,Follower}) => {
   );
 };
 
+
+
 export const LpMainContent = () => {
   let Data = useAppSelector((state) => state.landing);
   let Credits = useAppSelector((state) => state.credits);

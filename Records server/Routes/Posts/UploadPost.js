@@ -4,14 +4,26 @@ const Posts = require("../../models/Posts");
 const VerifyMember = require("../../middleware/VerifyMember");
 const Topic = require("../../models/Topic");
 const Member = require("../../models/Member");
+const Polls = require("../../models/Polls");
+const Question = require("../../models/Question");
 
 app.post("/", VerifyMember,async (req, res) => {
-  let {author,title,subTitle,banner,content,timeToRead,topic,tags,anonymous,FollowerOnly} = req.body;
+    //AditionalAssets = Polls and Questions
+  let {author,title,subTitle,banner,content,timeToRead,topic,tags,anonymous,FollowerOnly,AdditonalAssets,AdditonalAssetsType} = req.body;
+  let  PayloadAssest = {}
+  if(AdditonalAssetsType == "Poll"){
+    let Polled =await Polls.create({author,...AdditonalAssets})
+    PayloadAssest.Poll=Polled._id
+  }
+  else{
+    let Questioned =await Question.create({author,...AdditonalAssets})
+    PayloadAssest.Question=Questioned._id
+  }
   let TopicInDb=await Topic.findOne({title:topic})
-
   if (TopicInDb) {
+    
     Posts.create({
-        author,title,subTitle,banner,content,timeToRead,topic:TopicInDb._id,tags,anonymous,FollowerOnly
+        author,title,subTitle,banner,content,timeToRead,topic:TopicInDb._id,tags,anonymous,FollowerOnly,AdditonalAssetsType,...PayloadAssest
     })
     .then(async post=>{
          await Member.findByIdAndUpdate(author,{$push:{Posts:post._id}})
@@ -27,7 +39,8 @@ app.post("/", VerifyMember,async (req, res) => {
   else{
       Topic.create({title:topic}).then((topic)=>{
           Posts.create({
-        author,title,subTitle,banner,content,timeToRead,topic,tags,anonymous
+        author,title,subTitle,banner,content,timeToRead,topic,tags,anonymous,
+        AdditonalAssetsType,...PayloadAssest
     })
     .then(async post=>{
          await Member.findByIdAndUpdate(author,{$push:{Posts:post._id}})

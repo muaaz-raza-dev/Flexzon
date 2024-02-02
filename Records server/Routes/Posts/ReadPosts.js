@@ -290,9 +290,35 @@ try {
     path: "$author",
     preserveNullAndEmptyArrays: true
   }},
+  {
+    $lookup: {
+      from: "polls",
+      localField: "Poll",
+      foreignField: "_id",
+      as: "Poll"
+  }
+  },
+  {$unwind: {
+    path: "$Poll",
+    preserveNullAndEmptyArrays: true
+
+  }},
+  {
+    $lookup: {
+      from: "questions",
+      localField: "Question",
+      foreignField: "_id",
+      as: "Question"
+  }
+  },
+  {$unwind: {
+    path: "$Question",
+    preserveNullAndEmptyArrays: true
+
+  }},
  
 ]).then(async post=>{
-  if (post[0].author) {
+  if (post[0]?.author) {
     let Recommendations = await Posts.find({ isDeleted:false,author:post[0].author._id}).populate("topic").sort({publishDate:-1}).limit(4)
     res.json({success:true,payload:{Post:post[0],Recommendations}})
   }

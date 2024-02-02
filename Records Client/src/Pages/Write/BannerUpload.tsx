@@ -12,6 +12,8 @@ const [ImageURI, setImageURI] = useState<{sample:string,blob?:Blob|null}>({sampl
 useEffect(() => {
   localStorage.getItem("Banner_Post")&&setImageURI({sample:localStorage.getItem("Banner_Post")||""})
 }, []);
+console.log(ImageURI);
+
 let fileRef =useRef()
   let dispatch = useAppDispatch()
   return (
@@ -22,10 +24,9 @@ let fileRef =useRef()
               !ImageURI.sample?
               " Your Banner will be showing here."
               :
-              <>
-              <img src={ImageURI.sample} alt="" className="w-full"  />
+              ImageURI?.blob?.type.split("/")[0]?
+              <img src={ImageURI.sample} alt="" className="w-full"  />:
               <video src={ImageURI.sample} autoPlay controls loop/>
-              </>
             }
         </div>
         </div>

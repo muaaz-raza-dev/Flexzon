@@ -1,5 +1,4 @@
-import UploadFn from "@/Queryfunctions/Posts/UploadPost";
-import { useAppDispatch, useAppSelector } from "@/app/ReduxHooks";
+import {  useAppSelector } from "@/app/ReduxHooks";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -17,41 +16,12 @@ import {
 } from "@/components/ui/tooltip";
 import { useRef } from "react";
 import { toast } from "react-hot-toast";
-import { useMutation } from "react-query";
-import { CreditsInsertion } from "@/app/Slices/CredentialSlice";
-import { insertion } from "@/app/Slices/LandingSlice";
 import { LightLoader } from "@/Essentials/Loader";
-import { useNavigate } from "react-router-dom";
-import { WriteInsertion } from "@/app/Slices/WriteSlice";
+import useUploadPost from "./Hooks/useUploadPost";
 const PublishBlog = () => {
   let writeState = useAppSelector((state) => state.write);
-  let dispatch=useAppDispatch()
-  let credits = useAppSelector((state) => state.credits);
-  let {Blogs} = useAppSelector((state) => state.landing);
-  let { mainContent, title, subtitile, Banner, topic ,timeToRead,FollowerOnly } = writeState;
-  let navigate=useNavigate()
-  let {mutate ,isLoading } = useMutation({mutationKey:["upload",credits.Info._id] , mutationFn:(Anonymous:boolean)=>{
-      return UploadFn({author:credits.Info._id,anonymous:Anonymous,content:mainContent, title,subTitle: subtitile,banner: Banner,timeToRead, topic,FollowerOnly}) 
-  } ,onSuccess(data) {
-   let{payload}=data
-   let Input;
-   if (payload.anonymous) {
-     Input={...payload,author:{}}
-    }else{
-     Input =payload
-    }
-   dispatch(insertion({Blogs:[Input,...Blogs]}))
-   dispatch(CreditsInsertion({Posts:[Input,...credits.Info.Posts]}))
-   toast.success("Blog posted successfully")
-   localStorage.removeItem("Blog_Content")
-   localStorage.removeItem("Banner_Post")
-   backtoDefault()
-   navigate("/")
-  },
-onError(){
-  toast.error("Failed to upload , try again later")
-}
-});
+  let { mainContent, title,  Banner, topic } = writeState;
+  let {mutate,isLoading}=useUploadPost()
   let DialogRef = useRef<any>(null);
   let validateInputs = () => {
     if (mainContent.length == 0 || title.length == 0 || topic.length == 0) {
@@ -65,11 +35,7 @@ onError(){
     else {
     }
   };
-  let backtoDefault=()=>{
-    dispatch(WriteInsertion({mainContent:"",title:"",timeToRead:"" ,Banner:"",subtitile:"",topic:""}))
-    localStorage.removeItem("Banner_Post")
 
-  }
   return (
     <>
       <Dialog>

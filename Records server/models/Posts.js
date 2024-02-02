@@ -16,6 +16,12 @@ likedDetails:{type:[ObjectId],ref:"Member"},
 comments:{type:[ObjectId],},
 isDeleted:{type:Boolean,default:false},
 FollowerOnly:{type:Boolean,default:false},
-anonymous:{type:Boolean,default:false}
+anonymous:{type:Boolean,default:false},
+//! ----x-----x-------x-------
+Poll:{type:ObjectId,ref:"Polls"},
+Question:{type:ObjectId,ref:"Questions"},
+AdditonalAssetsType:{type:String} // "Polls" , "Question" , "none"
+//! ----x-----x-------x-------
+
 });
 module.exports = mongoose.model("Posts", Orderschema);

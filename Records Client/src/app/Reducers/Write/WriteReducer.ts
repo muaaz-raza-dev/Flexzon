@@ -9,23 +9,50 @@ interface IwriteAction {
   topic?: string;
   timeToRead?: string;
   tags?: string[];
-  plainText?:string
-  FollowerOnly?:boolean
+  plainText?: string;
+  FollowerOnly?: boolean;
+  AdditionalAssestsInclude?: boolean;
+  AdditionalAssestsType?: "Question" | "Poll";
+  AdditionalAssestsTitle?: string;
+  correct?: string;
+  Options?: { title: string }[];
+  OptionIndex?: number;
+  OptionRawIndexedTitle?: string;
 }
 
 const writeInsertion = (state: Iwrite, action: PayloadAction<IwriteAction>) => {
   let { payload } = action;
   if (payload.Banner) state.Banner = payload.Banner;
-  if (payload.title      !==undefined) state.title = payload.title;
-  if (payload.subtitile  !==undefined) state.subtitile = payload.subtitile;
-  if (payload.mainContent !==undefined) state.mainContent = payload.mainContent;
-  if (payload.PostType !==undefined) state.PostType = payload.PostType;
-  if (payload.topic !==undefined) state.topic = payload.topic;
-  if (payload.timeToRead !==undefined) state.timeToRead = payload.timeToRead;
-  if (payload.tags !==undefined) state.tags = payload.tags;
-  if (payload.plainText !==undefined) state.plainText = payload.plainText;
-  if (payload.FollowerOnly !==undefined) state.FollowerOnly = payload.FollowerOnly;
-  
+  if (payload.title !== undefined) state.title = payload.title;
+  if (payload.subtitile !== undefined) state.subtitile = payload.subtitile;
+  if (payload.mainContent !== undefined)
+    state.mainContent = payload.mainContent;
+  if (payload.PostType !== undefined) state.PostType = payload.PostType;
+  if (payload.topic !== undefined) state.topic = payload.topic;
+  if (payload.timeToRead !== undefined) state.timeToRead = payload.timeToRead;
+  if (payload.tags !== undefined) state.tags = payload.tags;
+  if (payload.plainText !== undefined) state.plainText = payload.plainText;
+  if (payload.FollowerOnly !== undefined)
+    state.FollowerOnly = payload.FollowerOnly;
+  if (payload.AdditionalAssestsInclude !== undefined)
+    state.AdditionalAssests.include = payload.AdditionalAssestsInclude;
+  if (payload.AdditionalAssestsType !== undefined)
+    state.AdditionalAssests.PollnQ.type = payload.AdditionalAssestsType;
+  if (
+ state.AdditionalAssests.PollnQ.type == "Question"
+  ) {
+    if (payload.correct !== undefined) state.AdditionalAssests.PollnQ.correct = payload.correct;
+  }
+    if (payload.Options !== undefined) {
+    state.AdditionalAssests.PollnQ.options = payload.Options;
+  }
+    
+    if (payload.OptionIndex !== undefined) {
+      state.AdditionalAssests.PollnQ.options[payload.OptionIndex].title = payload.OptionRawIndexedTitle||"";
+    }
+  if (payload.AdditionalAssestsTitle !== undefined) {
+    state.AdditionalAssests.PollnQ.title = payload.AdditionalAssestsTitle;
+  }
 };
 
 export default writeInsertion;

@@ -13,6 +13,7 @@ export  const Write :Iwrite = {
     PostType:"",
     FollowerOnly:false,
     plainText:"",
+    AdditionalAssests:{available:["Poll","Question"],include:false,PollnQ:{type:"Poll",title:"",options:[{title:""},{title:""}]}}
     
 }
 export const WriteSlice = createSlice({

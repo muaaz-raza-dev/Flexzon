@@ -43,6 +43,21 @@ tags:string[],
 likes:number,
 FollowerOnly:boolean,
 Comments:IComment[],
+Poll?:IPoll; 
+Question?:IQuestion;
+AdditonalAssetsType?:"Poll"|"Question";
+}
+
+interface IPoll{
+  title:string;
+  _id:string;
+  options:{title:string,votes:string[],}[]
+}
+interface IQuestion{
+  title:string;
+  _id:string;
+  options:{title:string,votes:string[],}[];
+  correct:string
 }
 export interface Ilanding{
   Blogs:Iblog[];
