@@ -7,15 +7,16 @@ import { ArrowLeft } from "lucide-react"
 import { Link, useParams } from "react-router-dom"
 import { useQuery } from "react-query"
 import FetchIndividualBlog from "@/Queryfunctions/Detail/FetchIndividualBlog"
-import Loader from "@/Essentials/Loader"
-import { useAppDispatch } from "@/app/ReduxHooks"
+import  { RecordsLoader } from "@/Essentials/Loader"
+import { useAppDispatch, useAppSelector } from "@/app/ReduxHooks"
 import { BlogInsert } from "@/app/Slices/BlogSlice"
 
 const BlogFile = () => {
   let Params = useParams()
   let dispatch =useAppDispatch()
+  let AdminId=useAppSelector(state=>state.credits.Info._id)
   let {data,isLoading}=useQuery({queryKey:[Params.id,"Blog"],staleTime:1000*60*60*5,
-  queryFn:()=>FetchIndividualBlog(Params?.id||"") 
+  queryFn:()=>FetchIndividualBlog(Params?.id||"",AdminId) 
 ,onSuccess(data) {
   dispatch(BlogInsert({data:data?.payload.Post,Recommendations:data?.payload.Recommendations}))
 },
@@ -23,7 +24,7 @@ const BlogFile = () => {
   
   )  
 if (isLoading) {
-  return <Loader/>
+  return <RecordsLoader/>
 }
 
   return (

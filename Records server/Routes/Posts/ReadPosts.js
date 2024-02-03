@@ -5,6 +5,7 @@ const VerifyMember = require("../../middleware/VerifyMember");
 const { ObjectId, LEGAL_TCP_SOCKET_OPTIONS } = require("mongodb");
 const Topic = require("../../models/Topic");
 const Member = require("../../models/Member");
+const PollnQAnalyzer = require("../Member/functions/PollnQAnalyzer");
 let limit = parseInt(process.env.DocsPerRequest);
 
 app.get("/topic/:topic", async (req, res) => {
@@ -251,87 +252,9 @@ TotalResults   = await Posts.find({ isDeleted:false,}).count()
     res.json({ success: true,payload,TotalResults });
 });
 
-app.get("/post/:id",async(req,res)=>{
-try {
-  let Post = await Posts.findById(req.params.id)
-  await Posts.aggregate([
-  {
-    $match: {
-      _id : Post._id,
-      isDeleted:false
-    },
-  },
-    {
-      $addFields: {
-        author: {
-          $cond: {
-            if: { $eq: ["$anonymous", true] },
-            then: [], // Exclude sensitiveField if isAnonymous is true
-            else: "$author", // Include sensitiveField if isAnonymous is false
-          },
-        },
-      },
-    },
-    {
-      $project: { isDeleted: 0,  }
-    },
 
-  
-  {
-    
-    $lookup: {
-      from: "members",
-      localField: "author",
-      foreignField: "_id",
-      as: "author"
-  }
-  },
-  {$unwind: {
-    path: "$author",
-    preserveNullAndEmptyArrays: true
-  }},
-  {
-    $lookup: {
-      from: "polls",
-      localField: "Poll",
-      foreignField: "_id",
-      as: "Poll"
-  }
-  },
-  {$unwind: {
-    path: "$Poll",
-    preserveNullAndEmptyArrays: true
 
-  }},
-  {
-    $lookup: {
-      from: "questions",
-      localField: "Question",
-      foreignField: "_id",
-      as: "Question"
-  }
-  },
-  {$unwind: {
-    path: "$Question",
-    preserveNullAndEmptyArrays: true
 
-  }},
- 
-]).then(async post=>{
-  if (post[0]?.author) {
-    let Recommendations = await Posts.find({ isDeleted:false,author:post[0].author._id}).populate("topic").sort({publishDate:-1}).limit(4)
-    res.json({success:true,payload:{Post:post[0],Recommendations}})
-  }
-  else{
-    res.json({success:true,payload:{Post:post[0],Recommendations:[]}})
-
-  }
-})
-} catch (error) {
-  console.log(error);
-  res.status(500).json({success: false, message: 'Internal server error'})
-}
-})
 app.post("/topics",async(req,res)=>{
   let payload  = await Posts.aggregate([
     {$group: {
@@ -476,6 +399,93 @@ app.post("/starter", async (req, res) => {
   }
 
 })
+
+
+
+app.get("/post/:id",async(req,res)=>{
+  try {
+    let Post = await Posts.findById(req.params.id)
+    await Posts.aggregate([
+    {
+      $match: {
+        _id : Post._id,
+        isDeleted:false
+      },
+    },
+      {
+        $addFields: {
+          author: {
+            $cond: {
+              if: { $eq: ["$anonymous", true] },
+              then: [], // Exclude sensitiveField if isAnonymous is true
+              else: "$author", // Include sensitiveField if isAnonymous is false
+            },
+          },
+        },
+      },
+      {
+        $project: { isDeleted: 0,  }
+      },
+  
+    
+    {
+      
+      $lookup: {
+        from: "members",
+        localField: "author",
+        foreignField: "_id",
+        as: "author"
+    }
+    },
+    {$unwind: {
+      path: "$author",
+      preserveNullAndEmptyArrays: true
+    }},
+    {
+      $lookup: {
+        from: "polls",
+        localField: "Poll",
+        foreignField: "_id",
+        as: "Poll"
+    }
+    },
+    {$unwind: {
+      path: "$Poll",
+      preserveNullAndEmptyArrays: true
+  
+    }},
+    {
+      $lookup: {
+        from: "questions",
+        localField: "Question",
+        foreignField: "_id",
+        as: "Question"
+    }
+    },
+    {$unwind: {
+      path: "$Question",
+      preserveNullAndEmptyArrays: true
+  
+    }},
+   
+  ]).then(async post=>{
+    if (post[0].author) {
+     let PollnQOutput=PollnQAnalyzer(post[0],req.header("AdminId")||"")
+      let Recommendations = await Posts.find({ isDeleted:false,author:post[0].author._id}).populate("topic").sort({publishDate:-1}).limit(4)
+      res.json({success:true,payload:{Post:{...post[0],...PollnQOutput},Recommendations}})
+    }
+    else{
+      res.json({success:true,payload:{Post:post[0],Recommendations:[]}})
+  
+    }
+  })
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({success: false, message: 'Internal server error'})
+  }
+  })
+
+
 
 
 module.exports = app;

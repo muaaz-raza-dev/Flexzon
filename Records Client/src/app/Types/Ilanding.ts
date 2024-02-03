@@ -48,15 +48,14 @@ Question?:IQuestion;
 AdditonalAssetsType?:"Poll"|"Question";
 }
 
-interface IPoll{
+export interface IPoll{
   title:string;
+  Polled:boolean
   _id:string;
-  options:{title:string,votes:string[],}[]
+  total:number
+  options:{title:string,votes:number,}[]
 }
-interface IQuestion{
-  title:string;
-  _id:string;
-  options:{title:string,votes:string[],}[];
+export interface IQuestion extends IPoll{
   correct:string
 }
 export interface Ilanding{

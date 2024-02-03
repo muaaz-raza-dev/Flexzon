@@ -6,7 +6,7 @@ import { useQuery } from "react-query"
 import FetchIndividualUser  from "@/Queryfunctions/Detail/FetchIndividualUser"
 import { useAppDispatch, useAppSelector } from "@/app/ReduxHooks"
 import { userDetailsInsertion } from "@/app/Slices/UserDetailsSilce"
-import { SmallLoader } from "@/Essentials/Loader"
+import { RecordsLoader } from "@/Essentials/Loader"
 import UPostHeader from "./Post Header/UPostHeader"
 const ProfileFile:FC = () => {
   let dispatch = useAppDispatch()
@@ -20,7 +20,7 @@ const ProfileFile:FC = () => {
   
 
 if (isLoading) {
-  return <SmallLoader/>
+  return <RecordsLoader/>
 }
   return (
     <main className="w-full flex flex-col items-center justify-center">

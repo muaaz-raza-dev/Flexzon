@@ -14,10 +14,12 @@ export const BlogPost = ({data}:Iblog|any) => {
   let credits = useAppSelector(state=>state.credits)
   useEffect(() => {
 setIsFollower(data.FollowerOnly&&(credits.isLogined&& credits.Info.following.some(elm=>elm._id==data._id)))
+TimeAgo.addDefaultLocale(en)
   }, []);
-  TimeAgo.addDefaultLocale(en)
-    
-  const timeAgo = new TimeAgo('en-US')
+    let timeAgo;
+    if (TimeAgo) {
+       timeAgo = new TimeAgo('en-US')
+    }
   
   return (
     <main  className="flex flex-col  lg:w-[40%] border max-lg:w-[35%] max-md:w-[95%]  md:h-[24rem] max-md:h-[27rem] border-b   px-5 ">
@@ -40,8 +42,8 @@ setIsFollower(data.FollowerOnly&&(credits.isLogined&& credits.Info.following.som
         <div className="flex  w-full">
 
         <section className="flex w-full items-center gap-x-2 py-2">
-        <p className="md:text-sm max-md:text-xs tracking-tighter text-blue-500 border p-1">{data?.timeToRead} </p>
-<p className="text-gray-800 md:text-sm max-md:text-xs tracking-tighter">{timeAgo.format(new Date(data?.publishDate))}</p>
+        <p className="md:text-sm max-md:text-xs whitespace-nowrap tracking-tighter text-blue-500 border p-1">{data?.timeToRead} </p>
+<p className="text-gray-800 md:text-sm max-md:text-xs whitespace-nowrap tracking-tighter">{timeAgo?.format(new Date(data?.publishDate))||"-"}</p>
 
         </section>
     <div className="flex gap-x-2  items-center w-full justify-end">

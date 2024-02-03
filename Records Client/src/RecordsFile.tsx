@@ -13,14 +13,15 @@ import useValidate from './Queryfunctions/Hooks/useValidate'
 import { useMutation } from 'react-query'
 import { useAppDispatch, useAppSelector } from './app/ReduxHooks'
 import { insertion } from './app/Slices/LandingSlice'
-import{useEffect} from "react"
+import{useEffect, useState} from "react"
 import SearchedPageFile from './Pages/Searched/SearchedPageFile'
 import CreditsGuard, { LoginAskModal } from './app/middlewares/CreditsGuard'
-import Loader from './Essentials/Loader'
+import  { RecordsLoader } from './Essentials/Loader'
 const RecordsFile = () => {
   let state=useAppSelector(state=>state.landing)
   let validation = useValidate()
   let Info=useAppSelector(state=>state.credits)
+  const [Loading, setLoading] = useState(true);
   let dispatch =useAppDispatch()
   let {mutate,isLoading,isSuccess}= useMutation({mutationKey:"Topics",
  onSuccess(data) {
@@ -37,19 +38,18 @@ const RecordsFile = () => {
 })
 
 useEffect(() => {
-  validation.then(()=>{
+  validation.then((loading)=>{
   mutate()
+  setLoading(loading)
       })
   }, []);
 
   if (isLoading&&isSuccess) {
-  return(
-   <div className='w-full h-screen center'>
-<Loader/>
-  </div>)    
+  return<RecordsLoader/>
   }
 else {
-
+if (!Loading) {
+  
   return (
     <main>
 <Navbar/>
@@ -74,6 +74,9 @@ else {
     </main>
   )
 }
+}
+
+
 }
 
 export default RecordsFile

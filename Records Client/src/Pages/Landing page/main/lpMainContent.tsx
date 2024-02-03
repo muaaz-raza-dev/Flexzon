@@ -5,7 +5,7 @@ import { Iblog } from "@/app/Types/Ilanding";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { Separator } from "@/components/ui/separator";
 import { Dot, Heart,} from "lucide-react";
-import { FC } from "react";
+import { FC, useEffect } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { Link } from "react-router-dom";
 import LikeBtn from "./LikeBtn";
@@ -16,8 +16,17 @@ interface IblogProp {
   data: Iblog;
   Follower:boolean
 }
-export const PostBox: FC<IblogProp> = ({ data ,Follower}) => {
+import TimeAgo from "javascript-time-ago";
+import en from 'javascript-time-ago/locale/en'
 
+export const PostBox: FC<IblogProp> = ({ data ,Follower}) => {
+ useEffect(() => {
+  TimeAgo.addDefaultLocale(en)
+}, []);
+  let timeAgo;
+  if (TimeAgo) {
+     timeAgo = new TimeAgo('en-US')
+  }
   
   return (
     <>
@@ -47,7 +56,7 @@ export const PostBox: FC<IblogProp> = ({ data ,Follower}) => {
             {data?.author?.username || "Anonymous"}
           </Link>
           <Dot />
-          <p>{new Date(data?.publishDate).toLocaleDateString()}</p>
+          <p>{timeAgo?.format(new Date(data?.publishDate))||"-"}</p>
         </Link>
 
         <main className="flex w-full h-full max-md:items-center max-md:flex-col-reverse ">

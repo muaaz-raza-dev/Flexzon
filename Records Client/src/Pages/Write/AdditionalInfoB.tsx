@@ -6,8 +6,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { Info } from "lucide-react";
 import { ChangeEvent, useEffect } from "react";
-// import Polling from "./Poll&Q/Polling";
-// import Polling from "./Poll&Q/Polling";
+import Polling from "./Poll&Q/Polling";
 const ReadCountCaculator = (plainText: string) => {
   let wordsCount = plainText.split(" ").filter((elm) => elm !== " ").length;
   let avgReader = 200; //238-38 wpm refrence:Google
@@ -34,7 +33,7 @@ const ReadCountCaculator = (plainText: string) => {
       return (
         <div className="w-full">
 
-          {/* <Polling/>  */}
+          <Polling/> 
       <Input
         placeholder="Title"
         name="title"

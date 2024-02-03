@@ -2,10 +2,10 @@ import { insertion } from "@/app/Slices/LandingSlice"
 import { Icredits } from "@/app/Types/ICredits"
 
 
-const CreditsValidator = <T,K>(state:Icredits,fn:T,dispatch:K) => {
+const CreditsValidator = <T,K>(state:Icredits,fn:T,dispatch:K,parameter?:string) => {
  if (state.isLogined) {
     if (typeof fn=="function") {
-        fn()
+        fn(parameter||"")
     }
 }
 else{

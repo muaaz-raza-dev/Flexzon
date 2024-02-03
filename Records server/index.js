@@ -5,10 +5,8 @@ const MongoConnection = require('./db');
 const cors = require('cors');
 const Port = 8000 || process.env.PORT;
 const server = require('http').createServer(app)
-
 //? To parse json data from body of request object
 app.use(express.json())
-
 app.use(cors({
   origin:["http://localhost:5173","https://recordss.vercel.app"],
   credentials:true,
@@ -27,6 +25,7 @@ app.use("/api/save",require("./Routes/Posts/Save"))
 app.use("/api/connections",require("./Routes/Member/FollowPattren"))
 app.use("/api/comments",require("./Routes/Posts/Comments"))
 app.use("/api/otp",require("./Routes/Member/OTP"))
+app.use("/api/vote",require("./Routes/Member/PollnQVoting"))
 
 
 server.listen(Port, () => {
