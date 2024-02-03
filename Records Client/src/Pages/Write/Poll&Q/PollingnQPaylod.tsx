@@ -11,8 +11,8 @@ const PollingnQPaylod = () => {
   let OptionvsQuestion =
     AdditionalAssests.PollnQ.type == "Poll" ? "Options" : "Answers";
   function OptionHandler(e: any) {
-    let options = AdditionalAssests.PollnQ.options?.map((elm, index) => {
-      return { title: e.target[index].value };
+    let options = AdditionalAssests.PollnQ.options?.map((...index) => {
+      return { title: e.target[index[1]].value };
     });
     dispatch(
       WriteInsertion({ Options: options.filter((elm) => elm.title !== "") })
@@ -109,7 +109,7 @@ const PollingnQPaylod = () => {
                       dispatch(
                         WriteInsertion({
                           Options: AdditionalAssests.PollnQ.options.filter(
-                            (elm, i) => i != index
+                            (...i) => i[1] != index
                           ),
                         })
                       );
