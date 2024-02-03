@@ -20,6 +20,7 @@ const BlogFile = () => {
 ,onSuccess(data) {
   dispatch(BlogInsert({data:data?.payload.Post,Recommendations:data?.payload.Recommendations}))
 },
+refetchOnWindowFocus: false
 } 
   
   )  

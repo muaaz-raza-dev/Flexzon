@@ -1,4 +1,4 @@
-import PollingTab from "./PollingTab";
+// import PollingTab from "./PollingTab";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
@@ -26,7 +26,7 @@ const PollingnQPaylod = () => {
 
   return (
     <div className="border-2 p-2 w-full border-black rounded border-dashed flex flex-col gap-y-3">
-      <PollingTab />
+      {/* <PollingTab /> */}
       <Input
         autoFocus
         placeholder="Ask question or somthing"

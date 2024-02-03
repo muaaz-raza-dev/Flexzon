@@ -32,7 +32,8 @@ const PollingAsk=()=>{
           >
 
 
-         Add Polling / Question
+         Add Polling 
+         {/* / Question */}
 
           </label>
         </div>
