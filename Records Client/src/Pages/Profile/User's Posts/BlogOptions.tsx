@@ -1,5 +1,4 @@
 import {DropdownMenu,DropdownMenuContent,DropdownMenuItem,DropdownMenuTrigger,} from "@/components/ui/dropdown-menu";
-import { Edit } from "lucide-react";
 import { FC, ReactNode } from "react";
 import DeletePost from "./DeletePost";
   
