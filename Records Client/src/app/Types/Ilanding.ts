@@ -56,7 +56,8 @@ export interface IPoll{
   options:{title:string,votes:number,}[]
 }
 export interface IQuestion extends IPoll{
-  correct:string
+  correct:string,
+  voted:string
 }
 export interface Ilanding{
   Blogs:Iblog[];

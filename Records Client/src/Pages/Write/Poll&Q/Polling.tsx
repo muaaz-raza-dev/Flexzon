@@ -32,7 +32,7 @@ const PollingAsk=()=>{
           >
 
 
-         Add Polling 
+         Add Polling / Question
          {/* / Question */}
 
           </label>

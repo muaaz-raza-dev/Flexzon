@@ -11,6 +11,7 @@ app.post("/", VerifyMember,async (req, res) => {
     //AditionalAssets = Polls and Questions
   let {author,title,subTitle,banner,content,timeToRead,topic,tags,anonymous,FollowerOnly,AdditonalAssets,AdditonalAssetsType} = req.body;
   let  PayloadAssest = {}
+  console.log(AdditonalAssets,AdditonalAssetsType);
   if(AdditonalAssetsType == "Poll"){
     let Polled =await Polls.create({author,...AdditonalAssets})
     PayloadAssest.Poll=Polled._id
@@ -19,9 +20,8 @@ app.post("/", VerifyMember,async (req, res) => {
     let Questioned =await Question.create({author,...AdditonalAssets})
     PayloadAssest.Question=Questioned._id
   }
-  let TopicInDb=await Topic.findOne({title:topic})
+  let TopicInDb=await Topic.findOne({$text:{$search:topic}})
   if (TopicInDb) {
-    
     Posts.create({
         author,title,subTitle,banner,content,timeToRead,topic:TopicInDb._id,tags,anonymous,FollowerOnly,AdditonalAssetsType,...PayloadAssest
     })

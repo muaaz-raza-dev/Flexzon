@@ -28,13 +28,14 @@ const PollingView=()=>{
         )
       }
       else{
-        let Ratio = {voted:`from-[${elm.votes}%]`,remain:`to-[${100-elm.votes}%]`}
+        let percentage = `from-[${elm.votes.toString()}%]`
+        console.log(percentage);
         
         return(
           <div className="flex justify-between transition pr-2 rounded-lg items-center ">
-        <div className={`w-[95%]  transition bg-gradient-to-r 
-        from-gray-400 ${Ratio.voted}  to-[0%]  to-white text-[var(--primary)] cursor-default font-semibold  text-sm border-[var(--primary)] border  rounded-md p-2 px-4`}>
-          {elm.title} </div>
+        <button className={`w-[95%] text-start transition bg-gradient-to-r 
+        from-[#161a3040] ${percentage}   to-[0%]  to-white text-[var(--primary)]  font-semibold  text-sm border-[var(--primary)] border  rounded-md p-2 px-4`}>
+          {elm.title} </button>
           <div className="px-4 w-[5%] hFont">{elm.votes}%</div>
         </div>
           )

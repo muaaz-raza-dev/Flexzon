@@ -1,19 +1,14 @@
 import { useAppDispatch, useAppSelector } from "@/app/ReduxHooks"
 import { FileUploader } from "react-drag-drop-files"
 import {useState,useRef} from "react"
-import { Upload } from "lucide-react";
-import UploadImage from "@/app/middlewares/functions/ImageUploader";
 import { WriteInsertion } from "@/app/Slices/WriteSlice";
-import { toast } from "react-hot-toast";
 import {useEffect} from "react"
 const BannerUploadB = () => {
   const writeState =useAppSelector(state=>state.write)
 const [ImageURI, setImageURI] = useState<{sample:string,blob?:Blob|null}>({sample:writeState.Banner});
 useEffect(() => {
-  localStorage.getItem("Banner_Post")&&setImageURI({sample:localStorage.getItem("Banner_Post")||""})
+  if(localStorage.getItem("Banner_Post"))setImageURI({sample:localStorage.getItem("Banner_Post")||""})
 }, []);
-console.log(ImageURI);
-
 let fileRef =useRef()
   let dispatch = useAppDispatch()
   return (
@@ -24,32 +19,21 @@ let fileRef =useRef()
               !ImageURI.sample?
               " Your Banner will be showing here."
               :
-              ImageURI?.blob?.type.split("/")[0]?
-              <img src={ImageURI.sample} alt="" className="w-full"  />:
-              <video src={ImageURI.sample} autoPlay controls loop/>
+             ["mp3","mp4"].includes(ImageURI.sample.split(".")[ImageURI.sample.split(".").length-1]) ?
+             <video src={ImageURI.sample} autoPlay controls loop/>:
+             <img src={ImageURI.sample} alt="" className="w-full"  />
             }
         </div>
         </div>
 <div className="max-md:w-full  center p-2 overflow-hidden">
 <FileUploader className={"!w-[34px] !h-8"}  multiple={false} ref={fileRef} label="Upload your banner" file={true} handleChange={(file:Blob)=>{
   setImageURI({sample:URL.createObjectURL(file),blob:file})
+  dispatch(WriteInsertion({BannerBlob:file}))
+  
 }} types={["PNG","JPG","JPEG","mp3","mp4"]} maxSize={10485760}  />
 </div>
 <div className="flex gap-x-4">
-{
-  ImageURI.blob&&
-<button onClick={()=>{ImageURI.blob&&UploadImage(ImageURI?.blob).then(data=>{
-  dispatch(WriteInsertion({Banner:data.url}))
-  setImageURI({...ImageURI,blob:null})
-  localStorage.setItem("Banner_Post",data.url) // For draft puropose
-  toast.success("Banner uploaded")
-}
-)
-}} className="p-2 w-fit rounded text-md text-white bg-[var(--primary)] flex gap-x-2">
-Upload
-  <Upload size={20}/>
-</button>
-}
+
 </div>
 
     </section>

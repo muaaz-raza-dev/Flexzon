@@ -8,6 +8,7 @@ interface IPollingnQ {
 
 export interface Iwrite {
   Banner: string;
+  BannerBlob?:Blob
   title: string;
   subtitile: string;
   mainContent: string;

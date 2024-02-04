@@ -54,7 +54,7 @@ TimeAgo.addDefaultLocale(en)
      {data?.likes} 
   
 <div className="cursor-not-allowed ">
-  <Heart size={18} className="max-md:w-6"/>
+  <Heart size={18} className="max-md:w-6 text-gray-500"/>
 
 </div>
   </div>

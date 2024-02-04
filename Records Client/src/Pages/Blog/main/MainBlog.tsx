@@ -1,12 +1,13 @@
-import { Iblog } from '@/app/Types/Ilanding'
 import PollingView from './PollnQ/PollingView'
-const MainBlog = ({data}:Iblog|any) => {
-  
+import { useAppSelector } from '@/app/ReduxHooks'
+import QuestionView from './PollnQ/QuestionView'
+const MainBlog = () => {
+  let {data} = useAppSelector(state=>state.Blog)
   return (
     <main className="flex flex-col w-full">
-      <header className="w-full flex items-center justify-center p-2 mb-4 ">
-      {["mp3", "mp4"].includes(data?.banner.split(".")[3]) ? (
-              <video src={data.banner}  loop autoPlay controls ></video>
+      <header className="w-full flex items-center rounded-lg justify-center p-2 mb-4 ">
+      {["mp3", "mp4"].includes((data?.banner||"")?.split(".")[3]) ? (
+              <video src={data?.banner} className='rounded'  loop autoPlay controls ></video>
             ) : (
               <img
                 src={data?.banner || "/images/Records.png"}
@@ -15,14 +16,17 @@ const MainBlog = ({data}:Iblog|any) => {
               />
             )}
      
-
       </header>
       <div className="text-xl">
-<p className="whitespace-pre-wrap" dangerouslySetInnerHTML={{__html:data.content}}>
+<p className="whitespace-pre-wrap" dangerouslySetInnerHTML={{__html:data?.content||""}}>
 </p>
 
       </div>
-<PollingView />
+      {
+        data?.AdditonalAssetsType=="Poll"?
+<PollingView />:
+<QuestionView/>
+      }
     </main>
   )
 }

@@ -5,11 +5,11 @@ import { Button } from "@/components/ui/button";
 import { useAppDispatch, useAppSelector } from "@/app/ReduxHooks";
 import { WriteInsertion } from "@/app/Slices/WriteSlice";
 import { Check, PlusCircle, X } from "lucide-react";
+import PollingTab from "./PollingTab";
 const PollingnQPaylod = () => {
   let { AdditionalAssests } = useAppSelector((state) => state.write);
   let dispatch = useAppDispatch();
-  let OptionvsQuestion =
-    AdditionalAssests.PollnQ.type == "Poll" ? "Options" : "Answers";
+  let OptionvsQuestion =AdditionalAssests.PollnQ.type == "Poll" ? "Options" : "Answers";
   function OptionHandler(e: any) {
     let options = AdditionalAssests.PollnQ.options?.map((...index) => {
       return { title: e.target[index[1]].value };
@@ -26,7 +26,7 @@ const PollingnQPaylod = () => {
 
   return (
     <div className="border-2 p-2 w-full border-black rounded border-dashed flex flex-col gap-y-3">
-      {/* <PollingTab /> */}
+      <PollingTab />
       <Input
         autoFocus
         placeholder="Ask question or somthing"
@@ -75,7 +75,7 @@ const PollingnQPaylod = () => {
             Choose correct one :
           </h1>
         )}
-        <div className="flex flex-wrap gap-x-2">
+        <div className="flex flex-wrap  gap-2">
           {AdditionalAssests.PollnQ.options.map((elm, index) => {
             if (elm.title !== "") {
               return (

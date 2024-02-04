@@ -23,7 +23,7 @@ const RecordsFile = () => {
   let Info=useAppSelector(state=>state.credits)
   const [Loading, setLoading] = useState(true);
   let dispatch =useAppDispatch()
-  let {mutate,isLoading,isSuccess}= useMutation({mutationKey:"Topics",
+  let {mutate,isLoading}= useMutation({mutationKey:"Topics",
  onSuccess(data) {
   
     dispatch(
@@ -44,12 +44,12 @@ useEffect(() => {
       })
   }, []);
 
-  if (isLoading&&isSuccess) {
+  if (isLoading) {
   return<RecordsLoader/>
   }
 else {
+
 if (!Loading) {
-  
   return (
     <main>
 <Navbar/>

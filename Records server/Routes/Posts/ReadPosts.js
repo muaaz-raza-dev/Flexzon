@@ -404,7 +404,13 @@ app.post("/starter", async (req, res) => {
 
 app.get("/post/:id",async(req,res)=>{
   try {
-    let Post = await Posts.findById(req.params.id)
+    if (req.params.id.split("").length<20) {
+      res.status(400).json({success: false, message: 'Invalid input detected'})
+      
+    }
+    else{
+      let Post = await Posts.findById(req.params.id)
+
     await Posts.aggregate([
     {
       $match: {
@@ -471,7 +477,7 @@ app.get("/post/:id",async(req,res)=>{
   ]).then(async post=>{
     if (post[0].author) {
      let PollnQOutput=PollnQAnalyzer(post[0],req.header("AdminId")||"")
-      let Recommendations = await Posts.find({ isDeleted:false,author:post[0].author._id}).populate("topic").sort({publishDate:-1}).limit(4)
+      let Recommendations = await Posts.find({_id:{$ne:post[0]._id}, isDeleted:false,author:post[0].author._id}).populate("topic").sort({publishDate:-1}).limit(4)
       res.json({success:true,payload:{Post:{...post[0],...PollnQOutput},Recommendations}})
     }
     else{
@@ -479,11 +485,20 @@ app.get("/post/:id",async(req,res)=>{
   
     }
   })
-  } catch (error) {
+
+}
+  }
+ catch (error) {
+  if (error.name === 'BSONError' && error.message === 'input must be a 24 character hex string, 12 byte Uint8Array, or an integer') {
+    console.log('Invalid input detected');
+    res.status(400).json({success: false, message: 'Invalid input detected'})
+  } else {
     console.log(error);
     res.status(500).json({success: false, message: 'Internal server error'})
   }
-  })
+}}
+
+  )
 
 
 

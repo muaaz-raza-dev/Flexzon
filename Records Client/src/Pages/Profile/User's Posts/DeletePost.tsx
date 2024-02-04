@@ -21,7 +21,7 @@ const DeletePost:React.FC<{id:string}> = ({id}) => {
 
   return (
     <button  className="flex gap-x-2 items-center text-red-500 text-xs" onClick={()=>mutate()}>
-    <Trash2 size={18}/>
+    <Trash2 size={16}/>
     {
         isLoading?
         <Loader/>:

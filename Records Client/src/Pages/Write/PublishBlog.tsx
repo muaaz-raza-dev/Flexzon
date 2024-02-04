@@ -1,4 +1,4 @@
-import {  useAppSelector } from "@/app/ReduxHooks";
+import {  useAppDispatch, useAppSelector } from "@/app/ReduxHooks";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -18,8 +18,11 @@ import { useRef } from "react";
 import { toast } from "react-hot-toast";
 import { LightLoader } from "@/Essentials/Loader";
 import useUploadPost from "./Hooks/useUploadPost";
+import UploadImage from "@/app/middlewares/functions/ImageUploader";
+import { WriteInsertion } from "@/app/Slices/WriteSlice";
 const PublishBlog = () => {
   let writeState = useAppSelector((state) => state.write);
+  let dispatch=useAppDispatch()
   let { mainContent, title,  Banner, topic } = writeState;
   let {mutate,isLoading}=useUploadPost()
   let DialogRef = useRef<any>(null);
@@ -29,8 +32,13 @@ const PublishBlog = () => {
       DialogRef?.current?.click();
     }
     else if(Banner.length==0){
-      toast.error("Upload your Banner first");
-      DialogRef?.current?.click();
+      writeState.BannerBlob&&UploadImage(writeState?.BannerBlob).then(data=>{ 
+        dispatch(WriteInsertion({Banner:data.url}))
+        DialogRef?.current?.click();
+    })
+  .catch(()=>{
+    toast.error("Something went wrong try again later!")
+  })
     }
     else {
     }
@@ -74,8 +82,9 @@ const PublishBlog = () => {
                 </button>
               </div>
               <button
-                onClick={() =>{ 
+                onClick={() =>{
                 mutate(false)
+
                
                 }}
                 className=" block w-full p-1 text-lg rounded-full bg-[var(--primary)] hover:bg-[black] text-white transition-colors focus:outline-none"

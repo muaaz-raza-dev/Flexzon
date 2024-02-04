@@ -18,6 +18,8 @@ interface IwriteAction {
   Options?: { title: string }[];
   OptionIndex?: number;
   OptionRawIndexedTitle?: string;
+  BannerBlob?:Blob
+
 }
 
 const writeInsertion = (state: Iwrite, action: PayloadAction<IwriteAction>) => {
@@ -53,6 +55,8 @@ const writeInsertion = (state: Iwrite, action: PayloadAction<IwriteAction>) => {
   if (payload.AdditionalAssestsTitle !== undefined) {
     state.AdditionalAssests.PollnQ.title = payload.AdditionalAssestsTitle;
   }
+  if (payload.BannerBlob) { 
+    state.BannerBlob=payload.BannerBlob}
 };
 
 export default writeInsertion;

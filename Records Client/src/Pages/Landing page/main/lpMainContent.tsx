@@ -61,7 +61,7 @@ export const PostBox: FC<IblogProp> = ({ data ,Follower}) => {
 
         <main className="flex w-full h-full max-md:items-center max-md:flex-col-reverse ">
           <section className="flex flex-col px-2 md:w-[75%] max-md:w-full justify-between">
-            <Link to={!data.FollowerOnly?`/blog/${data?._id}`:Follower?`/blog/${data?._id}`:`/user/${data?.author._id}`} className="cursor-default">
+            <Link to={!data.FollowerOnly?`/blog/${data?._id}`:Follower?`/blog/${data?._id}`:`/user/${data?.author._id}`} className="cursor-pointer">
               <h1 className="BFont md:text-2xl max-md:text-xl">
                 {data?.title}
               </h1>

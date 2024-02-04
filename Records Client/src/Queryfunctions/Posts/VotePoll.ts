@@ -8,4 +8,10 @@ const VotePollFn = async(Poll:IPoll,title:string) => {
         return response.data;
 }
 
+export const VoteQ = async(Question:IPoll,title:string) => {
+    let response = (await Axios.post(`/vote/question`,{Question,title},{
+        headers:{"auth-token":Cookies.get("Records_session")}
+    }));
+    return response.data;
+}
 export default VotePollFn

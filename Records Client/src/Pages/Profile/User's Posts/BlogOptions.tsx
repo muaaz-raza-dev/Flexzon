@@ -14,11 +14,11 @@ const BlogOptions:FC<{children:ReactNode,id:string}> = ({children,id}) => {
       <DropdownMenuItem className="cursor-pointer border-b-2">
      <DeletePost id={id}/>
       </DropdownMenuItem>
-      <DropdownMenuItem className="cursor-pointer">
+      {/* <DropdownMenuItem className="cursor-pointer">
         <div  className="flex gap-x-2 items-center text-sm" >
           <Edit/> Edit 
         </div>
-      </DropdownMenuItem>
+      </DropdownMenuItem> */}
     </DropdownMenuContent>
   </DropdownMenu>
   )
