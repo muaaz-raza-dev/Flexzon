@@ -1,4 +1,4 @@
-import { Iblog, Ilanding, Itopic } from "@/app/Types/Ilanding";
+import { Iblog, Ilanding, ItopCreators, Itopic } from "@/app/Types/Ilanding";
 import { PayloadAction } from "@reduxjs/toolkit";
 interface IinsertdataPayload {
   Blogs?: Iblog[];
@@ -8,7 +8,8 @@ interface IinsertdataPayload {
   tabs?: Itopic[];
   selectedTabs?: string;
   totalResults?:number;
-  ValidModal?:boolean
+  ValidModal?:boolean;
+  TopCreators?:ItopCreators[]
 }
 export const InsertData = (
   state: Ilanding,
@@ -16,6 +17,9 @@ export const InsertData = (
 ) => {
   if (action.payload.Blogs) {
     state.Blogs = action.payload.Blogs;
+  }
+  if (action.payload.TopCreators) {
+    state.TopCreators = action.payload.TopCreators;
   }
   if (action.payload.Topics) {
     state.Topics = action.payload.Topics;

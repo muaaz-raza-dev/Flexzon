@@ -18,6 +18,7 @@ interface IblogProp {
 }
 import TimeAgo from "javascript-time-ago";
 import en from 'javascript-time-ago/locale/en'
+import TopCreators from "./TopCreators";
 
 export const PostBox: FC<IblogProp> = ({ data ,Follower}) => {
  useEffect(() => {
@@ -124,6 +125,7 @@ export const LpMainContent = () => {
 
   return (
     <div className="flex flex-col w-full gap-y-3  ">
+      <TopCreators/>
       <InfiniteScroll
         className="overflow-hidden overflow-x-hidden ZeroScroll "
         dataLength={Data.Blogs.length}
@@ -143,6 +145,7 @@ export const LpMainContent = () => {
         {Data.Blogs.length !== 0 &&
           Data.Blogs.map((elm) => <PostBlockRenderer key={elm._id} data={elm}/>)}
       </InfiniteScroll>
+      
     </div>
   );
 };

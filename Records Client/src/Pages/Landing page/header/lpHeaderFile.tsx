@@ -9,7 +9,6 @@ export const HeaderLabels:FC<{value:string}> = ({value}) => {
   let dispatch=useAppDispatch()
 return (
       <div  className={` z-40 ${ data.selectedTabs===value&&'!text-white !bg-[var(--primary)]'} flex items-center text-sm h-full bg-gray-200 p-2 rounded-lg text-gray-600 text-nowrap cursor-pointer hover:text-[var(--primary)] transition-colors `} onClick={()=>{
-        window.screenY=0
         dispatch(insertion({selectedTabs:value,Blogs:[],count:0}))
           FetchBlogs<typeof dispatch>({...data,selectedTabs:value,Blogs:[],count:0},dispatch,Credits)
   }}>
@@ -25,7 +24,7 @@ export const LpHeaderFile = () => {
     bg-[var(--bg)] z-[30]  w-screen Headerlp  border-b items-center sticky -top-1 h-14 " >
         <a href="#" className="p-1   rounded cursor-pointer 
         hover:text-[var(--primary)]">
-<Home className="max-md:w-6 md:w-6 ml-4" size={28} />
+<Home className="max-md:w-6 md:w-6 " size={28} />
         </a>
         {
    data.tabs.slice(0,15).map((elm)=>{  

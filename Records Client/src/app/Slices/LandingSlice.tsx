@@ -5,6 +5,7 @@ export  const LandingState :Ilanding = {
 Blogs:[],
 Trendings:[],
 Topics:[],
+TopCreators:[],
 count:0,
 tabs:[{title:"For you",_id:"all"}],
 selectedTabs:"For you",

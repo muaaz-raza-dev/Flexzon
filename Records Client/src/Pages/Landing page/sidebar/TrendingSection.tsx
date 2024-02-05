@@ -36,7 +36,7 @@ export const TrendingSection = () => {
   let data = useAppSelector(state=>state.landing)
   return (
     <div className="w-full">
-        <h1 className="text-xl BFont flex gap-x-2 py-2 "> Trending <TrendingUp /> </h1>
+        <h1 className="text-xl BFont flex gap-x-2 py-2 items-center"> Trending Blogs <TrendingUp size={16}/> </h1>
         {
           data.Trendings.length!==0&&
             data.Trendings.map((elm)=><ShortCard data={elm}/>)

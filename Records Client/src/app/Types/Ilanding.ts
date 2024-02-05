@@ -59,9 +59,17 @@ export interface IQuestion extends IPoll{
   correct:string,
   voted:string
 }
+export interface ItopCreators{
+  _id:string,
+  avatar:string,
+  followers:string[],
+  Name:string,
+  posts:number
+}
 export interface Ilanding{
   Blogs:Iblog[];
   Trendings:Iblog[];
+  TopCreators:ItopCreators[];
   Topics: {_id:string,  topic:{_id:string,title:string},result:number}[];
   count:number;
   tabs:Itopic[];

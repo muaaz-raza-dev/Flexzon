@@ -268,7 +268,55 @@ app.post("/topics",async(req,res)=>{
 
 app.post("/starter", async (req, res) => {
   try {
+
+    
     await Posts.updateMany({FollowerOnly:{$exists:false}},{$set:{FollowerOnly:false}})
+    let TopCreators= await Posts.aggregate([
+      {
+        $group: {
+          _id: "$author",
+          posts: { $sum: 1 },
+        },
+      },
+      {
+        $lookup: {
+          from: "members",
+          localField: "_id",
+          foreignField: "_id",
+          as: "author",
+        },
+      },
+      {
+        $sort: {
+          posts: -1,
+        },
+      },
+      {
+        $unwind: {
+          path: "$author",
+        },
+      },
+      {
+        $project: {
+          "author.Name": 1,
+          "author.followers": 1,
+          "author.avatar": 1,
+          "posts":1
+        },
+      },
+      {
+        $replaceRoot: {
+          newRoot: {
+            $mergeObjects: ["$author", "$$ROOT"],
+          },
+          
+        },
+      },
+        {
+        $project: {
+          "author": 0,
+        }}
+    ]).limit(20)
     let Topics = await Posts.aggregate([
       {$match: {
         isDeleted:false
@@ -390,9 +438,9 @@ app.post("/starter", async (req, res) => {
             },
           },
         },
-      ]).sort({publishDate:-1,likes:-1}).limit(limit)
+      ]).sort({likes:-1,publishDate:-1}).limit(limit)
    
-    res.json({success: true, payload: {Topics, Trendings, Blogs:Post}})
+    res.json({success: true, payload: {Topics, Trendings, Blogs:Post,TopCreators}})
   } catch (error) {
     console.log(error);
     return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ success: false, msg: 'Internal server error' });

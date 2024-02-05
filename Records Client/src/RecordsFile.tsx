@@ -25,13 +25,13 @@ const RecordsFile = () => {
   let dispatch =useAppDispatch()
   let {mutate,isLoading}= useMutation({mutationKey:"Topics",
  onSuccess(data) {
-  
     dispatch(
       insertion({
           count: state?.count + 1,
           Blogs:[ ...state.Blogs, ...data?.payload?.Blogs]||[],
           Topics:data?.payload?.Topics||[],
   Trendings: data?.payload?.Trendings||[],
+  TopCreators:data?.payload.TopCreators||[]
 }))
   },
   mutationFn:()=>FetchStarter(state.count,Info.Info.interests)
@@ -73,6 +73,9 @@ if (!Loading) {
         </Routes>
     </main>
   )
+}
+else{
+  return<RecordsLoader/>
 }
 }
 
