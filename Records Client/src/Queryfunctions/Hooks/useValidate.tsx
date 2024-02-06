@@ -19,10 +19,11 @@ const useValidate = async() => {
                 dispatch(insertion({tabs:response.data.payload.interests}))
             }
             else{
-            loading=false
-
         dispatch(CreditsInsertion({isLoading:false}))
             }
+    }
+    else{
+        loading=false
     }
 }
     else{
