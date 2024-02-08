@@ -14,6 +14,7 @@ const AddComment = () => {
   let  {data}= useAppSelector(state=>state.Blog)
   let  commentState= useAppSelector(state=>state.comment)
   let {mutate,isLoading} =useMutation({mutationKey:"Commenting",mutationFn:()=>UploadComment(Comment,data?._id||""),onSuccess(data,) {
+    setComment("")
     dispatch(CommentInsertion({Comment:[data.payload,...commentState.Comment]}))
   },},)
     let credits = useAppSelector(state=>state.credits)
@@ -26,7 +27,7 @@ const AddComment = () => {
       </Avatar>
       <h1>{credits.Info.username}</h1>
         </div>
-    <Textarea placeholder="Write your thoughts on this upload" className="outline-none border-none focus:outline-none focus:border-none ring-0 focus-within:ring-0 focus-visible:ring-0" onChange={(e)=>setComment(e.target.value)} value={Comment}/>
+    <Textarea placeholder="Share your thoughts and suggestions" className="outline-none border-none focus:outline-none focus:border-none ring-0 focus-within:ring-0 focus-visible:ring-0 text-black" onChange={(e)=>setComment(e.target.value)} value={Comment}/>
     <Button className="primary text-white hover:bg-[var(--primary)]" onClick={()=>{
       CreditsValidator(credits,mutate,dispatch)
     }}>

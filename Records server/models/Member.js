@@ -22,5 +22,6 @@ const Orderschema = new mongoose.Schema({
     gender:{value:String,display:{type:Boolean,default:false}},
     OTP:Number,
     profileViews: [{viewer: {type: ObjectId, ref: "Member"}, date: {type: Date, default: Date.now}}],
+    notificationSettings:{all:Boolean,follows:Boolean,comments:Boolean,posts:Boolean,likes:Boolean},
     });
 module.exports = mongoose.model("Member", Orderschema);

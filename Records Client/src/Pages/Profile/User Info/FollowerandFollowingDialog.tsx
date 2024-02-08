@@ -38,7 +38,7 @@ let {Info} =useAppSelector(state=>state.userDetails)
                                 <AvatarImage src={data.avatar} className="w-full aspect-square rounded-full border border-black"/>
                             </Avatar>
                             <div className="flex flex-col ">
-                            <b>
+                            <b className="text-start">
                       {data.username}
                             </b>
                             <p className="text-gray-700  text-start">{data.Name}</p>

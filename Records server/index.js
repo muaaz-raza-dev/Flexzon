@@ -26,6 +26,8 @@ app.use("/api/connections",require("./Routes/Member/FollowPattren"))
 app.use("/api/comments",require("./Routes/Posts/Comments"))
 app.use("/api/otp",require("./Routes/Member/OTP"))
 app.use("/api/vote",require("./Routes/Member/PollnQVoting"))
+app.use("/api/notifications",require("./Routes/Notifications/Notifications"))
+
 
 
 server.listen(Port, () => {

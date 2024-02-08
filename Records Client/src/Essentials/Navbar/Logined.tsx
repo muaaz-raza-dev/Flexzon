@@ -6,6 +6,7 @@ import {
   PenBoxIcon,
   LogOut,
   BookText,
+  Bell,
 } from "lucide-react";
 import {
   DropdownMenu,
@@ -20,8 +21,8 @@ import {
   CommandSeparator,
 
 } from "@/components/ui/command";
-import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { KeyboardEvent, useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "@/app/ReduxHooks";
 import { SearchInsert } from "@/app/Slices/SearchSlice";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
@@ -31,6 +32,7 @@ import Cookies from "js-cookie";
 import { CreditsInsertion } from "@/app/Slices/CredentialSlice";
 import { SearchedInsert } from "@/app/Slices/SearchedSlice";
 import { toast } from "react-hot-toast";
+import { InitialCreditsState } from "@/app/middlewares/functions/InitialCreditsState";
 const LoginedOptions = () => {
   let info=useAppSelector(state=>state.credits)
   let dispatch =useAppDispatch()
@@ -64,22 +66,7 @@ const LoginedOptions = () => {
             <div  className="flex gap-x-2 items-center" onClick={()=>{
               Cookies.remove("Records_session")
               toast("Logged out")
-              dispatch(CreditsInsertion({isLogined:false,Info: {
-                _id:"",
-              username:"",
-              avatar:"",
-              email:"",
-              Name:"",
-              bio:"",
-              followers:[],
-              following:[],
-              Posts:[],
-              saved:[],
-              liked:[],
-              anonymous:[],
-              interests:[],
-              registeredDate:"",
-              }  }))
+              dispatch(CreditsInsertion({isLogined:false,Info: InitialCreditsState  }))
             }}>
            
               <LogOut size={16} /> Logout
@@ -92,13 +79,20 @@ const LoginedOptions = () => {
 };
 
 const Logined = () => {
+  let {notifications}=useAppSelector(state=>state.notifications)
   return (
     <>
-      <ul className="list-none flex gap-x-5  ">
-        <Link to={"/write"} className="text-gray-600 hover:text-black transition-colors cursor-pointer font-normal flex items-center gap-x-1 max-sm:hidden">
-          <PenBox size={25} />{" "}
+      <ul className="list-none flex gap-x-5  items-center">
+      <Link to={"/notifications"} className="relative text-gray-600 hover:text-black transition-colors cursor-pointer font-normal flex items-center center gap-x-1 max-sm:hidden">
+        {notifications.filter(elm=>elm.read==false).length!==0&&
+          <p className="absolute -top-2  -right-1.5 bg-black rounded-full w-4 center aspect-square  text-xs text-white ">{notifications.filter(elm=>elm.read==false).length}</p>
+        }
+          <Bell size={20} />
         </Link>
-    
+        
+        <Link to={"/write"} className="text-gray-600 hover:text-black transition-colors cursor-pointer font-normal flex items-center gap-x-1 max-sm:hidden">
+          <PenBox size={20} />{" "}
+        </Link>
       </ul>
       <LoginedOptions />
     </>
@@ -110,18 +104,25 @@ export const LoginedSearchbar = () => {
   let data=useAppSelector(state=>state.search)
   const [open, setOpen] = useState(false);
   let Trendings= useAppSelector(state=>state.landing.Topics)
-  const debouced = useDebouncedCallback((output)=>{
+  const debouced = useDebouncedCallback((output:any)=>{
     SearchQuery(output).then(data=>{
       dispatch(SearchInsert({topics:data.payload.topics,users:data.payload.users}))
     })
     },800)
     useEffect(() => {
       if (data.input!=="") {
-             
         debouced(data.input)
     }
 
     }, [data.input]);
+    let navigate =useNavigate()
+    let Searcher = (e:KeyboardEvent<HTMLInputElement>)=>{
+if (e.key =="Enter") {
+  dispatch(SearchedInsert({TopicSearch:false}))
+  navigate (`/search/${data.input}`)
+  setOpen(false)
+}
+    }
   return (
     <>
       <div
@@ -134,7 +135,7 @@ export const LoginedSearchbar = () => {
       <CommandDialog open={open}   onOpenChange={setOpen}>
         <div className="flex justify-between px-2 w-full">
 
-        <CommandInput placeholder="Type a topic or author's name..." className="w-full" value={data.input} onValueChange={(e)=>dispatch(SearchInsert({input:e}))}>
+        <CommandInput placeholder="Type a topic or author's name..." className="w-full" value={data.input}  onValueChange={(e)=>dispatch(SearchInsert({input:e})) } onKeyDown={(e)=>Searcher(e)} >
           </CommandInput>
           <Link to={`/search/${data.input}`} onClick={()=>setOpen(false)}  className={`my-3 mr-8 p-1  cursor-pointer aspect-square transition-colors hover:bg-gray-300 rounded-full `} >
   <Search size={18} onClick={()=>dispatch(SearchedInsert({TopicSearch:false}))}/>
@@ -160,9 +161,9 @@ export const LoginedSearchbar = () => {
   {
 
     Trendings.slice(0,5).map(elm=>{
-      return <div className="flex gap-3 justify-between">
+      return <Link to={`/topic/${elm.topic._id}`} onClick={()=>setOpen(false)} className="flex gap-3 justify-between">
     <Topic topic={elm.topic.title} /> 
-  </div>
+  </Link>
 })
 }
 </div>

@@ -126,15 +126,15 @@ export const PostReply:FC<{data:Icomment}>=({data})=>{
   let dispatch =useAppDispatch()
   let {mutate,isLoading} = useMutation({mutationKey:"Reply" ,mutationFn:()=>UploadComment(Comment,PostId.data?._id||"",data._id,true), onSuccess(output) {
     dispatch(CommentInsertion({Comment:commentState.Comment.map(elm=>{
+      setComment("")
       if (elm._id!==data._id)return elm
       else return {...elm,Replies:[output.payload,...data.Replies] }
     })}))
-    setComment("")
   },}  )
 return(
 
 <div className="flex justify-between gap-x-2 p-1 mt-4 ">
-  <Input placeholder='Reply' onChange={(e)=>setComment(e.target.value)} value={Comment}/>
+  <Input placeholder='Reply' className='!text-black' onChange={(e)=>setComment(e.target.value)} value={Comment}/>
   <Button className="primary text-white hover:bg-[var(--primary)]" onClick={()=>{
       CreditsValidator(credits,mutate,dispatch)
     }}>

@@ -18,6 +18,7 @@ export  const Credits :Icredits = {
       liked:[],
       interests:[],
       registeredDate:"",
+    notificationSettings:{all:true,follow:true,Comment:true,Post:true,Like:true}
     } ,
     isLogined:false,
     isLoading:true,

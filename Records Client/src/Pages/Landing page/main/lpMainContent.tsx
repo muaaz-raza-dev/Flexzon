@@ -16,30 +16,22 @@ interface IblogProp {
   data: Iblog;
   Follower:boolean
 }
-import TimeAgo from "javascript-time-ago";
-import en from 'javascript-time-ago/locale/en'
 import TopCreators from "./TopCreators";
+import moment from "moment"
 
 export const PostBox: FC<IblogProp> = ({ data ,Follower}) => {
- useEffect(() => {
-  TimeAgo.addDefaultLocale(en)
-}, []);
-  let timeAgo;
-  if (TimeAgo) {
-     timeAgo = new TimeAgo('en-US')
-  }
-  
+
   return (
     <>
-      <section className="flex  w-full py-2 md:px-4 max-md:px-2 justify-between flex-col  ">
+      <section className="flex flex-col justify-between w-full py-2 md:px-4 border-x max-md:px-2 ">
         <Link
           to={`/user/${data?.author?._id ? data?.author?._id : ""}`}
           className="flex items-center   gap-x-0.5"
         >
-          <Avatar className="p-2 z-20 h-full">
+          <Avatar className="z-20 h-full p-2">
             <AvatarImage
               src={data?.author?.avatar || "/images/anonymous.png"}
-              className="z-10  aspect-square rounded-full"
+              className="z-10 rounded-full aspect-square"
             />
           </Avatar>
           <Link
@@ -57,7 +49,7 @@ export const PostBox: FC<IblogProp> = ({ data ,Follower}) => {
             {data?.author?.username || "Anonymous"}
           </Link>
           <Dot />
-          <p>{timeAgo?.format(new Date(data?.publishDate))||"-"}</p>
+          <p>{moment(data.publishDate).fromNow()||"-"}</p>
         </Link>
 
         <main className="flex w-full h-full max-md:items-center max-md:flex-col-reverse ">
@@ -78,17 +70,17 @@ export const PostBox: FC<IblogProp> = ({ data ,Follower}) => {
                 ></p>
               )}
             </Link>
-            <section className="flex gap-x-4 items-center justify-between w-full">
-              <div className=" flex gap-x-2 items-center ">
+            <section className="flex items-center justify-between w-full gap-x-4">
+              <div className="flex items-center gap-x-2">
                 <div className=" px-2 py-0.5 bg-gray-200 rounded-md text-sm">
                   {data.topic?.title}
                 </div>
-                <p className="text-gray-800 text-sm">{data.timeToRead}</p>
-                <p className="text-gray-800 text-sm flex items-center gap-x-1">
+                <p className="text-sm text-gray-800">{data.timeToRead}</p>
+                <p className="flex items-center text-sm text-gray-800 gap-x-1">
                   {data.likes} <Heart className="max-md:w-6" size={12} />
                 </p>
               </div>
-              <section className="flex gap-x-4 items-center">
+              <section className="flex items-center gap-x-4">
                 {data.FollowerOnly&&
 <RestrictionIcon Info={data.FollowerOnly}/>
                 }
@@ -105,7 +97,7 @@ export const PostBox: FC<IblogProp> = ({ data ,Follower}) => {
               <img
                 src={data?.banner || "/images/Records.png"}
                 alt=""
-                className="w-full object-contain rounded "
+                className="object-contain w-full rounded "
               />
             )}
           </div>
@@ -122,10 +114,11 @@ export const LpMainContent = () => {
   let Data = useAppSelector((state) => state.landing);
   let Credits = useAppSelector((state) => state.credits);
   let dispatch = useAppDispatch();
-
   return (
-    <div className="flex flex-col w-full gap-y-3  ">
+    <div className="flex flex-col w-full gap-y-1 ">
+      <div className="max-md:hidden">
       <TopCreators/>
+      </div>
       <InfiniteScroll
         className="overflow-hidden overflow-x-hidden ZeroScroll "
         dataLength={Data.Blogs.length}
@@ -137,13 +130,16 @@ export const LpMainContent = () => {
         hasMore={Data.Blogs.length !== Data.totalResults}
         loader={<SmallLoader />}
         endMessage={
-          <h1 className="text-md font-bold py-6 text-center">
+          Data.Blogs.length!==0&&
+          <h1 className="py-6 font-bold text-center text-md">
             You all caught up!
           </h1>
         }
       >
-        {Data.Blogs.length !== 0 &&
-          Data.Blogs.map((elm) => <PostBlockRenderer key={elm._id} data={elm}/>)}
+        {Data.Blogs.length !== 0 ?
+          Data.Blogs.map((elm) => <PostBlockRenderer key={elm._id} data={elm}/>)
+          :<h1 className="font-bold">0 blogs found</h1>
+          }
       </InfiniteScroll>
       
     </div>

@@ -1,7 +1,6 @@
 import { Icredits, Iinfo } from "@/app/Types/ICredits";
 import { Iblog, Itopic } from "@/app/Types/Ilanding";
 import { PayloadAction } from "@reduxjs/toolkit/react";
-
 interface IpaylaodCredits {
     Info?:Iinfo,
     isLogined?:boolean;
@@ -18,7 +17,7 @@ interface IpaylaodCredits {
     interests?:Itopic[],
     isLoading?:boolean;
     OTPRequest?:boolean;
-
+    NotificationSetting?:{all:boolean,follow:boolean,Comment:boolean,Post:boolean,Like:boolean}
 }
 const CreditsReducer = (
   state: Icredits,
@@ -67,6 +66,9 @@ if (payload.Name!==undefined) {
 }
 if (payload.avatar!==undefined) {
     state.Info.avatar=payload.avatar
+}
+if (payload.NotificationSetting) {
+    state.Info.notificationSettings=payload.NotificationSetting
 }
 };
 

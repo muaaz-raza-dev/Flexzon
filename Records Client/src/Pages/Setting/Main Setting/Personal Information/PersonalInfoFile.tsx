@@ -21,13 +21,11 @@ import { Trash } from "lucide-react"
 import { toast } from "react-hot-toast"
 import { useMutation } from "react-query"
 import UploadImage from "@/app/middlewares/functions/ImageUploader"
-
 import DeleteAccount from "@/Queryfunctions/Auth/verifyPassword"
 import Cookies from "js-cookie"
 import { useNavigate } from "react-router-dom"
 import ContactNumberDetails, { GenderDetails, IchangeHandlerInput, SocialMediaDetails, WebsiteDetails } from "./InputDetails"
 import InputInterests from "./InputInterests"
-
 
 
 const PersonalInfoFile = () => {
@@ -61,6 +59,7 @@ const [ImageState, setImageState] = useState<{uri:string,blob?:any}>({uri:"",});
   let {mutate,isLoading} =useMutation({mutationKey:"Save",mutationFn:()=>EditInfo({Name,username,bio,email,avatar,contact,dob,website,gender,Links,interests:Info.interests}) ,
 onSuccess() {
   toast.success("Credentials updated")
+  
 },})
 function ChangeHandler <T>({e,payload}:IchangeHandlerInput<T>){
   if (payload&&["gender","dob","website","Links","contact"].includes(payload.Header)) {
@@ -144,7 +143,7 @@ function ChangeHandler <T>({e,payload}:IchangeHandlerInput<T>){
         </div>
       </section>
 
-      <Button className="w-[20%]  text-md  bg-[var(--secondary)] hover:bg-[var(--primary)] hover:text-white text-white" variant={"outline"} onClick={()=>mutate()}>
+      <Button className="w-[20%]  text-md  bg-[var(--secondary)] hover:bg-[var(--primary)] hover:text-white text-white" variant={"outline"}  onClick={()=>mutate()}>
 {isLoading?<LightLoader/>:"Save"}
   </Button>
   <Separator/>
@@ -185,22 +184,7 @@ let DeleteDialog = ()=>{
       
       navigate("/")
       Cookies.remove("Records_session")
-      dispatch(CreditsInsertion({isLogined:false,Info: {
-        _id:"",
-      username:"",
-      avatar:"",
-      email:"",
-      Name:"",
-      bio:"",
-      followers:[],
-      following:[],
-      Posts:[],
-      saved:[],
-      liked:[],
-      anonymous:[],
-      interests:[],
-      registeredDate:"",
-    }}))
+      dispatch(CreditsInsertion({isLogined:false,Info: InitialCreditsState}))
     }
     else{
       toast.error("Invalid Password entered .")

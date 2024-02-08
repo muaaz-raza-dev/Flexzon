@@ -90,6 +90,11 @@ app.post("/", async (req, res) => {
   if (req.body.topic!==""){
 TotalResults   = (await Posts.aggregate([
   {
+    $match:{
+      isDeleted:false
+    }
+  },
+  {
     $lookup: {
       from: "topics",
       localField: "topic",
@@ -152,19 +157,15 @@ TotalResults   = (await Posts.aggregate([
     },
   },
 
-]).sort({publishDate:-1,likes:-1}).skip(count*limit).limit(limit)
+]).skip(count*limit).limit(limit)
 
 
   }
   else{
 TotalResults   = await Posts.find({ isDeleted:false,}).count()
 
-   payload=await Posts.aggregate([
-    {
-      $match:{
-        isDeleted:false
-      }
-    }, 
+   payload=await Posts.aggregate([ 
+    {$match:{isDeleted:false}},
     {
       $lookup: {
         from: "topics",
@@ -189,14 +190,17 @@ TotalResults   = await Posts.find({ isDeleted:false,}).count()
     {
       $unwind: "$topiced"
     },
-
+    {$sort: {
+      publishDate: -1,
+      likes:-1
+    }},
     {
       $facet: {
         matchingDocs: [
-          { $match: { topiced: { $in: req.body.interests||[] } } },
+          { $match: { topiced: { $in: req.body.interests?req.body.interests:[] } } },
         ],
         unrelatedDocs: [
-          { $match: { topiced: { $nin: req.body.interests||[] } } },
+          { $match: { topiced: { $nin: req.body.interests?req.body.interests:[] } } },
         ],
       },
     },
@@ -247,7 +251,7 @@ TotalResults   = await Posts.find({ isDeleted:false,}).count()
         },
       },
     },
-  ]).sort({publishDate:-1,likes:-1}).skip(count*limit).limit(limit)
+  ]).skip(count*limit).limit(limit)
   }
     res.json({ success: true,payload,TotalResults });
 });
@@ -268,10 +272,13 @@ app.post("/topics",async(req,res)=>{
 
 app.post("/starter", async (req, res) => {
   try {
-
-    
     await Posts.updateMany({FollowerOnly:{$exists:false}},{$set:{FollowerOnly:false}})
     let TopCreators= await Posts.aggregate([
+      {
+        $match:{
+          publishDate: { $gte: new Date(Date.now() - 2*7 * 24 * 60 * 60 * 1000) }
+        }
+      },
       {
         $group: {
           _id: "$author",
@@ -289,6 +296,7 @@ app.post("/starter", async (req, res) => {
       {
         $sort: {
           posts: -1,
+          views:-1
         },
       },
       {
@@ -316,7 +324,7 @@ app.post("/starter", async (req, res) => {
         $project: {
           "author": 0,
         }}
-    ]).limit(20)
+    ]).sort({followers:-1}).limit(20)
     let Topics = await Posts.aggregate([
       {$match: {
         isDeleted:false
@@ -353,7 +361,7 @@ app.post("/starter", async (req, res) => {
           }},
         
         ]).limit(20)
-    let Trendings = await Posts.find({ isDeleted:false,anonymous:false}).sort({publishDate:-1,likes:-1}).populate(["author","topic"]).sort({likes:-1,publishDate:-1}).limit(6)
+    let Trendings = await Posts.find({ isDeleted:false,anonymous:false}).sort({likes:-1,publishDate:-1}).populate(["author","topic"]).sort({likes:-1,publishDate:-1}).limit(6)
     let  Post=await Posts.aggregate([ 
         {$match:{isDeleted:false}},
         {
@@ -380,7 +388,10 @@ app.post("/starter", async (req, res) => {
         {
           $unwind: "$topiced"
         },
-    
+        {$sort: {
+          publishDate: -1,
+          likes:-1
+        }},
         {
           $facet: {
             matchingDocs: [
@@ -438,7 +449,7 @@ app.post("/starter", async (req, res) => {
             },
           },
         },
-      ]).sort({likes:-1,publishDate:-1}).limit(limit)
+      ]).limit(limit)
    
     res.json({success: true, payload: {Topics, Trendings, Blogs:Post,TopCreators}})
   } catch (error) {
@@ -448,8 +459,6 @@ app.post("/starter", async (req, res) => {
 
 })
 
-
-
 app.get("/post/:id",async(req,res)=>{
   try {
     if (req.params.id.split("").length<20) {
@@ -458,12 +467,12 @@ app.get("/post/:id",async(req,res)=>{
     }
     else{
       let Post = await Posts.findById(req.params.id)
-
     await Posts.aggregate([
     {
       $match: {
         _id : Post._id,
-        isDeleted:false
+        isDeleted:false,
+        anonymous:false
       },
     },
       {

@@ -4,7 +4,6 @@ import MainSettingFile from "./Main Setting/MainSettingFile"
 const SettingFile = () => {
   return (
     <Routes>
-      {/* <Route path="/" element={<UserProfileFile/>}/> */}
       <Route path="/settings/*" element={<MainSettingFile/>}/>
     </Routes>
   )

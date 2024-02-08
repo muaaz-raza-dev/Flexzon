@@ -1,15 +1,17 @@
+import { useAppSelector } from "@/app/ReduxHooks"
+import { Link } from "react-router-dom"
+
 const HeroSection = () => {
-  return (
- 
-<div className="relative heroShadow overflow-hidden before:absolute before:top-0 before:start-1/2 before:bg-[url('https://preline.co/assets/svg/examples/polygon-bg-element.svg')] before:bg-no-repeat before:bg-top before:bg-cover before:w-full before:h-full before:-z-[1] before:transform before:-translate-x-1/2 
-dark:before:bg-[url('https://preline.co/assets/svg/examples-dark/polygon-bg-element.svg')]">
+  let {isLogined}=useAppSelector(state=>state.credits)
+  if (!isLogined) {
+    return (
+      <div className="relative heroShadow overflow-hidden before:absolute before:top-0 before:start-1/2 before:bg-[url('https://preline.co/assets/svg/examples/polygon-bg-element.svg')] before:bg-no-repeat before:bg-top before:bg-cover before:w-full before:h-full before:-z-[1] before:transform before:-translate-x-1/2 
+      dark:before:bg-[url('https://preline.co/assets/svg/examples-dark/polygon-bg-element.svg')]">
   <div className=" max-w-[85rem]  mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-10">
     {/* <!-- Announcement Banner --> */}
     <div className="flex justify-center">
-   
     </div>
     {/* <!-- End Announcement Banner --> */}
-
     {/* <!-- Title --> */}
     <div className="mt-5 max-w-2xl text-center mx-auto z-40">
       <h1 className="block font-bold text-gray-800 hFont text-4xl md:text-5xl lg:text-6xl dark:text-gray-200">
@@ -25,10 +27,9 @@ dark:before:bg-[url('https://preline.co/assets/svg/examples-dark/polygon-bg-elem
 
     {/* <!-- Buttons --> */}
     <div className="mt-8 gap-3 flex justify-center z-40">
-      <a className="inline-flex shadow text-xl px-6 justify-center items-center gap-x-3 text-center bg-[var(--primary)] border active:scale-95 transition-all border-transparent text-white  font-medium rounded-lg focus:outline-none focus:ring-1 focus:ring-gray-600 py-3 dark:focus:ring-offset-gray-800" href="#">
-       Start reading
-      
-      </a>
+      <Link to={"/auth/login"} className="inline-flex shadow text-xl px-6 justify-center items-center gap-x-3 text-center bg-[var(--primary)] border active:scale-95 transition-all border-transparent text-white  font-medium rounded-lg focus:outline-none focus:ring-1 focus:ring-gray-600 py-3 dark:focus:ring-offset-gray-800" >
+       Start writing
+      </Link>
   
     </div>
 
@@ -38,6 +39,7 @@ dark:before:bg-[url('https://preline.co/assets/svg/examples-dark/polygon-bg-elem
   </div>
 </div>
   )
+}
 }
 
 export default HeroSection

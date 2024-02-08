@@ -17,6 +17,7 @@ import{useEffect, useState} from "react"
 import SearchedPageFile from './Pages/Searched/SearchedPageFile'
 import CreditsGuard, { LoginAskModal } from './app/middlewares/CreditsGuard'
 import  { RecordsLoader } from './Essentials/Loader'
+import NotificationFile from './Pages/Notification/NotificationFile'
 const RecordsFile = () => {
   let state=useAppSelector(state=>state.landing)
   let validation = useValidate()
@@ -60,6 +61,7 @@ if (!Loading) {
 <Route path='/' element={<LandingFile/>}/>
 <Route path='*' element={<LandingFile/>}/>
 <Route path='/user/:id' element={<ProfileFile  />}/>
+<Route path='/notifications' element={<CreditsGuard><NotificationFile  /></CreditsGuard>}/>
 <Route path='/blog/:id' element={<BlogFile />}/>
 <Route path='/topic/:topic' element={<SearchedPageFile  />}/>
 <Route path='/search/:q' element={<SearchedPageFile  />}/>

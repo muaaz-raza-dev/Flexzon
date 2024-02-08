@@ -13,8 +13,6 @@ app.get("/:id",async(req,res)=>{
          
        }
        else{
-
-          
           let User =await Member.findOne({_id:id})
           .populate([
              "interests",

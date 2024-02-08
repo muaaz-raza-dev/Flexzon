@@ -36,7 +36,7 @@ export const InsertData = (
   if (action.payload.selectedTabs) {
     state.selectedTabs = action.payload.selectedTabs;
   }
-  if (action.payload.totalResults) {
+  if (action.payload.totalResults!==undefined) {
     state.totalResults = action.payload.totalResults;
   }
   if (action.payload.ValidModal!==undefined) {

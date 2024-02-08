@@ -43,6 +43,7 @@ app.post("/", VerifyMember,async (req, res) => {
         AdditonalAssetsType,...PayloadAssest
     })
     .then(async post=>{
+        
          await Member.findByIdAndUpdate(author,{$push:{Posts:post._id}})
          let UpdatedPost = await Posts.findById(post._id).populate(["topic","author"])
          res.json({success:true,msg:"Post created successfully",payload:UpdatedPost})

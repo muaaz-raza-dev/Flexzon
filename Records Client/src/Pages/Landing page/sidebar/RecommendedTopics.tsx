@@ -21,7 +21,7 @@ export const TopicBox:FC<Itopics>=({data})=>{
 export const RecommendedTopics = () => {
     let data = useAppSelector(state=>state.landing)
   return (
-    <div className="w-full ">
+    <div className="w-full max-md:hidden">
         <h1 className="text-xl BFont flex gap-x-2 py-2 items-center "> Trending Topics today <TrendingUp size={16} />  </h1>
         <div className="flex gap-2 justify-start   max-md:w-full flex-wrap">
 {

@@ -9,6 +9,7 @@ import { SearchedReducer } from "./Slices/SearchedSlice";
 import { CommentSliced } from "./Slices/CommentSlice";
 import { BlogState } from "./Slices/BlogSlice";
 import { SettingR } from "./Slices/SettingsSlice";
+import { NotificationState } from "./Slices/Notifications/NotifcationSlice";
 
 
 export const Store = configureStore({
@@ -17,7 +18,8 @@ export const Store = configureStore({
     searched:SearchedReducer,
     comment:CommentSliced,
     Blog:BlogState,
-    settings:SettingR
+    settings:SettingR,
+    notifications:NotificationState
     },
     middleware: (getDefaultMiddleware) => getDefaultMiddleware({ serializableCheck: false}),
 });

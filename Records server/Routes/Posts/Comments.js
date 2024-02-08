@@ -3,8 +3,8 @@ let { StatusCodes } = require("http-status-codes");
 const Posts = require("../../models/Posts");
 const VerifyMember = require("../../middleware/VerifyMember");
 const Comments = require("../../models/Comments");
+const Notifier = require("../Notifications/Notifier");
 const limit = +process.env.DocsPerRequest
-
 app.post("/read/:id",async(req,res)=>{
 
     let count = +req.header("count")
@@ -30,9 +30,11 @@ let {content,post,replied,Replied}=req.body
 Comments.create({
     content,commentor:req.AdminId,post ,Replied
 }).then(async comment=>{
+    let Reciever = await Posts.findById(post).populate("author")
+   await Notifier(Reciever.author,req.AdminId,"comments",`Comment on your post '${content}'`,post)
     await Posts.findByIdAndUpdate(post,{$push:{'comments':comment._id}})
+
     if (replied) {
-        console.log(replied);
     await Comments.findByIdAndUpdate(replied,{$push:{'Replies':comment._id}})
     }
     let payload = await Comments.findById(comment._id).populate(["commentor","Replies"])

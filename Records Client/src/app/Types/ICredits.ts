@@ -1,5 +1,7 @@
 import { Iblog, Itopic } from "./Ilanding";
 
+export interface Inotification
+    {all:boolean,follow:boolean,Comment:boolean,Post:boolean,Like:boolean}
 
 export interface Iinfo{
     _id:string;
@@ -21,7 +23,8 @@ export interface Iinfo{
     contact?:{value:string,display:boolean},
     Links?:{fb:string,insta:string,linkedIn:string},
     gender?:{value:string,display:boolean},
-    profileViews?:any[]
+    profileViews?:any[],
+    notificationSettings:Inotification
 }
 export interface Icredits {
     Info:Iinfo

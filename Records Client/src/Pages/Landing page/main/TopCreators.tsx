@@ -6,19 +6,46 @@ import { useAppSelector } from "@/app/ReduxHooks";
 import { FC } from "react";
 import { ItopCreators } from "@/app/Types/Ilanding";
 import { Link } from "react-router-dom";
+import { ArrowRight } from "lucide-react";
 const TopCreators = () => {
   let TopCreators= useAppSelector(state=>state.landing).TopCreators
-    var settings = {
-        dots: true,
-        infinite: true,
-        speed: 500,
-        slidesToShow: 1,
-        slidesToScroll: 1,
-      };
+  var settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 2,
+    slidesToScroll:1,
+    initialSlide: 0,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 3,
+          infinite: true,
+          dots: true
+        }
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2,
+        }
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1
+        }
+      }
+    ]
+  };
   return (
-      <div className=" w-full h-max   border p-2 rounded">
-        <h1 className="hFont my-2 text-2xl ">Today's top creator</h1>
-      <Slider {...settings} arrows={false} slidesPerRow={3} touchMove   autoplay={false} className="w-full " >
+      <div className=" lg:w-full      border md:p-4 rounded">
+        <h1 className="hFont px-2 text-2xl  ">Top Writers this week</h1>
+      <Slider {...settings} arrows={true}  touchMove   autoplay={true} className="lg:w-full max-lg:w-[98vw] h-full " >
         {
           TopCreators.map(elm=>
             {
@@ -27,6 +54,7 @@ const TopCreators = () => {
      </div>
             })
         }
+      
     </Slider>
     </div>
   )
@@ -34,22 +62,28 @@ const TopCreators = () => {
 
 const EachCreatorComponent:FC<{data:ItopCreators}> =({data})=>{
     return (
-     
-        <div className="w-full  max-h-[17rem] p-1 flex gap-y-2 flex-col border border-black items-center  text-black">
-            <Link  to={`/user/${data._id}`} className="h-[50%] bg-[var(--secondary)] overflow-hidden object-contain w-full center  aspect-square">
-    <img src={data.avatar||"/images/muaaz.png"} className="w-[45%] rounded h-[90%] p-2  object-contain border bg-[#ffffff57]"/>
-            </Link>
-            <Link to={`/user/${data._id}`} className="">
+      
+      <div className="p-2">
+        <div className="w-full rounded  max-h-[17rem] pb-2 flex gap-y-2 flex-col border-2 border-black items-center  text-black">
+
+            <div   className="h-[50%] bg-[var(--secondary)] overflow-hidden object-contain w-full center  aspect-square">
+    <img src={data.avatar||"/images/muaaz.png"} className="w-[85%] rounded h-[90%] p-2  object-contain border bg-[#ffffff57]"/>
+            </div>
+            <div  className="">
 
             <h1 className="hFont font-semibold text-xl">{data.Name}</h1>
             <p className="text-xs font-bold">{data.followers.length} Followers 
             . {data.posts} Posts 
             </p>
+            </div>
+            <Button className="w-[96%] py-2  px-4 hover:bg-[var(--primary)] bg-[var(--primary)] rounded-full gap-x-2">
+            <Link  to={`/user/${data._id}`} className="w-full flex gap-x-2 center py-2 px-4">
+              Visit profile 
+              <ArrowRight size={16}/>
             </Link>
-            <Button className="w-full py-2 px-4 hover:bg-[var(--primary)] bg-[var(--primary)] rounded-full">
-            Follow
             </Button>
         </div>
+          </div>
        
     )
 }

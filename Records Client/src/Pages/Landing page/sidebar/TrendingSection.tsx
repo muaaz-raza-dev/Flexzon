@@ -4,22 +4,20 @@ import { Avatar, AvatarImage } from "@/components/ui/avatar"
 import { Dot, Heart, TrendingUp } from "lucide-react"
 import { FC } from "react";
 import { Link } from "react-router-dom";
-import TimeAgo from "javascript-time-ago";
-import en from 'javascript-time-ago/locale/en'
+import moment from 'moment'
 interface ITrendingProp {
   data:Iblog;
   }
 export const ShortCard:FC<ITrendingProp> = ({data})=>{
-TimeAgo.addDefaultLocale(en)
-const timeAgo = new TimeAgo('en-US')
-  return(<div className="w-full flex flex-col border-b md:border-r py-2">
+
+  return(<div className="flex flex-col w-full py-2 border-b md:border-r">
     <Link to={`/user/${data.author._id}`} className="flex items-center  gap-x-0.5">
   <Avatar className="p-2">
-    <AvatarImage src={data?.author?.avatar||"/images/muaaz.png"} className="-z-10 w-full aspect-square rounded-full"/>
+    <AvatarImage src={data?.author?.avatar||"/images/muaaz.png"} className="w-full rounded-full -z-10 aspect-square"/>
   </Avatar>
 <h1 className="font-bold">{data?.author?.username||"Anonymous"}</h1>
 <Dot/>
-<p>{timeAgo.format(new Date(data?.publishDate))}</p>
+<p>{moment(data?.publishDate).fromNow()}</p>
 </Link>
 <Link to={`/blog/${data._id}`} className="">
 <h1  className="text-[1.1rem] whitespace-normal h-max w-full   BFont pr-4 cursor-pointer " >{data?.title}</h1>
@@ -35,8 +33,8 @@ const timeAgo = new TimeAgo('en-US')
 export const TrendingSection = () => {
   let data = useAppSelector(state=>state.landing)
   return (
-    <div className="w-full">
-        <h1 className="text-xl BFont flex gap-x-2 py-2 items-center"> Trending Blogs <TrendingUp size={16}/> </h1>
+    <div className="w-full ">
+        <h1 className="flex items-center py-2 text-xl BFont gap-x-2"> Trending Blogs <TrendingUp size={16}/> </h1>
         {
           data.Trendings.length!==0&&
             data.Trendings.map((elm)=><ShortCard data={elm}/>)

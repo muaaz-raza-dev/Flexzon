@@ -29,7 +29,8 @@ const FollowPattren = () => {
 
     
   return (
-    <div className='w-full h-full  ' onClick={()=>{CreditsValidator<typeof mutate,typeof dispatch>(credits,mutate,dispatch)}} >
+    <div className='w-full h-full  ' onClick={()=>{
+      CreditsValidator<typeof mutate,typeof dispatch>(credits,mutate,dispatch)}}>
 {!isLoading? (Info.following.some(elm=>elm._id==data.Info._id))? "Unfollow":"Follow" : <LightLoader/>}
     </div>
   )

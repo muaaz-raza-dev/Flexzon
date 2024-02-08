@@ -3,12 +3,14 @@ let { StatusCodes } = require("http-status-codes");
 const Posts = require("../../models/Posts");
 const VerifyMember = require("../../middleware/VerifyMember");
 const Member = require("../../models/Member");
+const Notifier = require("../Notifications/Notifier");
 
 app.post("/follow",VerifyMember,async(req,res)=>{
  let {toFollow} = req.body
  let memberTobeupdated =(await Member.findById(toFollow)) 
  try {
     if (!memberTobeupdated.followers.includes(req.AdminId)) {
+        await Notifier(memberTobeupdated,req.AdminId,"follows",`started following you`)
         await Member.findByIdAndUpdate(toFollow,{$push: {followers:req.AdminId} })
         await Member.findByIdAndUpdate(req.AdminId,{$push: {following:toFollow} })
         res.json({success:true,type:"follow"})

@@ -14,7 +14,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { toast } from "react-hot-toast";
 import { LightLoader } from "@/Essentials/Loader";
 import useUploadPost from "./Hooks/useUploadPost";
@@ -26,34 +26,40 @@ const PublishBlog = () => {
   let { mainContent, title,  Banner, topic } = writeState;
   let {mutate,isLoading}=useUploadPost()
   let DialogRef = useRef<any>(null);
+  const [Loading, setLoading] = useState<Boolean>(false);
   let validateInputs = () => {
     if (mainContent.length == 0 || title.length == 0 || topic.length == 0) {
       toast.error("Main Content, Title and Topic can't be empty ");
-      DialogRef?.current?.click();
     }
-    else if(Banner.length==0){
-      writeState.BannerBlob&&UploadImage(writeState?.BannerBlob).then(data=>{ 
-        dispatch(WriteInsertion({Banner:data.url}))
-        DialogRef?.current?.click();
-    })
-  .catch(()=>{
-    toast.error("Something went wrong try again later!")
-  })
-    }
-    else {
-    }
+      else 
+       {
+        if (Banner.length==0) {
+          setLoading(true)
+          writeState.BannerBlob&&UploadImage(writeState?.BannerBlob).then(data=>{ 
+            dispatch(WriteInsertion({Banner:data.url}))
+            DialogRef?.current?.click();
+          })
+          .catch(()=>{
+            toast.error("Something went wrong try again later!")
+          }).finally(()=>{setLoading(false)})}
+          else{
+            DialogRef?.current?.click();
+          }
+        }
   };
 
   return (
     <>
-      <Dialog>
-        <DialogTrigger className="w-full" ref={DialogRef}>
           <Button
             onClick={validateInputs}
             className="bg-[var(--primary)] hover:bg-[var(--primary)] active:scale-95 transition-colors"
           >
-            Publish
+            {Loading?<LightLoader/>:
+            "Publish"
+            }
           </Button>
+      <Dialog>
+        <DialogTrigger className="w-full" ref={DialogRef}>
         </DialogTrigger>
         <DialogContent>
           <DialogHeader>

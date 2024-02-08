@@ -1,21 +1,26 @@
+import useFetchNotification from "../Notification/Hook/useFetchNotification"
 import HeroSection from "./header/Hero/HeroSection"
 import { LpHeaderFile } from "./header/lpHeaderFile"
+import TopCreators from "./main/TopCreators"
 import { LpMainContent } from "./main/lpMainContent"
 import LpSidebarFile    from "./sidebar/LpSidebarFile"
 const LandingFile = () => {
+    useFetchNotification();
 
 return (
     <div className="">
                 <HeroSection/>
-
-    <main className="w-full gap-y-4 flex max-md:flex-col-reverse justify-between">
+    <main className="flex justify-between w-full md:gap-y-4 max-md:flex-col-reverse">
         <section aria-label="Main part" className="md:w-[70%] max-md:w-full md:py-6 max-md:py-2  flex items-center flex-col">
-            <div className="md:w-[95%]  max-md:full  flex flex-col gap-y-8 ">
+            <div className="md:w-[95%]  max-md:w-full  flex flex-col gap-y-4 ">
+                <div className="md:hidden max-md:visible">
+<TopCreators/>
+                </div>
 <LpHeaderFile/>
 <LpMainContent/>
             </div>
         </section>
-        <section  className="flex md:py-8 max-md:pt-2 px-6 md:w-[35%] max-md:w-full md:mt-16  md:min-h-[90vh]  border-l">
+        <section  className="flex md:py-8 max-md:pt-2 lg:px-6 max-lg:px-1 md:w-[35%] max-md:w-full md:mt-16  md:min-h-[90vh]  border-l">
 <LpSidebarFile/>
         </section>
     </main>
