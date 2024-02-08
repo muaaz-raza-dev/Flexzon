@@ -37,18 +37,18 @@ const ReadCountCaculator = (plainText: string) => {
       <Input
         placeholder="Title"
         name="title"
-        className="   focus-visible:ring-0 border border-black my-2 text-md font-bold placeholder:font-bold "
+        className="my-2 font-bold border border-black focus-visible:ring-0 text-md placeholder:font-bold"
         onChange={(e) => InputHandler(e)}
         value={writeState.title}
       />
       <Textarea
       placeholder="Sub-title or teaser "
       name="subtitile"
-        className="   focus-visible:ring-0 border border-black my-2 text-sm"
+        className="my-2 text-sm border border-black focus-visible:ring-0"
         onChange={(e) => InputHandler(e)}
         value={writeState.subtitile}
         />
-      <div className="flex gap-x-2 w-full justify-between">
+      <div className="flex justify-between w-full gap-x-2">
         <div className="w-[80%]">
           <Input
             placeholder="Topic i.e Programming or Entertaiment"
@@ -75,11 +75,11 @@ export default AdditionalInfoB;
           let writeState = useAppSelector((state) => state.write);
           let dispatch = useAppDispatch();
           return (
-            <div className=" lg:w-[18%]  max-lg:w-[38%] max-md:w-[48%] justify-between    items-center  flex space-x-2">
+            <div className=" lg:w-[18%]  max-lg:w-[42%] max-md:w-[50%] justify-between    items-center  flex space-x-2">
               <div className="grid gap-1.5 leading-none">
                 <label
                   htmlFor="terms1"
-                  className="text-md font-bold tracking-tight center  leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 flex gap-x-3"
+                  className="flex font-bold leading-none tracking-tight text-md center peer-disabled:cursor-not-allowed peer-disabled:opacity-70 gap-x-3"
                   
                 >
 

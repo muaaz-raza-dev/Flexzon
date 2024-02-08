@@ -56,4 +56,11 @@ const CreditsGuard: FC<{ children: ReactNode }> = ({ children }) => {
   }
 };
 
+export const CreditsValidatorComp: FC<{ children: ReactNode }> = ({ children }) => {
+  let Credits = useAppSelector((state) => state.credits);
+  if (Credits.isLogined) {
+    return <main>{children}</main>;
+  }
+  else{return <LoginAskModal/>}
+};
 export default CreditsGuard;

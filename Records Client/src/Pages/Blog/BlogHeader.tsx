@@ -9,15 +9,11 @@ import { Link } from "react-router-dom";
 import CommentsFile from "./Comments/CommentsFile";
 import { CommentInsertion } from "@/app/Slices/CommentSlice";
 import SaveBtn from "../Landing page/main/SaveBtn";
-import TimeAgo from "javascript-time-ago";
-import en from 'javascript-time-ago/locale/en'
+import moment from "moment";
+
 
 const BlogHeader = ({data}:(Iblog|any)) => {
   let dispatch =useAppDispatch()
-  TimeAgo.addDefaultLocale(en)
-
-    
-  const timeAgo = new TimeAgo('en-US')
   return (
     <header className="flex flex-col gap-y-8">
       <div className="">
@@ -29,28 +25,24 @@ const BlogHeader = ({data}:(Iblog|any)) => {
           <AvatarImage src={data?.author?.avatar || "/images/anonymous.png"} />
         </Avatar>
         <div className="">
-          <h1 className="flex gap-x-4 text-lg ">
+          <h1 className="flex text-lg gap-x-4 ">
             {data?.author?.username ||"Anonymous"}
-            {/* {
-              data.author &&
-            <b className="cursor-pointer opacity-70 hover:opacity-100 text-[var(--secondary)]">
-              Follow
-            </b>
-            } */}
-          </h1>
-          <span className="flex gap-x-2 text-sm text-gray-500">
+                    </h1>
+          <span className="flex text-sm text-gray-500 gap-x-2">
             {data?.timeToRead}
-            <p>|| {timeAgo.format(new Date(data?.publishDate))}</p>
+            <p>|| {moment(data?.publishDate).toNow()}</p>
           </span>
         </div>
       </Link>
-      <div className="flex flex-col gap-y-6 px-2">
+      <div className="flex flex-col px-2 gap-y-6">
         <Separator />
         <section className="flex justify-between">
           <div className="flex gap-x-6">
            <LikeMechanism data={data}/>
            <CommentsFile >
-            <div onClick={()=>dispatch(CommentInsertion({count:0}))} className="flex gap-x-1 cursor-pointer text-[#6B6B6B] hover:text-black transition text-sm items-center">
+            <div onClick={()=>
+            dispatch(CommentInsertion({count:0})) 
+          } className="flex gap-x-1 cursor-pointer text-[#6B6B6B] hover:text-black transition text-sm items-center">
               <MessageCircle
                 size={20}
                 className="text-[#6B6B6B] hover:text-black transition"

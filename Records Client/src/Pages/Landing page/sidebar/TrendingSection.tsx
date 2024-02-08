@@ -1,9 +1,10 @@
 import { useAppSelector } from "@/app/ReduxHooks"
 import { Iblog } from "@/app/Types/Ilanding";
-import { Avatar, AvatarImage } from "@/components/ui/avatar"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Dot, Heart, TrendingUp } from "lucide-react"
-import { FC } from "react";
+import { FC} from "react";
 import { Link } from "react-router-dom";
+import Skeleton from 'react-loading-skeleton'
 import moment from 'moment'
 interface ITrendingProp {
   data:Iblog;
@@ -12,9 +13,18 @@ export const ShortCard:FC<ITrendingProp> = ({data})=>{
 
   return(<div className="flex flex-col w-full py-2 border-b md:border-r">
     <Link to={`/user/${data.author._id}`} className="flex items-center  gap-x-0.5">
-  <Avatar className="p-2">
-    <AvatarImage src={data?.author?.avatar||"/images/muaaz.png"} className="w-full rounded-full -z-10 aspect-square"/>
+     
+        <Avatar className="p-2">
+    <AvatarImage   src={data?.author?.avatar||"/images/muaaz.png"} className="w-full rounded-full -z-10 aspect-square"/>
+    <AvatarFallback>
+    <div className="w-8 rounded-full bg aspect-square">
+  <Skeleton className="w-full h-full rounded-full"/>
+  </div>
+    </AvatarFallback>
   </Avatar>
+ 
+  
+
 <h1 className="font-bold">{data?.author?.username||"Anonymous"}</h1>
 <Dot/>
 <p>{moment(data?.publishDate).fromNow()}</p>

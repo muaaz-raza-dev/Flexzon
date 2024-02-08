@@ -6,6 +6,7 @@ import BlogFile from './Pages/Blog/BlogFile'
 import SettingFile from './Pages/Setting/SettingFile'
 import AuthFile from './Pages/Auth/AuthFile'
 import WriteFile from './Pages/Write/WriteFile'
+import 'react-loading-skeleton/dist/skeleton.css'
 // import NotificationFile from './Pages/Notification/NotificationFile'
 import { Toaster } from 'react-hot-toast'
 import  { FetchStarter } from "@/Queryfunctions/Hooks/useFetchStarter"

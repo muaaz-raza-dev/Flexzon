@@ -36,12 +36,12 @@ function inputHandler(purpose:string,e:ChangeEvent<HTMLInputElement>) {
   return (
     <section className="min-h-[94vh] flex items-stretch text-white ">
       <div className="lg:flex w-1/2 hidden to-[var(--primary)] from-[var(--secondary)] bg-gradient-to-t  bg-no-repeat bg-cover relative items-center shadow-lg">
-        <div className="absolute bg-black opacity-60 inset-0 z-0"></div>
-        <div className="w-full px-12 z-10">
-          <h1 className="text-5xl font-bold text-left tracking-wide">
+        <div className="absolute inset-0 z-0 bg-black opacity-60"></div>
+        <div className="z-10 w-full px-12">
+          <h1 className="text-5xl font-bold tracking-wide text-left">
             Keep it special
           </h1>
-          <p className="text-sm my-4">
+          <p className="my-4 text-sm">
             Unlock the power of words and let your thoughts take flight. Welcome
             to our blogging community, where every login is a step towards
             sharing your story with the world. Embrace the journey of
@@ -51,7 +51,7 @@ function inputHandler(purpose:string,e:ChangeEvent<HTMLInputElement>) {
       </div>
       <div className="lg:w-1/2 bg-[var(--bg)] text-black w-full flex items-center justify-center text-center md:px-16 px-0 z-0">
       
-        <div className="w-full py-6 z-20">
+        <div className="z-20 w-full py-6">
           <h1 className="my-6 text-4xl hFont">Login to Records</h1>
 
           <form onSubmit={(e)=>{
@@ -59,7 +59,7 @@ function inputHandler(purpose:string,e:ChangeEvent<HTMLInputElement>) {
           mutate()
           }} className="sm:w-[75%] w-full px-4 lg:px-0 mx-auto">
             <div className="">
-            <div className="pb-2 pt-4">
+            <div className="pt-4 pb-2">
               <input
               value={dataAuth.login.username}
                 type="text"
@@ -70,7 +70,7 @@ function inputHandler(purpose:string,e:ChangeEvent<HTMLInputElement>) {
                 className="block w-full p-4 text-lg rounded border-[var(--secondary)] border-2 focus:border-black "
               />
             </div>
-            <div className="pb-2 pt-4">
+            <div className="pt-4 pb-2">
               <input
                 className="block w-full p-4 text-lg rounded border-[var(--secondary)] border-2 focus:border-black "
                 onChange={(e) =>
@@ -83,14 +83,14 @@ function inputHandler(purpose:string,e:ChangeEvent<HTMLInputElement>) {
                 placeholder="Password"
               />
             </div>
-            <div className="text-right   flex w-full justify-between">
-              <Link to={"/auth/register"} className="text-green-700">Create new account</Link>
+            <div className="flex justify-between w-full text-right">
+              <Link to={"/auth/register"} className="underline">Create new account</Link>
               <Link to={"/auth/Forgot"} className="cursor-pointer">Forgot password?</Link>
               </div>
               </div>
 
 
-            <div className="px-4 pb-2 pt-4">
+            <div className="px-4 pt-4 pb-2">
               <button className="uppercase block w-full p-4 text-lg rounded-full bg-[var(--primary)] hover:bg-[black] text-white transition-colors focus:outline-none">
             {
             isLoading?

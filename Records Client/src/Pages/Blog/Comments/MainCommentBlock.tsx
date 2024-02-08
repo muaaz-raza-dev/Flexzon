@@ -10,31 +10,27 @@ import { FC, useEffect, useState } from 'react'
 import { useMutation } from 'react-query'
 import CommentsLike from './CommentsLike'
 import InfiniteScroll from 'react-infinite-scroll-component'
-import TimeAgo from 'javascript-time-ago'
-import en from 'javascript-time-ago/locale/en'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import CreditsValidator from '@/app/middlewares/functions/CreditsValidator'
 import UploadComment from '@/Queryfunctions/Comment/UploadComment'
+import moment from 'moment'
 
 
 export const EachCommentBlock:FC<{data:Icomment,repliable?:boolean}> = ({data,repliable}) => {
 
-    TimeAgo.addDefaultLocale(en)
-    
-  const timeAgo = new TimeAgo('en-US')
+
   
 return(
-<div className='w-full flex gap-y-2 flex-col border p-2  '>
-<div className="flex gap-x-2 items-center border-b py-2">
-      <Avatar className="w-8 aspect-square rounded-full border ">
-        <AvatarImage src={data.commentor.avatar||"/images/muaaz.png"} className="w-full aspect-square rounded-full"/>
+<div className='flex flex-col w-full p-2 border gap-y-2 '>
+<div className="flex items-center py-2 border-b gap-x-2">
+      <Avatar className="w-8 border rounded-full aspect-square ">
+        <AvatarImage src={data.commentor.avatar||"/images/muaaz.png"} className="w-full rounded-full aspect-square"/>
       </Avatar>
       <div className="">
       <h1>{data.commentor.username||"Anonymous"}</h1>
-
       <p className='text-xs'>
-       {timeAgo.format(new Date(data.delivered))}
+       {moment(data.delivered).toNow()}
          </p>
       </div>
         </div>
@@ -43,7 +39,7 @@ return(
             {data.content}
           </p>
         </main>
-        <footer className='flex justify-between h-full w-full'>
+        <footer className='flex justify-between w-full h-full'>
           {
             repliable!==false&&
           <RepliesCommentBlock data={data}/>
@@ -54,15 +50,16 @@ return(
 }
 export const RepliesCommentBlock:FC<{data:Icomment}> = ({data}) => {
   const [Replies, setReplies] = useState<boolean>(false);
+  let {isLogined}=useAppSelector(state=>state.credits)
   return(
   <section className='flex flex-col w-full gap-y-3 '>
     <div className="flex justify-between">
 <CommentsLike data={data}/>
-<p className='text-sm cursor-pointer text-right' onClick={()=>setReplies(!Replies)}>{data.Replies.length} Replies</p>
+<p className='text-sm text-right cursor-pointer' onClick={()=>setReplies(!Replies)}>{data.Replies.length} Replies</p>
     </div>
-<div className=" pl-1 px-2 w-full flex flex-col gap-y-3 border ">
+<div className="flex flex-col w-full px-2 pl-1 border gap-y-3">
 {
-  Replies&&
+isLogined&&  Replies&&
   <>
 <PostReply data={data}/>
   {data.Replies.map(elm=><EachCommentBlock data={elm} repliable={false} /> )}
@@ -87,11 +84,11 @@ const MainCommentBlock = () => {
   }, []);
   return (
     <main className='flex flex-col gap-y-4 '>
-      <header className='flex gap-x-2 items-center '>Most Recent <ChevronDown size={20}/> </header>
-      <Separator className='sha shadow-lg'/>
+      <header className='flex items-center gap-x-2 '>Most Recent <ChevronDown size={20}/> </header>
+      <Separator className='shadow-lg sha'/>
     
       <InfiniteScroll
-      className=" flex flex-col gap-y-4 "
+      className="flex flex-col gap-y-4"
       height={500}
       dataLength={Commentstate.Comment.length}
      next={()=>{
@@ -133,7 +130,7 @@ export const PostReply:FC<{data:Icomment}>=({data})=>{
   },}  )
 return(
 
-<div className="flex justify-between gap-x-2 p-1 mt-4 ">
+<div className="flex justify-between p-1 mt-4 gap-x-2 ">
   <Input placeholder='Reply' className='!text-black' onChange={(e)=>setComment(e.target.value)} value={Comment}/>
   <Button className="primary text-white hover:bg-[var(--primary)]" onClick={()=>{
       CreditsValidator(credits,mutate,dispatch)
