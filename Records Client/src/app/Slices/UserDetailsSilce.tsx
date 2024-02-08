@@ -15,13 +15,15 @@ export  const userDetailsState :IuserDetails = {
     saved:[],
     liked:[],
     interests:[],
-    registeredDate:""},
+    registeredDate:"",
+notificationSettings:{all:true, Post:true,follow:true,Comment:true,Like:true}},
     Follower:[],
     Following:[],
     Posts:[],
     isAdmin:false,
     tabs:["Posts","Saved","Anonymous"],
-    selectedTab:"Posts"
+    selectedTab:"Posts",
+    
 }
 export const userDetails = createSlice({
     name:"UserDetails",

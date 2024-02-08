@@ -5,7 +5,7 @@ import { Iblog } from "@/app/Types/Ilanding";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { Separator } from "@/components/ui/separator";
 import { Dot, Heart,} from "lucide-react";
-import { FC, useEffect } from "react";
+import { FC } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { Link } from "react-router-dom";
 import LikeBtn from "./LikeBtn";

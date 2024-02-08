@@ -6,7 +6,6 @@ import { Link } from "react-router-dom";
 import useFetchNotification from "./Hook/useFetchNotification";
 import { SmallLoader } from "@/Essentials/Loader";
 import useReadNotification from "./Hook/useReadNotification";
-import Notifier from "./Notifier.js";
 import moment from "moment";
 
 const EachNotification: React.FC<{ data: Inotification }> = ({ data }) => {

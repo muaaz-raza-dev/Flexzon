@@ -1,4 +1,3 @@
-import { Iblog } from "@/app/Types/Ilanding"
 import { Heart } from "lucide-react"
 import { Link } from "react-router-dom"
 import BlogOptions from "./BlogOptions"

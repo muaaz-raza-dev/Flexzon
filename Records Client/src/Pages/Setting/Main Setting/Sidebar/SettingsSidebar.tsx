@@ -1,8 +1,9 @@
 import { useAppDispatch, useAppSelector } from "@/app/ReduxHooks"
 import { CreditsInsertion } from "@/app/Slices/CredentialSlice"
 import { SettingInsert } from "@/app/Slices/SettingsSlice"
+import { InitialCreditsState } from "@/app/middlewares/functions/InitialCreditsState"
 import Cookies from "js-cookie"
-import {BarChart4, BellDot, BellRing, Briefcase, LogOut, User } from "lucide-react"
+import {BarChart4,  BellRing, Briefcase, LogOut, User } from "lucide-react"
 import { Link, useNavigate } from "react-router-dom"
 
 const SettingsSidebar = () => {

@@ -26,6 +26,7 @@ import Cookies from "js-cookie"
 import { useNavigate } from "react-router-dom"
 import ContactNumberDetails, { GenderDetails, IchangeHandlerInput, SocialMediaDetails, WebsiteDetails } from "./InputDetails"
 import InputInterests from "./InputInterests"
+import { InitialCreditsState } from "@/app/middlewares/functions/InitialCreditsState"
 
 
 const PersonalInfoFile = () => {
@@ -72,15 +73,15 @@ function ChangeHandler <T>({e,payload}:IchangeHandlerInput<T>){
   }
 }
   return (
-    <div className=" w-full py-12 flex justify-center ">
+    <div className="flex justify-center w-full py-12 ">
         <div className="md:w-[90%] flex flex-col gap-y-8">
       <h1 className="text-3xl hFont"> Edit Profile</h1>
-      <section className="flex gap-x-4 flex-col">
+      <section className="flex flex-col gap-x-4">
     <div className="bg-gray-200   md:w-[85%] justify-between p-4 rounded flex gap-x-6 items-center ">
-        <div className="flex gap-x-2 items-center">
+        <div className="flex items-center gap-x-2">
 
-        <Avatar className=" w-16 h-16">
-            <AvatarImage src={ImageState.uri||avatar} className=" object-fill w-full "/>
+        <Avatar className="w-16 h-16 ">
+            <AvatarImage src={ImageState.uri||avatar} className="object-fill w-full "/>
             </Avatar>
             <input type="file" hidden id="ImageUpload" onChange={(e)=>{
               if (e.target.files) {
@@ -88,7 +89,7 @@ function ChangeHandler <T>({e,payload}:IchangeHandlerInput<T>){
                setImageState({uri:ImageURI,blob:e.target.files[0]})
               }
             }}/>
-            <input onChange={(e)=>ChangeHandler({e})} className="md:text-xl max-md:text-sm border-black bg-transparent p-1 focus:border-b  outline-none "  name="Name" defaultValue={Info.Name}/>
+            <input onChange={(e)=>ChangeHandler({e})} className="p-1 bg-transparent border-black outline-none md:text-xl max-md:text-sm focus:border-b "  name="Name" defaultValue={Info.Name}/>
         </div>
         <div className="flex gap-x-1">
 
@@ -112,18 +113,18 @@ function ChangeHandler <T>({e,payload}:IchangeHandlerInput<T>){
     </div>
       </section>
 
-      <section className="flex gap-x-4 flex-col ">
-        <label htmlFor="email" className="hFont text-xl py-2" >Username </label>
+      <section className="flex flex-col gap-x-4 ">
+        <label htmlFor="email" className="py-2 text-xl hFont" >Username </label>
         <div className="md:w-[80%]  flex  flex-col gap-y0.5 justify-center">
-<Input onChange={(e)=>ChangeHandler({e})} type="text" id="email" className=" focus-visible:ring-0 focus-visible:border-black border" name="username" placeholder="username" defaultValue={Info.username}/>
+<Input onChange={(e)=>ChangeHandler({e})} type="text" id="email" className="border focus-visible:ring-0 focus-visible:border-black" name="username" placeholder="username" defaultValue={Info.username}/>
         </div>
       </section>
 {/* //!Email */}
-      <section className="flex gap-x-4 flex-col ">
-        <label htmlFor="email" className="hFont text-xl py-2" >Email</label>
+      <section className="flex flex-col gap-x-4 ">
+        <label htmlFor="email" className="py-2 text-xl hFont" >Email</label>
         <div className="md:w-[80%]  flex  flex-col gap-y0.5 justify-center">
-<Input onChange={(e)=>ChangeHandler({e})} type="email" id="email" className=" focus-visible:ring-0 focus-visible:border-black border" name="email" placeholder="Email" defaultValue={Info.email}/>
-  <p className="text-xs  text-gray-500 tracking-tighter">This won't visible on your profile</p>
+<Input onChange={(e)=>ChangeHandler({e})} type="email" id="email" className="border focus-visible:ring-0 focus-visible:border-black" name="email" placeholder="Email" defaultValue={Info.email}/>
+  <p className="text-xs tracking-tighter text-gray-500">This won't visible on your profile</p>
         </div>
       </section>
 
@@ -136,10 +137,10 @@ function ChangeHandler <T>({e,payload}:IchangeHandlerInput<T>){
 <InputInterests/>
 
 {/* //! Bio */}
-      <section className="flex gap-x-4 flex-col ">
-        <label htmlFor="email"  className="hFont text-xl py-2" >About</label>
+      <section className="flex flex-col gap-x-4 ">
+        <label htmlFor="email"  className="py-2 text-xl hFont" >About</label>
         <div className="md:w-[80%]  flex  flex-col gap-y0.5 justify-center">
-<Textarea placeholder="write about you" name="bio" className=" focus-visible:ring-0 focus-visible:border-black border" defaultValue={Info.bio} onChange={(e)=>ChangeHandler({e})}/>
+<Textarea placeholder="write about you" name="bio" className="border focus-visible:ring-0 focus-visible:border-black" defaultValue={Info.bio} onChange={(e)=>ChangeHandler({e})}/>
         </div>
       </section>
 
@@ -157,9 +158,9 @@ function ChangeHandler <T>({e,payload}:IchangeHandlerInput<T>){
 
 let DeleleProfileBlock= ()=>{
   return(
-    <div className="border text-start max-md:flex-col p-2 gap-y-2 md:items-center flex justify-between">
+    <div className="flex justify-between p-2 border text-start max-md:flex-col gap-y-2 md:items-center">
     <div className="flex flex-col gap-y-1">
-<button className="flex gap-x-1 items-center font-semibold   text-xl text-red-500">
+<button className="flex items-center text-xl font-semibold text-red-500 gap-x-1">
 <Trash size={20}/>
 Delete account
 
@@ -195,7 +196,7 @@ let DeleteDialog = ()=>{
   <>
   <Dialog>
       <DialogTrigger asChild>
-      <Button className=" hover:text-white  text-white" variant={"destructive"}>Delete account</Button>
+      <Button className="text-white hover:text-white" variant={"destructive"}>Delete account</Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
@@ -204,7 +205,7 @@ let DeleteDialog = ()=>{
           Permanently delete your account will also erase all of your content. This action is unrecoverable , Are you sure!
           </DialogDescription>
         </DialogHeader>
-        <div className="flex flex-col gap-y-2  gap-4">
+        <div className="flex flex-col gap-4 gap-y-2">
           
             <Input id="username" value={Password} onChange={(e)=>setPassword(e.target.value)} className="col-span-3" placeholder="Enter your password"/>
           </div>
