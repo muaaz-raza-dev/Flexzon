@@ -23,7 +23,7 @@ const PollingAsk=()=>{
     let {AdditionalAssests} =useAppSelector(state=>state.write)
   let dispatch=useAppDispatch()
     return(
-        <div className=" lg:w-[18%]  max-lg:w-[38%] max-md:w-[48%] justify-between    items-center  flex space-x-2">
+        <div className=" lg:w-[18%]  max-lg:w-[38%] max-md:w-[78%] justify-between    items-center  flex space-x-2">
         <div className="grid gap-1.5 leading-none">
           <label
             htmlFor="terms1"

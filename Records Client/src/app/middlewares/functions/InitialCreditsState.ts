@@ -1,4 +1,4 @@
-export let InitialCreditsState =
+export let InitialCreditsState= 
 {
     _id:"",
   username:"",

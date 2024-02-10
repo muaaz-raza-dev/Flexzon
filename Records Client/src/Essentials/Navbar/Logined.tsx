@@ -35,7 +35,7 @@ import { toast } from "react-hot-toast";
 import { InitialCreditsState } from "@/app/middlewares/functions/InitialCreditsState";
 const LoginedOptions = () => {
   let info=useAppSelector(state=>state.credits)
-  let dispatch =useAppDispatch()
+  let dispatch=useAppDispatch()
   return (
     <>
       <DropdownMenu>
@@ -43,30 +43,34 @@ const LoginedOptions = () => {
           <img src={info.Info.avatar? info?.Info?.avatar:"/images/muaaz.png"} className="aspect-square rounded-full h-[90%] border border-black" />
         </DropdownMenuTrigger>
         <DropdownMenuContent className="mx-2 z-[600]">
-          <DropdownMenuItem className="cursor-pointer">
-            <Link to={`/user/${info.Info._id}`} className="flex gap-x-2 items-center">
+            <Link to={`/user/${info.Info._id}`}
+               className="cursor-pointer w-full"
+             >
+          <DropdownMenuItem 
+               className="cursor-pointer flex gap-x-2 items-center"
+          >
               <UserCircle2 size={16} />
               Profile
-            </Link>
           </DropdownMenuItem>
-          <DropdownMenuItem className="cursor-pointer">
+            </Link>
             <Link
               to={"/profile/settings"}
-              className="flex gap-x-2 items-center">
+              className="cursor-pointer w-full" >
+          <DropdownMenuItem className="flex cursor-pointer  gap-x-2 items-center">
               <Settings size={16} /> Settings
-            </Link>
           </DropdownMenuItem>
-          <DropdownMenuItem className="cursor-pointer">
-            <Link to={"/write"} className="flex gap-x-2 items-center">
+            </Link>
+          <Link to={"/write"} className="cursor-pointer w-full">
+            <DropdownMenuItem  className="flex cursor-pointer  gap-x-2 items-center">
               <PenBoxIcon size={16} /> Write
-            </Link>
-          </DropdownMenuItem>
+            </DropdownMenuItem>
+          </Link>
           <DropdownMenuItem className="cursor-pointer">
             
             <div  className="flex gap-x-2 items-center" onClick={()=>{
               Cookies.remove("Records_session")
-              toast("Logged out")
               dispatch(CreditsInsertion({isLogined:false,Info: InitialCreditsState  }))
+              toast("Logged out")
             }}>
            
               <LogOut size={16} /> Logout
@@ -135,7 +139,8 @@ if (e.key =="Enter") {
       <CommandDialog open={open}   onOpenChange={setOpen}>
         <div className="flex justify-between px-2 w-full">
 
-        <CommandInput placeholder="Type a topic or author's name..." className="w-full" value={data.input}  onValueChange={(e)=>dispatch(SearchInsert({input:e})) } onKeyDown={(e)=>Searcher(e)} >
+        <CommandInput placeholder="Type a topic or author's name..." className="w-full" value={data.input}  onValueChange={(e)=>dispatch(SearchInsert({input:e})) } 
+        onKeyDown={(e)=>Searcher(e)} >
           </CommandInput>
           <Link to={`/search/${data.input}`} onClick={()=>setOpen(false)}  className={`my-3 mr-8 p-1  cursor-pointer aspect-square transition-colors hover:bg-gray-300 rounded-full `} >
   <Search size={18} onClick={()=>dispatch(SearchedInsert({TopicSearch:false}))}/>

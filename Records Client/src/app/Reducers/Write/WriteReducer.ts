@@ -18,7 +18,9 @@ interface IwriteAction {
   Options?: { title: string }[];
   OptionIndex?: number;
   OptionRawIndexedTitle?: string;
-  BannerBlob?:Blob
+  BannerBlob?:Blob,
+  Commenting?:boolean
+  likescount?:boolean
 
 }
 
@@ -55,8 +57,12 @@ const writeInsertion = (state: Iwrite, action: PayloadAction<IwriteAction>) => {
   if (payload.AdditionalAssestsTitle !== undefined) {
     state.AdditionalAssests.PollnQ.title = payload.AdditionalAssestsTitle;
   }
-  if (payload.BannerBlob) { 
+  if (payload.BannerBlob!==undefined) { 
     state.BannerBlob=payload.BannerBlob}
+    if (payload.Commenting!==undefined) { 
+      state.Commenting=payload.Commenting}
+      if (payload.likescount!==undefined) { 
+        state.likescount=payload.likescount}
 };
 
 export default writeInsertion;

@@ -13,7 +13,7 @@ const usePollVote = (Poll:IPoll) => {
           }, onSuccess(data) {
             if (PollState?.total==0) {
               let UpdatedPoll={...PollState,Polled:true,
-                PolledTotal:PollState?.total||0+1 , options:PollState?.options.map(elm=>{
+                PolledTotal:1 , options:PollState?.options.map(elm=>{
                   if (elm.title==data.title) {
                     return {...elm,votes:100}
                   }
@@ -25,7 +25,7 @@ const usePollVote = (Poll:IPoll) => {
               dispatch(BlogInsert({Poll:UpdatedPoll}))
             }
             else{
-              dispatch(BlogInsert({Polled:true,PolledTotal:PollState?.total||0+1}))
+              dispatch(BlogInsert({Polled:true,PolledTotal:(PollState?.total||0)+1}))
             }
           },})
           return {mutate,isLoading,dispatch}

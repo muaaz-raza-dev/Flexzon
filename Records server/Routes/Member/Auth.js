@@ -9,11 +9,13 @@ let JWT_SECRET = process.env.jwt_Secret;
 //! Create
 app.post("/register", async (req, res) => {
   let { Name, username, bio, email, password, avatar, Topics } = req.body;
-  let verification = await Member.find({ username }).count();
-  if (verification !== 0) {
+  let verification = await Member.find({ username, isDeleted:false }).count();
+  let emailExist = await Member.find({ email ,isDeleted:false }).count();
+  if (verification !== 0||emailExist!==0) {
     res
       .status(StatusCodes.NOT_ACCEPTABLE)
-      .json({ success: false, msg: "username already exists" });
+      .json({ success: false, msg: "username or email already exists" });
+
   } else {
     try {
       bcrypt.hash(password, 8, function (err, hash) {

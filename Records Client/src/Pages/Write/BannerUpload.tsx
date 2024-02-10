@@ -11,8 +11,6 @@ useEffect(() => {
 }, []);
 let fileRef =useRef()
   let dispatch = useAppDispatch()
-  console.log(ImageURI?.blob?.type);
-  
   return (
     <section className="flex flex-col items-center w-full gap-y-4">
         <div className="max-md:w-[90%] md:w-[75%]  ">

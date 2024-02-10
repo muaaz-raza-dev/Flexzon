@@ -6,7 +6,6 @@ const Comments = require("../../models/Comments");
 const Notifier = require("../Notifications/Notifier");
 const limit = +process.env.DocsPerRequest
 app.post("/read/:id",async(req,res)=>{
-
     let count = +req.header("count")
     try {
     let Payload = await Comments.find({post:req.params.id,Replied:false}).populate("commentor").populate({ 

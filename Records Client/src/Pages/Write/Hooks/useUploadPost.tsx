@@ -20,6 +20,8 @@ const useUploadPost = () => {
     timeToRead,
     FollowerOnly,
     AdditionalAssests,
+    Commenting,
+    likescount
   } = writeState;
   let { type, options, title: PollTitle } = AdditionalAssests.PollnQ;
 
@@ -66,6 +68,8 @@ const useUploadPost = () => {
         topic,
         FollowerOnly,
         ...AdditionalAssestsPayload,
+        commenting:Commenting,
+        likesCount:likescount 
       });
     },
     onSuccess(data) {

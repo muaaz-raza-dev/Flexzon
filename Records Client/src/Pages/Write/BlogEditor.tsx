@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import { WriteInsertion } from "@/app/Slices/WriteSlice";
 var toolbarOptions = [
   ["bold", "italic", "underline", "strike"], // toggled buttons
-  ["blockquote", "code-block"],
+  ["code-block"],
   [{ header: 1 }, { header: 2 }], // custom button values
   [{ list: "ordered" }, { list: "bullet" }],
   [{ script: "sub" }, { script: "super" }], // superscript/subscript

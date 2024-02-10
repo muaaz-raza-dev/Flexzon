@@ -52,7 +52,7 @@ function inputHandler(purpose:string,e:ChangeEvent<HTMLInputElement>) {
       <div className="lg:w-1/2 bg-[var(--bg)] text-black w-full flex items-center justify-center text-center md:px-16 px-0 z-0">
       
         <div className="z-20 w-full py-6">
-          <h1 className="my-6 text-4xl hFont">Login to Records</h1>
+          <h1 className="my-6 text-4xl hFont">Login to Flexzon</h1>
 
           <form onSubmit={(e)=>{
             e.preventDefault()

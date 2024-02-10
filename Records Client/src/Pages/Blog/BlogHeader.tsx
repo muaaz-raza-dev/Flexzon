@@ -1,6 +1,6 @@
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { Separator } from "@/components/ui/separator";
-import { LucideShare, MessageCircle } from "lucide-react";
+import { CircleOff, LucideShare, MessageCircle } from "lucide-react";
 import { Webshare } from "./functions/WebShare";
 import { Iblog } from "@/app/Types/Ilanding";
 import { useAppDispatch } from "@/app/ReduxHooks";
@@ -10,8 +10,6 @@ import CommentsFile from "./Comments/CommentsFile";
 import { CommentInsertion } from "@/app/Slices/CommentSlice";
 import SaveBtn from "../Landing page/main/SaveBtn";
 import moment from "moment";
-
-
 const BlogHeader = ({data}:(Iblog|any)) => {
   let dispatch =useAppDispatch()
   return (
@@ -37,8 +35,10 @@ const BlogHeader = ({data}:(Iblog|any)) => {
       <div className="flex flex-col px-2 gap-y-6">
         <Separator />
         <section className="flex justify-between">
-          <div className="flex gap-x-6">
+          <div className="flex gap-x-6 items-center">
            <LikeMechanism data={data}/>
+            {
+              data?.commenting?
            <CommentsFile >
             <div onClick={()=>
             dispatch(CommentInsertion({count:0})) 
@@ -49,7 +49,13 @@ const BlogHeader = ({data}:(Iblog|any)) => {
               />
               {data?.comments?.length}
             </div>
-            </CommentsFile>
+            </CommentsFile>:
+            <div className="flex items-center gap-x-2">
+          <CircleOff size={20}
+          className="text-[#6B6B6B]  transition"/>
+          <p className="text-red-500 text-xs">Responses disabled</p>
+          </div>
+            }
           </div>
           <div className="flex gap-x-6">
             <SaveBtn _id={data._id}/>

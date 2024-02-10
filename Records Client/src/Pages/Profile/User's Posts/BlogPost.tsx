@@ -16,7 +16,7 @@ setIsFollower(data.FollowerOnly&&(credits.isLogined&& credits.Info.following.som
 
   
   return (
-    <main  className="flex flex-col  lg:w-[40%] border max-lg:w-[35%] max-md:w-[95%]  md:h-[24rem] max-md:h-[27rem] border-b   px-5 ">
+    <main  className="flex flex-col p-2 shadow lg:w-[40%] border max-lg:w-[35%] max-md:w-[95%]  md:h-[25rem] max-md:h-[27rem] border-b   px-5 ">
 
         <Link    to={!data.FollowerOnly?`/blog/${data?._id}`:IsFollower?`/blog/${data?._id}`:`/user/${data?.author._id}`} className="flex justify-center object-fill w-full h-48 p-2 bg-gray-300 border-b">
 {["mp3", "mp4"].includes(data?.banner.split(".")[3]) ? (
@@ -26,6 +26,8 @@ setIsFollower(data.FollowerOnly&&(credits.isLogined&& credits.Info.following.som
                 src={data?.banner || "/images/Records.png"}
                 alt=""
                 className="object-contain w-full rounded "
+                loading="lazy"
+
               />
             )}
         </Link>

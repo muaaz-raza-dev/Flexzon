@@ -44,7 +44,7 @@ const QuestionView = () => {
                         : "bg-[#ff00004f] border-[#ff00004f]":""
                     }`}
                   >
-                    {elm.title}{" "}
+                    {elm.title}
                     <div className="px-4 w-[10%] items-end hFont flex gap-x-4">
                       {
                       elm.title ==

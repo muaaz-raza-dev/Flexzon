@@ -74,8 +74,64 @@ app.get("/topic/:topic", async (req, res) => {
 app.get("/search", async (req, res) => {
   let count = req.header("count");
   let q = req.header("q");
-  let payload = await Posts.find({ isDeleted:false,$text:{$search:q}   }).limit(limit)
-  .skip(parseInt(count) * limit);
+  let payload = await Posts.aggregate([
+    {
+      $match: {
+        isDeleted:false,
+        $text:{$search:q}
+      },
+    },
+      {
+        $addFields: {
+          author: {
+            $cond: {
+              if: { $eq: ["$anonymous", true] },
+              then: [], // Exclude sensitiveField if isAnonymous is true
+              else: "$author", // Include sensitiveField if isAnonymous is false
+            },
+          },
+        },
+      },
+      {
+        $project: { isDeleted: 0,  }
+      },
+  
+    
+    {
+      
+      $lookup: {
+        from: "members",
+        localField: "author",
+        foreignField: "_id",
+        as: "author"
+    }
+    },
+    {$unwind: {
+      path: "$author",
+      // includeArrayIndex: 'author',
+      preserveNullAndEmptyArrays: true
+    }}
+    ,
+  
+    
+    {
+      
+      $lookup: {
+        from: "topics",
+        localField: "topic",
+        foreignField: "_id",
+        as: "topic"
+    }
+    },
+    {$unwind: {
+      path: "$topic",
+      // includeArrayIndex: 'author',
+    }}
+   
+  
+  ]).sort({publishDate:-1,likes:-1}).limit(20)
+  // let payload = await Posts.find({ isDeleted:false,anonymous:false,$text:{$search:q}}).populate(["topic","author"]).limit(limit)
+  // .skip(parseInt(count) * limit);
   res.json({ success: true, payload ,totalResults:payload.length, count :payload.length>limit*(count==0?count+1:count)?count+1:count  });
 });
 app.get("/trending", async (req, res) => {
@@ -271,12 +327,16 @@ app.post("/topics",async(req,res)=>{
 
 
 app.post("/starter", async (req, res) => {
+  await Posts.updateMany({commenting:{$exists:false},likesCount:{$exists:false}} , {
+    $set:{commenting:true,likesCount:true}
+})
   try {
     await Posts.updateMany({FollowerOnly:{$exists:false}},{$set:{FollowerOnly:false}})
     let TopCreators= await Posts.aggregate([
       {
         $match:{
-          publishDate: { $gte: new Date(Date.now() - 2*7 * 24 * 60 * 60 * 1000) }
+          publishDate: { $gte: new Date(Date.now() - 2*7 * 24 * 60 * 60 * 1000) },
+          anonymous:false
         }
       },
       {
@@ -472,8 +532,7 @@ app.get("/post/:id",async(req,res)=>{
       $match: {
         _id : Post._id,
         isDeleted:false,
-        anonymous:false
-      },
+            },
     },
       {
         $addFields: {
@@ -532,13 +591,13 @@ app.get("/post/:id",async(req,res)=>{
     }},
    
   ]).then(async post=>{
+    let PollnQOutput=PollnQAnalyzer(post[0],req.header("AdminId")||"")
     if (post[0].author) {
-     let PollnQOutput=PollnQAnalyzer(post[0],req.header("AdminId")||"")
-      let Recommendations = await Posts.find({_id:{$ne:post[0]._id}, isDeleted:false,author:post[0].author._id}).populate("topic").sort({publishDate:-1}).limit(4)
+      let Recommendations = await Posts.find({_id:{$ne:post[0]._id}, isDeleted:false,anonymous:false,author:post[0].author._id}).populate("topic").sort({publishDate:-1}).limit(4)
       res.json({success:true,payload:{Post:{...post[0],...PollnQOutput},Recommendations}})
     }
     else{
-      res.json({success:true,payload:{Post:post[0],Recommendations:[]}})
+      res.json({success:true,payload:{Post:{...post[0],...PollnQOutput},Recommendations:[]}})
   
     }
   })

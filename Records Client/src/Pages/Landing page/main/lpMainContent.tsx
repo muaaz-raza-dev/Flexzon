@@ -32,6 +32,7 @@ export const PostBox: FC<IblogProp> = ({ data ,Follower}) => {
             <AvatarImage
               src={data?.author?.avatar || "/images/anonymous.png"}
               className="z-10 rounded-full aspect-square"
+              loading="lazy"
             />
           </Avatar>
           <Link
@@ -92,12 +93,14 @@ export const PostBox: FC<IblogProp> = ({ data ,Follower}) => {
 
           <div className="md:w-[18%] max-md:w-[55%] center rounded flex overflow-hidden  justify-end aspect-square  h-full mx-2">
             {["mp3", "mp4"].includes(data?.banner.split(".")[3]) ? (
-              <video src={data.banner} loop autoPlay muted ></video>
+              <video src={data.banner} loop autoPlay muted 
+             ></video>
             ) : (
               <img
                 src={data?.banner || "/images/Records.png"}
                 alt=""
                 className="object-contain w-full rounded "
+                loading="lazy"
               />
             )}
           </div>

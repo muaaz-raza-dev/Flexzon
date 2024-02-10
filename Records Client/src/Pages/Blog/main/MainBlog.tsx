@@ -13,19 +13,14 @@ const MainBlog = () => {
               loading='eager'
                 src={data?.banner || "/images/Records.png"}
                 alt=""
-                onLoadedDataCapture={()=>{
-                  console.log("I am loaded");
-                  
-                }}
                 className="object-contain "
               />
             )}
      
       </header>
-      <div className="text-xl">
-<p className="whitespace-pre-wrap" dangerouslySetInnerHTML={{__html:data?.content||""}}>
-</p>
-
+      <div className="text-xl h-max w-full">
+<div className=" w-full flex flex-col " dangerouslySetInnerHTML={{__html:data?.content||""}}>
+</div>
       </div>
       {
         data?.AdditonalAssetsType=="Poll"?

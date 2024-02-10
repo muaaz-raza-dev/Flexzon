@@ -19,4 +19,6 @@ export interface Iwrite {
   plainText: string;
   tags: string[];
   AdditionalAssests: IPollingnQ;
+  Commenting:boolean;
+  likescount:boolean;
 }

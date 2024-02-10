@@ -5,7 +5,7 @@ import { Switch } from "@/components/ui/switch";
 import { Textarea } from "@/components/ui/textarea";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { Info } from "lucide-react";
-import { ChangeEvent, useEffect } from "react";
+import { ChangeEvent,  useEffect } from "react";
 import Polling from "./Poll&Q/Polling";
 const ReadCountCaculator = (plainText: string) => {
   let wordsCount = plainText.split(" ").filter((elm) => elm !== " ").length;
@@ -53,7 +53,7 @@ const ReadCountCaculator = (plainText: string) => {
           <Input
             placeholder="Topic i.e Programming or Entertaiment"
             name="topic"
-            className=" outline-none  focus-visible:ring-0 border border-black my-2 text-[0.85rem] "
+            className="font-bold outline-none  focus-visible:ring-0 border border-black my-2 text-[0.85rem] "
             onChange={(e) => InputHandler(e)}
             value={writeState.topic}
           />
@@ -63,53 +63,60 @@ const ReadCountCaculator = (plainText: string) => {
         </div>
       </div>
       {/* // !FollowerOnly */}
-    <FollowerOnlyOption/>
-    
+      <div className="mt-4">
+        <h1 className="font-bold text-xl p-2">Advanced accessiblity options</h1>
+      <div className="flex max-lg:flex-col w-full gap-x-4 ">
+    <AcessiblityOptions purpose={"FollowerOnly"} description={"blog will only be accessable by your followers"} label={"For followers only"}/>
+    <AcessiblityOptions purpose={"Commenting"} description={"Commenting on your post will be disabled"} label={" Commenting"}/>
+    <AcessiblityOptions purpose={"likescount"} description={"Total likes count will not be shown your blog"} label={"Likes count"}/>
+      </div>
     </div>
+      </div>
   );
 };
 
 export default AdditionalInfoB;
 
-        function FollowerOnlyOption() {
+        function AcessiblityOptions ({purpose,description,label}:{purpose:"FollowerOnly"|"Commenting"|"likescount",description:string,label:string}) {
           let writeState = useAppSelector((state) => state.write);
           let dispatch = useAppDispatch();
           return (
-            <div className=" lg:w-[18%]  max-lg:w-[42%] max-md:w-[50%] justify-between    items-center  flex space-x-2">
+            <div className=" lg:w-[24%]  max-lg:w-[42%] p-2 border max-md:w-[100%] justify-between    items-center  flex space-x-2 flex-row-reverse">
+               <Switch
+                id=""
+                onCheckedChange={(e) =>
+                  dispatch(
+                    WriteInsertion({
+                      [purpose]: e,
+                    })
+                  )
+                }
+                className="!bg-[var(--light)] ToggleShadCn     aspect-square"
+                checked={writeState[purpose]}
+              />
               <div className="grid gap-1.5 leading-none">
                 <label
-                  htmlFor="terms1"
+                  htmlFor=""
                   className="flex font-bold leading-none tracking-tight text-md center peer-disabled:cursor-not-allowed peer-disabled:opacity-70 gap-x-3"
                   
                 >
 
 
-                  Follower only ⭐
+                  {label}
 
                   <TooltipProvider>
     <Tooltip>
       <TooltipTrigger asChild>
-                  <Info size={18}/>
+                  <Info size={14}/>
       </TooltipTrigger>
       <TooltipContent>
-        <p>You can't post anonymously after active this option</p>
+        <p>{description}</p>
       </TooltipContent>
     </Tooltip>
   </TooltipProvider>
                 </label>
               </div>
-              <Switch
-                id="terms1"
-                onCheckedChange={(e) =>
-                  dispatch(
-                    WriteInsertion({
-                      FollowerOnly: e,
-                    })
-                  )
-                }
-                className="!bg-[var(--light)] ToggleShadCn     aspect-square"
-                checked={writeState.FollowerOnly}
-              />
+             
             </div>
           );
         }

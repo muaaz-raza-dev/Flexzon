@@ -1,3 +1,4 @@
+import { useAppSelector } from "@/app/ReduxHooks"
 import useFetchNotification from "../Notification/Hook/useFetchNotification"
 import HeroSection from "./header/Hero/HeroSection"
 import { LpHeaderFile } from "./header/lpHeaderFile"
@@ -5,7 +6,10 @@ import TopCreators from "./main/TopCreators"
 import { LpMainContent } from "./main/lpMainContent"
 import LpSidebarFile    from "./sidebar/LpSidebarFile"
 const LandingFile = () => {
-    useFetchNotification();
+    let credits =useAppSelector(state=>state.credits)
+    if (credits.isLogined) {
+        useFetchNotification();
+    }
 
 return (
     <div className="">

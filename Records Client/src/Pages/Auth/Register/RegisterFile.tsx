@@ -20,8 +20,8 @@ const RegisterFile = () => {
     <div className="lg:flex w-1/2 hidden to-[var(--primary)] from-[var(--secondary)] bg-gradient-to-l  bg-no-repeat bg-cover relative items-center shadow-lg" >
         <div className="absolute inset-0 z-0 bg-black opacity-60"></div>
         <div className="z-10 w-full px-12">
-            <h1 className="text-5xl font-bold tracking-wide text-left">Step into world of Records</h1>
-            <p className="my-4 text-sm">Step into the world of Records, where every keystroke becomes a symphony of your thoughts. Register now and compose your digital narrative, turning moments into timeless stories on this captivating blogging platform.</p>
+            <h1 className="text-5xl font-bold tracking-wide text-left">Step into world of Sparklet</h1>
+            <p className="my-4 text-sm">Step into the world of Sparklet, where every keystroke becomes a symphony of your thoughts. Register now and compose your digital narrative, turning moments into timeless stories on this captivating blogging platform.</p>
         </div>
         
     </div>
@@ -29,7 +29,7 @@ const RegisterFile = () => {
      
         <div className="z-20 w-full py-6">
             <h1 className="my-6 text-4xl hFont">
-            Register to Blogger
+            Register to Sparklet
             </h1>
           
             <form  className="sm:[75%] w-full px-2 lg:px-0 mx-auto" onSubmit={(e)=>e.preventDefault()}>

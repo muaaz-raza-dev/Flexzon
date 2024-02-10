@@ -6,9 +6,9 @@ const BlogFooter = ({data}:Iblog|any) => {
  if (data.Recommendations.length!==0) {
   
    return (
-     <div className="w-full my-8 flex flex-col items-center justify-center gap-y-4">
- <h1 className="hFont text-2xl self-start "> More from {data?.Post.author?.username}</h1>
- <section className="flex flex-wrap w-full items-center md:justify-around gap-y-6 max-md:justify-center gap-2">
+     <div className="w-full flex flex-col items-center justify-center ">
+ <h1 className="hFont text-2xl my-2 self-start "> More from {data?.Post.author?.username}</h1>
+ <section className="flex justify-between flex-wrap w-full   gap-y-6  gap-2">
 {
   data?.Recommendations.length!==0&&
      data?.Recommendations.map((elm:Iblog)=><BlogPost data={elm}/>)

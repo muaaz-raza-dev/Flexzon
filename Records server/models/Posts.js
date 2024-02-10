@@ -17,6 +17,8 @@ comments:{type:[ObjectId],},
 isDeleted:{type:Boolean,default:false},
 FollowerOnly:{type:Boolean,default:false},
 anonymous:{type:Boolean,default:false},
+commenting:{type:Boolean,default:true},
+likesCount:{type:Boolean,default:true},
 //! ----x-----x-------x-------
 Poll:{type:ObjectId,ref:"Polls"},
 Question:{type:ObjectId,ref:"Questions"},

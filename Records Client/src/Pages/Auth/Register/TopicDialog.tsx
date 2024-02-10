@@ -28,20 +28,24 @@ const TopicDialog:FC<TopicDialog> = ({title,loading}) => {
   let dispatch = useAppDispatch()
   let RegisterationSumbit = ()=>{
     setLoading(true)
-      Registeration(Auth.register).then(data=>{
-        setLoading(false)
-        if (data.success===true) {
-          toast.success("Logined to your account")
-          Cookies.set("Records_session",data.token,{expires:1.296e+9})
-          dispatch(CreditsInsertion({isLogined:true,Info:{...Credits.Info,...data.payload}}))
-          dispatch(insertion({tabs:data.payload.interests}))
+    Registeration(Auth.register).then(data=>{
+      if (data.success===true) {
+        toast.success("Logined to your account")
+        Cookies.set("Records_session",data.token,{expires:1.296e+9})
+        dispatch(CreditsInsertion({isLogined:true,Info:{...Credits.Info,...data.payload}}))
+        dispatch(insertion({tabs:data.payload.interests}))
           navigate("/")
         }
         else{
           toast.error(data.msg)
         }
+      }).catch(err=>{
+        toast.error(err.response.data.msg)
+      }).finally(()=>{
+        setLoading(false)
       })
-  }
+
+        }
   return (
     <Dialog>
   <DialogTrigger className="w-full">{loading===false&&title}</DialogTrigger>

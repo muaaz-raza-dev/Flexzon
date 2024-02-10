@@ -19,7 +19,7 @@ export  const Credits :Icredits = {
       interests:[],
       registeredDate:"",
     notificationSettings:{all:true,follow:true,Comment:true,Post:true,Like:true}
-    } ,
+    },
     isLogined:false,
     isLoading:true,
     OTPRequest:Cookies.get("ROR")?true:false

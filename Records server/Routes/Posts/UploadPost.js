@@ -9,21 +9,22 @@ const Question = require("../../models/Question");
 
 app.post("/", VerifyMember,async (req, res) => {
     //AditionalAssets = Polls and Questions
-  let {author,title,subTitle,banner,content,timeToRead,topic,tags,anonymous,FollowerOnly,AdditonalAssets,AdditonalAssetsType} = req.body;
+  
+  let {author,title,subTitle,banner,content,timeToRead,topic,tags,anonymous,FollowerOnly,AdditonalAssets,AdditonalAssetsType,commenting,nodmeno
+} = req.body;
   let  PayloadAssest = {}
-  console.log(AdditonalAssets,AdditonalAssetsType);
   if(AdditonalAssetsType == "Poll"){
-    let Polled =await Polls.create({author,...AdditonalAssets})
+    let Polled =await Polls.create({author:req.AdminId,...AdditonalAssets})
     PayloadAssest.Poll=Polled._id
   }
   else{
-    let Questioned =await Question.create({author,...AdditonalAssets})
+    let Questioned =await Question.create({author:req.AdminId,...AdditonalAssets})
     PayloadAssest.Question=Questioned._id
   }
   let TopicInDb=await Topic.findOne({$text:{$search:topic}})
   if (TopicInDb) {
     Posts.create({
-        author,title,subTitle,banner,content,timeToRead,topic:TopicInDb._id,tags,anonymous,FollowerOnly,AdditonalAssetsType,...PayloadAssest
+        author,title,commenting,likesCount,subTitle,banner,content,timeToRead,topic:TopicInDb._id,tags,anonymous,FollowerOnly,AdditonalAssetsType,...PayloadAssest
     })
     .then(async post=>{
          await Member.findByIdAndUpdate(author,{$push:{Posts:post._id}})
@@ -39,11 +40,10 @@ app.post("/", VerifyMember,async (req, res) => {
   else{
       Topic.create({title:topic}).then((topic)=>{
           Posts.create({
-        author,title,subTitle,banner,content,timeToRead,topic,tags,anonymous,
+        author:req.AdminId ,commenting,likesCount,title,subTitle,banner,content,timeToRead,topic,tags,anonymous,
         AdditonalAssetsType,...PayloadAssest
     })
     .then(async post=>{
-        
          await Member.findByIdAndUpdate(author,{$push:{Posts:post._id}})
          let UpdatedPost = await Posts.findById(post._id).populate(["topic","author"])
          res.json({success:true,msg:"Post created successfully",payload:UpdatedPost})

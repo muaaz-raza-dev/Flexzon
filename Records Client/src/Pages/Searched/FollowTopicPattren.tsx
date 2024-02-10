@@ -1,6 +1,7 @@
 import FollowTopicFn from "@/Queryfunctions/Topic/FollowTopic"
 import { useAppDispatch, useAppSelector } from "@/app/ReduxHooks"
 import { CreditsInsertion } from "@/app/Slices/CredentialSlice"
+import { insertion } from "@/app/Slices/LandingSlice"
 import { SearchedInsert } from "@/app/Slices/SearchedSlice"
 import CreditsValidator from "@/app/middlewares/functions/CreditsValidator"
 import { Button } from "@/components/ui/button"
@@ -10,6 +11,7 @@ import { useMutation } from "react-query"
 const FollowTopicPattren = () => {
     const data = useAppSelector(state=>state.userDetails)
     const searchedData = useAppSelector(state=>state.searched)
+    let {tabs}=useAppSelector(State=>State.landing)
     let dispatch=useAppDispatch()
     let credits =useAppSelector(state=>state.credits)
     const {mutate}=useMutation({mutationFn:()=>FollowTopicFn(searchedData.Topic._id) ,mutationKey:[data.Info?._id,"Follow Topic"] , onSuccess(resp) {
@@ -18,6 +20,7 @@ const FollowTopicPattren = () => {
           toast.success(`You are following ${searchedData.Topic.title}`)
         dispatch(CreditsInsertion({interests:[...credits.Info.interests,payloadEntry]}))
         dispatch(SearchedInsert({Topic:{...searchedData.Topic,Followers:searchedData.Topic.Followers+1}}))
+        dispatch(insertion({tabs:[...tabs,payloadEntry]}))
         }
         else{
             dispatch(CreditsInsertion({interests:credits.Info.interests.filter(elm=>elm._id!==searchedData.Topic._id)}))

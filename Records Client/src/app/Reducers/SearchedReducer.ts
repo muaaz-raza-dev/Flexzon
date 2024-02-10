@@ -11,11 +11,11 @@ interface IwriteAction {
 
 const searchedInsertion = (state: Isearched, action: PayloadAction<IwriteAction>) => {
   let { payload } = action;
-if (payload.Blogs)state.Blogs=payload.Blogs 
-if (payload.count)state.count=payload.count 
-if (payload.totalResults)state.totalResults=payload.totalResults 
-if (payload.Topic)state.Topic=payload.Topic 
-if (payload.TopicSearch)state.TopicSearch=payload.TopicSearch 
+if (payload.Blogs !==undefined)state.Blogs=payload.Blogs 
+if (payload.count !==undefined)state.count=payload.count 
+if (payload.totalResults !==undefined)state.totalResults=payload.totalResults 
+if (payload.Topic !==undefined)state.Topic=payload.Topic 
+if (payload.TopicSearch !==undefined)state.TopicSearch=payload.TopicSearch 
 };
 
 export default searchedInsertion;

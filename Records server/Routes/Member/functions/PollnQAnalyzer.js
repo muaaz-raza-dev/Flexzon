@@ -1,4 +1,5 @@
 function PollnQAnalyzer(post,id) {
+    console.log(id);
     let PollnQ={}
     let type=post.AdditonalAssetsType
     if (post.AdditonalAssetsType) {

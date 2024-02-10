@@ -10,6 +10,8 @@ import moment from "moment";
 
 const EachNotification: React.FC<{ data: Inotification }> = ({ data }) => {
   let { mutate } = useReadNotification();
+  console.log(data.message);
+  
   let CommentMessageProvider = () => {
     if (data.type == "comments") {
       return (
@@ -30,7 +32,7 @@ const EachNotification: React.FC<{ data: Inotification }> = ({ data }) => {
         </Link>
       );
     } else if (data.type == "likes") {
-      <Link
+   return   <Link
         to={`/blog/${data.NotificationIncludedPost}`}
         className="w-full py-2 font-semibold text-md"
       >
@@ -38,14 +40,15 @@ const EachNotification: React.FC<{ data: Inotification }> = ({ data }) => {
       </Link>;
     }
   };
-
+  
+if (data.message) {
   return (
     <section
-      className={`w-full cursor-pointer transition-all ${
+    className={`w-full cursor-pointer transition-all ${
         !data.read ? " hover:bg-[#8080804a] bg-[#80808027]" : "border"
       } flex gap-x-2 p-1 items-center    rounded-md`}
       onClick={() => mutate(data._id)}
-    >
+      >
       <Avatar>
         <AvatarImage src={data.NotificationIncludedUser.avatar} />
       </Avatar>
@@ -55,6 +58,7 @@ const EachNotification: React.FC<{ data: Inotification }> = ({ data }) => {
       </p>
     </section>
   );
+}
 };
 
 const Notifications = () => {

@@ -45,6 +45,8 @@ FollowerOnly:boolean,
 Comments:IComment[],
 Poll?:IPoll; 
 Question?:IQuestion;
+commenting:boolean;
+likesCount:boolean
 AdditonalAssetsType?:"Poll"|"Question";
 }
 
