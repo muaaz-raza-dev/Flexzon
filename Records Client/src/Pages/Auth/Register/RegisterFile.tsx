@@ -21,7 +21,7 @@ const RegisterFile = () => {
         <div className="absolute inset-0 z-0 bg-black opacity-60"></div>
         <div className="z-10 w-full px-12">
             <h1 className="text-5xl font-bold tracking-wide text-left">Step into world of Sparklet</h1>
-            <p className="my-4 text-sm">Step into the world of Sparklet, where every keystroke becomes a symphony of your thoughts. Register now and compose your digital narrative, turning moments into timeless stories on this captivating blogging platform.</p>
+            <p className="my-4 text-sm">Step into the world of Flexzon, where every keystroke becomes a symphony of your thoughts. Register now and compose your digital narrative, turning moments into timeless stories on this captivating blogging platform.</p>
         </div>
         
     </div>
