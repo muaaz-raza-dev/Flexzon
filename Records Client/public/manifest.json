@@ -1,9 +1,9 @@
 {
-    "name": "Records",
-    "short_name": "Records",
+    "name": "Flexzon",
+    "short_name": "Flexzon",
     "scope": "/",
-    "start_url": "https://recordss.vercel.app", 
-    "description":"Welcome to Records, the ultimate blogging platform designed for both seasoned writers and newcomers alike. With an intuitive interface, creative content tools, and responsive design, Records makes expressing yourself a breeze on any device. Personalize your blog with themes, connect with like-minded individuals through a supportive community, and explore diverse content recommendations. Prioritizing privacy and security, Records seamlessly integrates with social platforms, while analytics insights help you track and refine your blog's performance. Capture inspiration anytime, anywhere with an offline writing feature. Records is your go-to destination for effortless and creative blogging.",
+    "start_url": "https://flexzon.vercel.app", 
+    "description":"Welcome to Flexzon, the ultimate blogging platform designed for both seasoned writers and newcomers alike. With an intuitive interface, creative content tools, and responsive design, Records makes expressing yourself a breeze on any device. Personalize your blog with themes, connect with like-minded individuals through a supportive community, and explore diverse content recommendations. Prioritizing privacy and security, Records seamlessly integrates with social platforms, while analytics insights help you track and refine your blog's performance. Capture inspiration anytime, anywhere with an offline writing feature. Records is your go-to destination for effortless and creative blogging.",
     "icons": [
         {
             "src": "/images/Records-512.png",

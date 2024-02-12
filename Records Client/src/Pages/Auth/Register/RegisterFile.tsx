@@ -29,7 +29,7 @@ const RegisterFile = () => {
      
         <div className="z-20 w-full py-6">
             <h1 className="my-6 text-4xl hFont">
-            Register to Sparklet
+            Register to Flexzon
             </h1>
           
             <form  className="sm:[75%] w-full px-2 lg:px-0 mx-auto" onSubmit={(e)=>e.preventDefault()}>
