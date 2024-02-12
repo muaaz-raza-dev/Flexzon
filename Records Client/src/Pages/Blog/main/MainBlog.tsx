@@ -1,6 +1,7 @@
 import PollingView from './PollnQ/PollingView'
 import { useAppSelector } from '@/app/ReduxHooks'
 import QuestionView from './PollnQ/QuestionView'
+import 'quill/dist/quill.snow.css';
 const MainBlog = () => {
   let {data} = useAppSelector(state=>state.Blog)
   return (
@@ -18,8 +19,8 @@ const MainBlog = () => {
             )}
      
       </header>
-      <div className="text-xl h-max w-full">
-<div className=" w-full flex flex-col " dangerouslySetInnerHTML={{__html:data?.content||""}}>
+      <div className="text-xl h-max w-full ql-snow">
+<div className=" w-full flex flex-col ql-editor" dangerouslySetInnerHTML={{__html:data?.content||""}}>
 </div>
       </div>
       {

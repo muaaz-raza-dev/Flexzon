@@ -1,10 +1,9 @@
 import { useAppSelector } from "@/app/ReduxHooks"
 import { Iblog } from "@/app/Types/Ilanding";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { Avatar,  AvatarImage } from "@/components/ui/avatar"
 import { Dot, Heart, TrendingUp } from "lucide-react"
 import { FC} from "react";
 import { Link } from "react-router-dom";
-import Skeleton from 'react-loading-skeleton'
 import moment from 'moment'
 interface ITrendingProp {
   data:Iblog;
@@ -16,11 +15,6 @@ export const ShortCard:FC<ITrendingProp> = ({data})=>{
      
         <Avatar className="p-2">
     <AvatarImage   src={data?.author?.avatar||"/images/muaaz.png"} className="w-full rounded-full -z-10 aspect-square"/>
-    <AvatarFallback>
-    <div className="w-8 rounded-full bg aspect-square">
-  <Skeleton className="w-full h-full rounded-full"/>
-  </div>
-    </AvatarFallback>
   </Avatar>
  
   

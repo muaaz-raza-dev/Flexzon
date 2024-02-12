@@ -4,6 +4,7 @@ import { useAppDispatch } from "@/app/ReduxHooks";
 import { AuthInsertion } from "@/app/Slices/AuthSlice";
 import { Ban, Verified } from "lucide-react";
 import { useState,useEffect } from "react";
+// @ts-ignore
 import { useDebouncedCallback } from "use-debounce";
 interface IusernameState{
     loading:boolean;
@@ -13,7 +14,7 @@ const Username = () => {
     const [username, setusername] = useState<string>("");
     const [state, setState] = useState<IusernameState>({loading:true,success:false});
     let dispatch =useAppDispatch()
-    const debouced = useDebouncedCallback((output)=>{
+    const debouced = useDebouncedCallback((output:any)=>{
         usernameValidation(output).then(data=>{
             if (data?.success===true) {
                 setState({success:true,loading:false})

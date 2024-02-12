@@ -8,7 +8,7 @@ const server = require('http').createServer(app)
 //? To parse json data from body of request object
 app.use(express.json())
 app.use(cors({
-  origin:["http://localhost:5173","https://recordss.vercel.app"],
+  origin:["http://localhost:5173","https://flexzon.vercel.app","https://recordss.vercel.app"],
   credentials:true,
 }))
 

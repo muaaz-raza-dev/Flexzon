@@ -17,6 +17,16 @@
 .BFont{
   font-family: 'Patua One',sans-serif;
 }
+.quill.ql-error {
+  .ql-toolbar {
+    border-bottom: 1px solid red;
+  }
+  .ql-container {
+    border-left: 1px solid red;
+    border-right: 1px solid red;
+    border-bottom: 1px solid red;
+  }
+}
 @layer base {
   :root {
     --background: 0 0% 100%;

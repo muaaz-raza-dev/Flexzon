@@ -12,7 +12,7 @@ const UPostHeader = () => {
             return(
         <button onClick={()=>{
             dispatch(userDetailsInsertion({selectedTab:elm}))
-        }} className={`${elm==data.selectedTab && "border-black border-t-2 text-[var(--primary)]" } text-lg hFont flex gap-x-2 p-2`} >
+        }} className={`${elm==data.selectedTab && "border-black border-t-2 text-[var(--primary)]" } text-lg hFont flex gap-x-2 items-center p-2`} >
 <UPostHeaderIcon tab={elm}/>   {elm}
             </button> 
         )    

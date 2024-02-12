@@ -1,24 +1,22 @@
 import { Route,Routes } from 'react-router-dom'
-import Navbar from './Essentials/Navbar/Navbar'
-import LandingFile from './Pages/Landing page/LandingFile'
-import ProfileFile from './Pages/Profile/ProfileFile'
-import BlogFile from './Pages/Blog/BlogFile'
-import SettingFile from './Pages/Setting/SettingFile'
-import AuthFile from './Pages/Auth/AuthFile'
-import WriteFile from './Pages/Write/WriteFile'
-import 'react-loading-skeleton/dist/skeleton.css'
-// import NotificationFile from './Pages/Notification/NotificationFile'
+import{useEffect, useState ,lazy,Suspense} from "react"
 import { Toaster } from 'react-hot-toast'
 import  { FetchStarter } from "@/Queryfunctions/Hooks/useFetchStarter"
-import useValidate from './Queryfunctions/Hooks/useValidate'
-import { useMutation } from 'react-query'
-import { useAppDispatch, useAppSelector } from './app/ReduxHooks'
 import { insertion } from './app/Slices/LandingSlice'
-import{useEffect, useState} from "react"
-import SearchedPageFile from './Pages/Searched/SearchedPageFile'
 import CreditsGuard, { LoginAskModal } from './app/middlewares/CreditsGuard'
 import  { RecordsLoader } from './Essentials/Loader'
-import NotificationFile from './Pages/Notification/NotificationFile'
+import { useAppDispatch, useAppSelector } from './app/ReduxHooks'
+import { useMutation } from 'react-query'
+import useValidate from './Queryfunctions/Hooks/useValidate'
+import Navbar from './Essentials/Navbar/Navbar'
+const LandingFile = lazy(() => import('./Pages/Landing page/LandingFile'));
+const ProfileFile = lazy(() => import('./Pages/Profile/ProfileFile'));
+const BlogFile = lazy(() => import('./Pages/Blog/BlogFile'));
+const SearchedPageFile = lazy(() => import('./Pages/Searched/SearchedPageFile'));
+const AuthFile = lazy(() => import('./Pages/Auth/AuthFile'));
+const WriteFile = lazy(() => import('./Pages/Write/WriteFile'));
+const SettingFile = lazy(() => import('./Pages/Setting/SettingFile'));
+const NotificationFile = lazy(() => import('./Pages/Notification/NotificationFile'));
 const RecordsFile = () => {
   let state=useAppSelector(state=>state.landing)
   let validation = useValidate()
@@ -59,20 +57,43 @@ if (!Loading) {
 {state.ValidModal===true&&<LoginAskModal/>
 }
         <Routes>
-<Route path='/' element={<LandingFile/>}/>
-<Route path='*' element={<LandingFile/>}/>
-<Route path='/user/:id' element={<ProfileFile  />}/>
-<Route path='/notifications' element={<CreditsGuard><NotificationFile  /></CreditsGuard>}/>
-<Route path='/blog/:id' element={<BlogFile />}/>
-<Route path='/topic/:topic' element={<SearchedPageFile  />}/>
-<Route path='/search/:q' element={<SearchedPageFile  />}/>
-<Route path='/auth/*' element={<AuthFile />}/>
-<Route path='/write/*' element={<CreditsGuard><WriteFile/></CreditsGuard>}/>
-<Route path='/profile/*' element={
-  <CreditsGuard>
-<SettingFile />
-  </CreditsGuard>
-}/>
+        <Route path="/" element={<Suspense fallback={<RecordsLoader/>}><LandingFile /></Suspense>} />
+      <Route path="*" element={<Suspense fallback={<RecordsLoader/>}><LandingFile /></Suspense>} />
+      <Route path="/user/:id" element={<Suspense fallback={<RecordsLoader/>}><ProfileFile /></Suspense>} />
+      <Route
+        path="/notifications"
+        element={
+          <Suspense fallback={<RecordsLoader/>}>
+            <CreditsGuard>
+              <NotificationFile />
+            </CreditsGuard>
+          </Suspense>
+        }
+      />
+      <Route path="/blog/:id" element={<Suspense fallback={<RecordsLoader/>}><BlogFile /></Suspense>} />
+      <Route path="/topic/:topic" element={<Suspense fallback={<RecordsLoader/>}><SearchedPageFile /></Suspense>} />
+      <Route path="/search/:q" element={<Suspense fallback={<RecordsLoader/>}><SearchedPageFile /></Suspense>} />
+      <Route path="/auth/*" element={<Suspense fallback={<RecordsLoader/>}><AuthFile /></Suspense>} />
+      <Route
+        path="/write/*"
+        element={
+          <Suspense fallback={<RecordsLoader/>}>
+            <CreditsGuard>
+              <WriteFile />
+            </CreditsGuard>
+          </Suspense>
+        }
+      />
+      <Route
+        path="/profile/*"
+        element={
+          <Suspense fallback={<RecordsLoader/>}>
+            <CreditsGuard>
+              <SettingFile />
+            </CreditsGuard>
+          </Suspense>
+        }
+      />
         </Routes>
     </main>
   )

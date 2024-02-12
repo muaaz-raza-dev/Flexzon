@@ -4,7 +4,7 @@ import { useAppDispatch, useAppSelector } from "@/app/ReduxHooks";
 import { Iblog } from "@/app/Types/Ilanding";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { Separator } from "@/components/ui/separator";
-import { Dot, Heart,} from "lucide-react";
+import { Dot, Heart, } from "lucide-react";
 import { FC } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { Link } from "react-router-dom";
@@ -35,8 +35,8 @@ export const PostBox: FC<IblogProp> = ({ data ,Follower}) => {
               loading="lazy"
             />
           </Avatar>
+          
           <Link
-            preventScrollReset
             to={
               Follower?
               data?.author?._id?
@@ -49,6 +49,7 @@ export const PostBox: FC<IblogProp> = ({ data ,Follower}) => {
           >
             {data?.author?.username || "Anonymous"}
           </Link>
+          {/* <VerifiedBadge/> */}
           <Dot />
           <p>{moment(data.publishDate).fromNow()||"-"}</p>
         </Link>
@@ -59,12 +60,12 @@ export const PostBox: FC<IblogProp> = ({ data ,Follower}) => {
               <h1 className="BFont md:text-2xl max-md:text-xl">
                 {data?.title}
               </h1>
-              <p className="md:text-[.9rem] max-md:text-[.7rem] text-gray-700">
-                {data?.subTitle?.split(" ").slice(1, 40).join(" ")}...{" "}
+              <p className="md:text-[.9rem] break-words max-md:text-[.7rem] text-gray-700">
+                {data?.subTitle?.split(" ").slice(0, 40).join(" ")}...
               </p>
               {!data.subTitle && (
                 <p
-                  className="whitespace-pre-wrap"
+                  className="whitespace-pre-wrap break-words"
                   dangerouslySetInnerHTML={{
                     __html: data.content.slice(1, 20),
                   }}
@@ -132,12 +133,7 @@ export const LpMainContent = () => {
         }}
         hasMore={Data.Blogs.length !== Data.totalResults}
         loader={<SmallLoader />}
-        endMessage={
-          Data.Blogs.length!==0&&
-          <h1 className="py-6 font-bold text-center text-md">
-            You all caught up!
-          </h1>
-        }
+    
       >
         {Data.Blogs.length !== 0 ?
           Data.Blogs.map((elm) => <PostBlockRenderer key={elm._id} data={elm}/>)

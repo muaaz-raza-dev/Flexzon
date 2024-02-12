@@ -24,7 +24,7 @@ return (
 <LpMainContent/>
             </div>
         </section>
-        <section  className="flex md:py-8 max-md:pt-2 lg:px-6 max-lg:px-1 md:w-[35%] max-md:w-full md:mt-16  md:min-h-[90vh]  border-l">
+        <section  className="flex md:py-8 max-md:pt-2  lg:pl-2 max-lg:px-1 md:w-[35%] max-md:w-full md:mt-16  md:min-h-[90vh]  border-l">
 <LpSidebarFile/>
         </section>
     </main>

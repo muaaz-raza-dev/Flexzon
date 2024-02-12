@@ -33,9 +33,9 @@ const PublishBlog = () => {
     }
       else 
        {
-        if (Banner.length==0) {
+        if (writeState.BannerBlob) {
           setLoading(true)
-          writeState.BannerBlob&&UploadImage(writeState?.BannerBlob).then(data=>{ 
+         UploadImage(writeState?.BannerBlob).then(data=>{ 
             dispatch(WriteInsertion({Banner:data.url}))
             DialogRef?.current?.click();
           })
@@ -43,7 +43,7 @@ const PublishBlog = () => {
             toast.error("Something went wrong try again later!")
           }).finally(()=>{setLoading(false)})}
           else{
-            DialogRef?.current?.click();
+            Banner.length>0?DialogRef?.current?.click():toast.error("Upload banner first")
           }
         }
   };

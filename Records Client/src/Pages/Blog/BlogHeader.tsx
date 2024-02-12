@@ -16,7 +16,8 @@ const BlogHeader = ({data}:(Iblog|any)) => {
     <header className="flex flex-col gap-y-8">
       <div className="">
       <h1 className="text-5xl BFont">{data?.title}</h1>
-      <p className="text-gray-700 font-roboto ">{data?.subTitle}</p>
+      <p className="text-gray-700 break-words font-roboto w-full  ">
+             {data?.subTitle}</p>
       </div>
       <Link to={data.author?`/user/${data.author?._id }`:`/blog/${data._id}`} className={`flex gap-x-2 items-center ${!data.author&&"cursor-not-allowed"}`} >
         <Avatar>

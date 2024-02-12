@@ -10,7 +10,7 @@ const Question = require("../../models/Question");
 app.post("/", VerifyMember,async (req, res) => {
     //AditionalAssets = Polls and Questions
   
-  let {author,title,subTitle,banner,content,timeToRead,topic,tags,anonymous,FollowerOnly,AdditonalAssets,AdditonalAssetsType,commenting,nodmeno
+  let {author,title,subTitle,banner,content,timeToRead,topic,tags,anonymous,FollowerOnly,AdditonalAssets,AdditonalAssetsType,commenting,likesCount
 } = req.body;
   let  PayloadAssest = {}
   if(AdditonalAssetsType == "Poll"){

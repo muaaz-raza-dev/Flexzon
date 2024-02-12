@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import { WriteInsertion } from "@/app/Slices/WriteSlice";
 var toolbarOptions = [
   ["bold", "italic", "underline", "strike"], // toggled buttons
-  ["code-block"],
+  ["code-block",'blockquote'],
   [{ header: 1 }, { header: 2 }], // custom button values
   [{ list: "ordered" }, { list: "bullet" }],
   [{ script: "sub" }, { script: "super" }], // superscript/subscript
@@ -19,6 +19,7 @@ const modules = {
   toolbar: toolbarOptions,
 };
 const BlogEditor = () => {
+  
   const EditorRef: any = useRef(null);
   const [Content, setContent] = useState<string>("");
  
@@ -34,15 +35,17 @@ let data=useAppSelector(state=>state.write)
   }, [Content]);
 
   return (
+    <div className=" w-[95%]">
     <ReactQuill
       theme="snow"
       modules={modules}
-      className="w-[90%] bg-[#f7f6f6] border-none md:h-[50vh]   mb-6"
+      className="w-[100%]  border-none    mb-6"
       ref={EditorRef}
       placeholder="Share your information or thoughts "
       defaultValue={data.mainContent || ""}
       onChange={setContent}
     />
+      </div>
   );
 };
 

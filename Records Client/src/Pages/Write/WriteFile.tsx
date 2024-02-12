@@ -18,7 +18,7 @@ const WriteFile = () => {
 <BannerUploadB/>
         <h1 className='text-3xl hFont'>Write your Post </h1>
  <BlogEditor/>
-        <div className="w-[90%]">
+        <div className="md:w-[90%] max-md:w-[95%]">
 <AdditionalInfoB/>
         </div>
 <PublishBlog/>

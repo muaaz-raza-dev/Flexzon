@@ -34,7 +34,7 @@ setIsFollower(data.FollowerOnly&&(credits.isLogined&& credits.Info.following.som
 
      
         <h1 className="text-xl font-bold ">{data?.title}</h1>
-        <p className=" h-[30%]">{data?.subTitle.split(" ").slice(0,20).join(" ")|| ""}...</p>
+        <p className=" h-[30%] overflow-hidden break-words">{data?.subTitle.split(" ").slice(0,20).join(" ")|| ""}...</p>
         <div className="flex w-full">
 
         <section className="flex items-center w-full py-2 gap-x-2">
@@ -49,7 +49,7 @@ setIsFollower(data.FollowerOnly&&(credits.isLogined&& credits.Info.following.som
   <div className="text-gray-800 text-sm flex items-center justify-center gap-x-0.5">
      {data?.likes} 
   
-<div className="cursor-not-allowed ">
+<div className=" ">
   <Heart size={18} className="text-gray-500 max-md:w-6"/>
 
 </div>

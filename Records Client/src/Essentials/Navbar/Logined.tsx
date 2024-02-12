@@ -4,7 +4,6 @@ import {
   Settings,
   UserCircle2,
   PenBoxIcon,
-  LogOut,
   BookText,
   Bell,
 } from "lucide-react";
@@ -26,16 +25,12 @@ import { Link, useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "@/app/ReduxHooks";
 import { SearchInsert } from "@/app/Slices/SearchSlice";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
+// @ts-ignore
 import { useDebouncedCallback } from "use-debounce";
 import { SearchQuery } from "@/Queryfunctions/Landing/SearchQuery";
-import Cookies from "js-cookie";
-import { CreditsInsertion } from "@/app/Slices/CredentialSlice";
 import { SearchedInsert } from "@/app/Slices/SearchedSlice";
-import { toast } from "react-hot-toast";
-import { InitialCreditsState } from "@/app/middlewares/functions/InitialCreditsState";
 const LoginedOptions = () => {
   let info=useAppSelector(state=>state.credits)
-  let dispatch=useAppDispatch()
   return (
     <>
       <DropdownMenu>
@@ -65,17 +60,7 @@ const LoginedOptions = () => {
               <PenBoxIcon size={16} /> Write
             </DropdownMenuItem>
           </Link>
-          <DropdownMenuItem className="cursor-pointer">
-            
-            <div  className="flex gap-x-2 items-center" onClick={()=>{
-              Cookies.remove("Records_session")
-              dispatch(CreditsInsertion({isLogined:false,Info: InitialCreditsState  }))
-              toast("Logged out")
-            }}>
-           
-              <LogOut size={16} /> Logout
-            </div>
-          </DropdownMenuItem>
+         
         </DropdownMenuContent>
       </DropdownMenu>
     </>
