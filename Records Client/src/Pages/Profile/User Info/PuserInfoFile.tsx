@@ -36,10 +36,10 @@ const PuserInfoFile:FC = () => {
         </div>
         <div className="flex max-md:w-[95%] md:w-[80%] justify-between">
     <b>{userState.Posts.length} blogs   </b>
-    <FollowerandFollowingDialog type="follower">
+    <FollowerandFollowingDialog data={userState.Follower} >
     <b>{userState.Follower.length} Follower{userState.Follower.length>1&&"s"}</b>
     </FollowerandFollowingDialog>
-    <FollowerandFollowingDialog type="following">
+    <FollowerandFollowingDialog data={userState.Following}>
     <b>{userState.Following.length} Following</b>
     </FollowerandFollowingDialog>
 </div>

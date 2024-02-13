@@ -35,4 +35,9 @@ let updatedPost = await Posts.findByIdAndUpdate(PostId,{likes:Post.likes+1,liked
 
 })
 
+app.get("/getlikers",VerifyMember,async(req,res)=>{
+let LikedDetails =await Posts.findById(req.header("id")).populate({path:"likedDetails",select:" username Name avatar" ,limit:100})
+res.status(StatusCodes.OK).json({ success: true, payload:LikedDetails.likedDetails });
+
+})
 module.exports= app

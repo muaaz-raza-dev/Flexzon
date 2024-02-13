@@ -1,4 +1,4 @@
-import { useAppSelector } from "@/app/ReduxHooks"
+import { Iinfo } from "@/app/Types/ICredits"
 import { Avatar, AvatarImage } from "@/components/ui/avatar"
 import {
     Command,
@@ -10,9 +10,7 @@ import {
 import { Dialog, DialogClose, DialogContent, DialogTrigger } from "@/components/ui/dialog"
 import { Link } from "react-router-dom"
 
-export const FollowerandFollowingDialog:React.FC<{children:React.ReactNode,type:"follower"|"following"}> = ({children,type}) => {
-let {Info} =useAppSelector(state=>state.userDetails)
-     let ToIterate ={follower:Info.followers,following:Info.following}
+export const FollowerandFollowingDialog:React.FC<{children:React.ReactNode,data:Iinfo[]}> = ({children,data}) => {
   return (
        
           <Dialog >
@@ -22,26 +20,26 @@ let {Info} =useAppSelector(state=>state.userDetails)
             <DialogContent className="w-screen p-0">
               <Command className="w-full">
                 <CommandInput placeholder="Search by username ... " className="h-9" />
-                <CommandEmpty>No follower found.</CommandEmpty>
+                <CommandEmpty>No user found.</CommandEmpty>
                 <CommandGroup>
                   {
-                    ToIterate[type].length!==0?
-                  ToIterate[type].map((data) => (
+                    data.length!==0?
+                  data.map((user:any) => (
                     <CommandItem
                   
                      
                     >
 
-                        <Link to={`/user/${data._id}`} className="flex w-full gap-x-4  items-center ">
+                        <Link to={`/user/${user._id}`} className="flex w-full gap-x-4  items-center ">
                         <DialogClose className="flex w-full gap-x-4  items-center">
                             <Avatar>
-                                <AvatarImage src={data.avatar} className="w-full aspect-square rounded-full border border-black"/>
+                                <AvatarImage src={user.avatar} className="w-full aspect-square rounded-full border border-black"/>
                             </Avatar>
                             <div className="flex flex-col ">
                             <b className="text-start">
-                      {data.username}
+                      {user.username}
                             </b>
-                            <p className="text-gray-700  text-start">{data.Name}</p>
+                            <p className="text-gray-700  text-start">{user.Name}</p>
                             </div>
                         </DialogClose>
                         </Link>
@@ -49,7 +47,7 @@ let {Info} =useAppSelector(state=>state.userDetails)
                     </CommandItem>
                   )) :
                   <CommandItem>
-                    0  {type} yet
+                    0  found
                   </CommandItem >
                   }
                 </CommandGroup>

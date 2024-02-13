@@ -592,12 +592,16 @@ app.get("/post/:id",async(req,res)=>{
    
   ]).then(async post=>{
     let PollnQOutput=PollnQAnalyzer(post[0],req.header("AdminId")||"")
+    let likedDetails=[]
+    if (post[0].likedDetails[0]) {
+      likedDetails = await Member.findById(post[0].likedDetails[0].toString()).select("avatar username")
+    }
     if (post[0].author) {
       let Recommendations = await Posts.find({_id:{$ne:post[0]._id}, isDeleted:false,anonymous:false,author:post[0].author._id}).populate("topic").sort({publishDate:-1}).limit(4)
-      res.json({success:true,payload:{Post:{...post[0],...PollnQOutput},Recommendations}})
+      res.json({success:true,payload:{Post:{...post[0],...PollnQOutput,likedDetails:[likedDetails]},Recommendations}})
     }
     else{
-      res.json({success:true,payload:{Post:{...post[0],...PollnQOutput},Recommendations:[]}})
+      res.json({success:true,payload:{Post:{...post[0],...PollnQOutput,likedDetails:[likedDetails]},Recommendations:[]}})
   
     }
   })

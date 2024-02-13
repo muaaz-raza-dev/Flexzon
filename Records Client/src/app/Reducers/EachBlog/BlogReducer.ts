@@ -8,7 +8,8 @@ PolledTotal?:number;
 Recommendations?:Iblog[]
 Poll?:IPoll;
 Question?:IQuestion
-QuestionVoted?:string
+QuestionVoted?:string,
+LikesSheet?:boolean
 }
 
 const BlogInsertion = (state: IblogFile, action: PayloadAction<IblogAction>) => {
@@ -20,7 +21,9 @@ const BlogInsertion = (state: IblogFile, action: PayloadAction<IblogAction>) => 
   if (payload.Poll&&state.data?.Poll) state.data.Poll = payload.Poll;
   if (payload.Question&&state.data?.Question) state.data.Question = payload.Question;
   if (payload.QuestionVoted&&state.data?.Question?.voted) state.data.Question.voted = payload.QuestionVoted;
-
+if (payload.LikesSheet!==undefined) {
+  state.LikesSheet=payload.LikesSheet
+}
 };
 
 export default BlogInsertion;

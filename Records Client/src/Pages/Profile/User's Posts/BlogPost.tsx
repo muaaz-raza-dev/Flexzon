@@ -32,8 +32,9 @@ setIsFollower(data.FollowerOnly&&(credits.isLogined&& credits.Info.following.som
             )}
         </Link>
 
-     
+     <Link to={!data.FollowerOnly?`/blog/${data?._id}`:IsFollower?`/blog/${data?._id}`:`/user/${data?.author._id}`}>
         <h1 className="text-xl font-bold ">{data?.title}</h1>
+     </Link>
         <p className=" h-[30%] overflow-hidden break-words">{data?.subTitle.split(" ").slice(0,20).join(" ")|| ""}...</p>
         <div className="flex w-full">
 
@@ -45,7 +46,8 @@ setIsFollower(data.FollowerOnly&&(credits.isLogined&& credits.Info.following.som
     <div className="flex items-center justify-end w-full gap-x-2">
 <Link to={`/topic/${data?.topic?._id}`} className=" px-2 whitespace-nowrap py-0.5 bg-gray-200 rounded-md  text-sm">{data?.topic?.title}</Link>
 <div className="flex items-center gap-x-4 ">
-  
+  {
+    data?.likesCount&&
   <div className="text-gray-800 text-sm flex items-center justify-center gap-x-0.5">
      {data?.likes} 
   
@@ -54,6 +56,7 @@ setIsFollower(data.FollowerOnly&&(credits.isLogined&& credits.Info.following.som
 
 </div>
   </div>
+  }
 
   <RestrictionIcon Info={data.FollowerOnly}/>
 <SaveBtn _id={data._id} size={22}/>

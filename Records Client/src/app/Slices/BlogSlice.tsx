@@ -3,7 +3,8 @@ import {createSlice} from "@reduxjs/toolkit"
 import { IblogFile } from "../Types/IblogFile";
 import BlogInsertion from "../Reducers/EachBlog/BlogReducer";
 export  const PostState :IblogFile = {
-Recommendations:[]
+Recommendations:[],
+LikesSheet:false
 }
 export const Post = createSlice({
     name:"Detailed Blog",

@@ -78,9 +78,11 @@ export const PostBox: FC<IblogProp> = ({ data ,Follower}) => {
                   {data.topic?.title}
                 </div>
                 <p className="text-sm text-gray-800">{data.timeToRead}</p>
+                {data.likesCount&&
                 <p className="flex items-center text-sm text-gray-800 gap-x-1">
                   {data.likes} <Heart className="max-md:w-6" size={12} />
                 </p>
+                }
               </div>
               <section className="flex items-center gap-x-4">
                 {data.FollowerOnly&&

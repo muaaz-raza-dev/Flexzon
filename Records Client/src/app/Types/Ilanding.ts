@@ -1,3 +1,5 @@
+import { Iuser } from "./IuserDetails";
+
 export interface Itopic{
     _id:string,
     title:string;
@@ -42,11 +44,12 @@ topic:{title:string,_id:string},
 tags:string[],
 likes:number,
 FollowerOnly:boolean,
-Comments:IComment[],
+comments:IComment[],
 Poll?:IPoll; 
 Question?:IQuestion;
 commenting:boolean;
-likesCount:boolean
+likesCount:boolean;
+likedDetails?:Iuser[]
 AdditonalAssetsType?:"Poll"|"Question";
 }
 
