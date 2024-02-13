@@ -26,7 +26,7 @@ interface IwriteAction {
 
 const writeInsertion = (state: Iwrite, action: PayloadAction<IwriteAction>) => {
   let { payload } = action;
-  if (payload.Banner) state.Banner = payload.Banner;
+  if (payload.Banner!==undefined) state.Banner = payload.Banner;
   if (payload.title !== undefined) state.title = payload.title;
   if (payload.subtitile !== undefined) state.subtitile = payload.subtitile;
   if (payload.mainContent !== undefined)

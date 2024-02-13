@@ -33,6 +33,7 @@ const useUploadPost = () => {
         title: "",
         timeToRead: "",
         Banner: "",
+        BannerBlob:undefined,
         subtitile: "",
         topic: "",
       })
