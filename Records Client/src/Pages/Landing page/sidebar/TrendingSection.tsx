@@ -9,7 +9,7 @@ interface ITrendingProp {
   data:Iblog;
   }
 export const ShortCard:FC<ITrendingProp> = ({data})=>{
-  return(<div className="flex flex-col md:w-full border max-md:max-w-[99%] max-md:min-w-[49%] my-1 py-2 p-1  rounded-md ">
+  return(<div className="flex flex-col md:w-full border  max-md:min-w-[98%] my-1 py-2 p-1  rounded-md ">
     <Link to={`/user/${data.author._id}`} className="flex items-center  gap-x-0.5">
      
         <Avatar className="p-2">
@@ -39,8 +39,9 @@ export const TrendingSection = () => {
   let data = useAppSelector(state=>state.landing)
   return (
     <div className="w-full ">
-        <h1 className="flex items-center py-2 text-xl BFont gap-x-2"> Trending Blogs <TrendingUp size={16}/> </h1>
-    <div className="flex flex-wrap gap-1">
+        <h1 className="flex items-center py-2 text-xl BFont gap-x-2"> 
+        <TrendingUp size={16}/>  Trending on Flexzon  </h1>
+    <div className="flex flex-wrap justify-center gap-1">
         {
           data.Trendings.length!==0&&
           data.Trendings.map((elm)=><ShortCard data={elm}/>)
