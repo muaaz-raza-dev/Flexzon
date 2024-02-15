@@ -25,7 +25,6 @@ else{
    await Notifier(LikersDetails,req.AdminId,"likes","Liked your post",PostId)
 let updatedPost = await Posts.findByIdAndUpdate(PostId,{likes:Post.likes+1,likedDetails:[...Post.likedDetails,LikerId]})
    let updatedMember =await Member.findByIdAndUpdate(req.AdminId,{liked:[...req.details.liked,PostId]})
-   
    if(updatedPost && updatedMember){
    res.status(StatusCodes.OK).json({success:true,msg:'Post liked successfully',type:"like"})
 }else{

@@ -6,7 +6,7 @@ import { useAppSelector } from "@/app/ReduxHooks";
 import { FC } from "react";
 import { ItopCreators } from "@/app/Types/Ilanding";
 import { Link } from "react-router-dom";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, TrendingUp } from "lucide-react";
 const TopCreators = () => {
   let TopCreators= useAppSelector(state=>state.landing).TopCreators
   var settings = {
@@ -50,15 +50,15 @@ const TopCreators = () => {
     ]
   };
   return (
-      <div className="w-full h-full  border rounded md:p-4">
-        <h1 className="px-2 text-2xl hFont ">Top Writers this week</h1>
+      <div className="w-full h-full rounded px-1">
+        <h1 className="px-2 max-md:flex my-2 md:hidden text-xl hFont items-center flex gap-x-2">Top Writers <TrendingUp size={16}/> </h1>
       <Slider {...settings} arrows={true} slidesPerRow={
         3
       } slidesToShow={1}   touchMove   autoplay={true} className="lg:w-full max-lg:w-[98vw]  " >
         {
           TopCreators.map(elm=>
             {
-              return <div key={elm?._id||""} className=" ">
+              return <div key={elm?._id||""} className="">
               <EachCreatorComponent data={elm}/>
                </div>
             })
@@ -72,26 +72,26 @@ const TopCreators = () => {
 const EachCreatorComponent:FC<{data:ItopCreators}> =({data})=>{
     return (
       
-      <div className="p-2">
-        <div className="w-full rounded  max-h-[17rem] pb-2 flex gap-y-2 flex-col border-2 border-black items-center  text-black">
+      <div className="p-1 w-full ">
+        <Link  to={`/user/${data?._id}`} className="w-full CreatorsShadow  max-h-[12rem] pb-1 flex  flex-col rounded-md items-center  text-black">
 
-            <div   className="h-[50%] bg-[var(--secondary)] overflow-hidden object-contain w-full center  aspect-square">
-    <img src={data?.avatar||"/images/muaaz.png"} className="w-[85%] rounded h-[90%] p-2  object-contain border bg-[#ffffff57]"/>
-            </div>
-            <div  className="">
+            <div  className="flex center gap-x-4">
+    <img src={data?.avatar||"/images/muaaz.png"} className="w-[20%]  rounded-full aspect-square my-1  object-cover  bg-[#ffffff57]"/>
 
-            <h1 className="text-xl font-semibold hFont text-center">{data?.Name}</h1>
+<div className="">
+
+            <h1 className="md:text-xl max-md:text-lg font-semibold hFont ">{data?.Name}</h1>
             <p className="text-xs font-bold">{data?.followers?.length} Followers 
             . {data?.posts} Posts 
             </p>
-            </div>
-            <Button className="w-[96%] py-2  px-4 hover:bg-[var(--primary)] bg-[var(--primary)] rounded-full gap-x-2">
-            <Link  to={`/user/${data?._id}`} className="flex w-full px-4 py-2 gap-x-2 center">
-              Visit profile 
-              <ArrowRight size={16}/>
+</div>
+            <Button className="  text-black    rounded gap-x-2">
+            <Link  to={`/user/${data?._id}`} className="flex w-full   gap-x-2 ">
+        <ArrowRight/>
             </Link>
             </Button>
-        </div>
+            </div>
+        </Link>
           </div>
        
     )

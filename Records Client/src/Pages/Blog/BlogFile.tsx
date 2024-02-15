@@ -32,9 +32,9 @@ if (isError) {
 }
 
   return (
-  <div className="w-full flex flex-col items-center justify-center pt-16">
+  <div className="w-full flex flex-col items-center justify-center md:pt-16 max-md:pt-4">
     <div className="md:w-[80%] max-md:w-[95%] flex flex-col gap-y-3 my-8">
-    <BlogHeader data={data?.payload.Post} />
+    <BlogHeader  />
     <MainBlog  />
     <Separator className="text-black my-4"/>
     <BlogFooter data={data?.payload}/>

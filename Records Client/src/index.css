@@ -241,3 +241,12 @@ input[type=number] {
 -moz-box-shadow: inset -1px -15px 37px -6px rgba(217,217,217,1);
 box-shadow: inset -1px -15px 37px -6px rgba(217,217,217,1);
 }
+.TopCreatorsBorderRadius{
+  border-radius: 100% 0% 100% 0% / 4% 100% 0% 96% ;
+}
+.CardBoxShadow{
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+}
+.CreatorsShadow{
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+}

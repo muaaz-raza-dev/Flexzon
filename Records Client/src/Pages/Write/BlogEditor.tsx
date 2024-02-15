@@ -35,7 +35,7 @@ let data=useAppSelector(state=>state.write)
   }, [Content]);
 
   return (
-    <div className=" w-[95%]">
+    <div className=" w-[90%]">
     <ReactQuill
       theme="snow"
       modules={modules}
