@@ -78,21 +78,24 @@ const EachCreatorComponent:FC<{data:ItopCreators}> =({data})=>{
       <div className="p-1 w-full ">
         <Link  to={`/user/${data?._id}`} className="w-full CreatorsShadow  max-h-[12rem] pb-1 flex  flex-col rounded-md items-center  text-black">
 
-            <div  className="flex center gap-x-4">
-    <img src={data?.avatar||"/images/muaaz.png"} className="w-[20%]  rounded-full aspect-square my-1  object-cover  bg-[#ffffff57]"/>
+            <div  className="flex px-2  justify-center items-center gap-x-2">
 
+<div className="flex items-center  gap-x-2">
+    <img src={data?.avatar||"/images/muaaz.png"} className="max-md:w-[15%] 
+    md:w-[20%]  rounded-full aspect-square my-1  object-cover  bg-[#ffffff57]"/>
 <div className="">
 
-            <h1 className="md:text-xl max-md:text-lg font-semibold hFont ">{data?.Name}</h1>
+            <h1 className="md:text-xl max-md:text-md font-semibold hFont ">{data?.Name} fd</h1>
             <p className="text-xs font-bold">{data?.followers?.length} Followers 
             . {data?.posts} Posts 
             </p>
 </div>
-            <Button className="  text-black    rounded gap-x-2">
+</div>
+            <button className="  justify-self-end  text-black  rounded gap-x-2">
             <Link  to={`/user/${data?._id}`} className="flex w-full   gap-x-2 ">
-        <ArrowRight/>
+        <ArrowRight size={22} className="max-md:w-6"/>
             </Link>
-            </Button>
+            </button>
             </div>
         </Link>
           </div>
