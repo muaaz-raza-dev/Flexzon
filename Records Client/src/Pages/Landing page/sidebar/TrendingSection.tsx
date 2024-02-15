@@ -9,7 +9,7 @@ interface ITrendingProp {
   data:Iblog;
   }
 export const ShortCard:FC<ITrendingProp> = ({data})=>{
-  return(<div className="flex flex-col md:w-full border max-md:w-[49%] my-1 py-2 p-1  rounded-md ">
+  return(<div className="flex flex-col md:w-full border max-md:max-w-[99%] max-md:min-w-[49%] my-1 py-2 p-1  rounded-md ">
     <Link to={`/user/${data.author._id}`} className="flex items-center  gap-x-0.5">
      
         <Avatar className="p-2">

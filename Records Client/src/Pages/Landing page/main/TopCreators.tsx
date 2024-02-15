@@ -15,7 +15,8 @@ const TopCreators = () => {
     speed: 500,
     slidesToScroll:1,
     initialSlide: 0,
-    slidesPerRow:3
+    slidesPerRow:3,
+    autoplay:true
     ,
     responsive: [
       {
@@ -25,7 +26,8 @@ const TopCreators = () => {
           slidesToScroll: 1,
           infinite: true,
           dots: true,
-    slidesPerRow:3
+    slidesPerRow:3,
+    autoplay:false
         }
       },
       {
@@ -34,7 +36,8 @@ const TopCreators = () => {
           infinite: true,
           slidesToShow: 1,
           slidesToScroll: 1,
-          slidesPerRow:2
+          slidesPerRow:2,
+          autoplay:false
         }
       },
       {
@@ -43,8 +46,8 @@ const TopCreators = () => {
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
-          slidesPerRow:2
-
+          slidesPerRow:2,
+          autoplay:false
         }
       }
     ]
