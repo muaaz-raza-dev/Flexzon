@@ -5,7 +5,6 @@ import { Ichats } from "@/app/Types/Imessaging"
 import { Avatar, AvatarImage } from "@/components/ui/avatar"
 import moment from "moment"
 import { Link, useParams } from "react-router-dom"
-import SwipeableViews from 'react-swipeable-views';
 import DeleteChat from "./DeleteChat.chat"
 import { FC } from "react"
 import { InvitesChatComp } from "./InvitesChatComp.chat"
@@ -44,7 +43,7 @@ function UserChatComp({data}:{data:Ichats}){
   }
  
     return (
-      <SwipeableViews enableMouseEvents>
+    
     <Link to={`/messaging/${data?._id}`} className={`flex py-4 border transition-colors rounded hover:text-white w-full px-4 items-center gap-x-4 hover:bg-[var(--secondary)] ${data._id==id["*"]?"bg-[var(--secondary)] text-white":""} cursor-pointer`} 
     onClick={MessageOpnerFunc}
       >
@@ -81,8 +80,8 @@ function UserChatComp({data}:{data:Ichats}){
     </div>
 </div>
     </Link>
-   <DeleteChat id={data._id}/>
-    </SwipeableViews>
+  //  <DeleteChat id={data._id}/>
+
     )
 }
 
