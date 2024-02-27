@@ -56,7 +56,7 @@ const TopCreators = () => {
         <h1 className="px-2 max-md:flex my-2 md:hidden text-xl hFont items-center flex gap-x-2">Top Writers <TrendingUp size={16}/> </h1>
       <Slider {...settings} arrows={true} slidesPerRow={
         3
-      } slidesToShow={1}   touchMove   autoplay={true} className="lg:w-full max-lg:w-[98vw]  " >
+      } slidesToShow={1} touchMove autoplay={true} className="lg:w-full max-lg:w-[98vw]  " >
         {
           TopCreators.map(elm=>
             {
@@ -73,7 +73,6 @@ const TopCreators = () => {
 
 const EachCreatorComponent:FC<{data:ItopCreators}> =({data})=>{
     return (
-      
       <div className="p-1 w-full ">
         <Link  to={`/user/${data?._id}`} className="w-full CreatorsShadow  max-h-[12rem] pb-1 flex  flex-col rounded-md items-center  text-black">
 
@@ -83,8 +82,7 @@ const EachCreatorComponent:FC<{data:ItopCreators}> =({data})=>{
     <img src={data?.avatar||"/images/muaaz.png"} className="max-md:w-[15%] 
     md:w-[20%]  rounded-full aspect-square my-1  object-cover  bg-[#ffffff57]"/>
 <div className="">
-
-            <h1 className="md:text-xl max-md:text-md font-semibold hFont ">{data?.Name} fd</h1>
+            <h1 className="md:text-xl max-md:text-md font-semibold hFont ">{data?.Name} </h1>
             <p className="text-xs font-bold">{data?.followers?.length} Followers 
             . {data?.posts} Posts 
             </p>

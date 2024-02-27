@@ -5,7 +5,8 @@ import InsertOperationAuth from "../Reducers/auth/AuthReducer";
 export  const Credits :Iauth = {
    login:{username:"",password:""},
    register:{
-       Name:"",bio:"",email:"",avatar:"",Topics:[],username:"",password:""
+       Name:"",bio:"",email:"",avatar:"",Topics:[],username:"",password:"",
+      
 }
 }
 export const AuthSlice = createSlice({

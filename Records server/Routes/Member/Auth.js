@@ -5,10 +5,11 @@ let { StatusCodes } = require("http-status-codes");
 const Member = require("../../models/Member");
 const Posts = require("../../models/Posts");
 const VerifyMember = require("../../middleware/VerifyMember");
+const Comments = require("../../models/Comments");
 let JWT_SECRET = process.env.jwt_Secret;
 //! Create
 app.post("/register", async (req, res) => {
-  let { Name, username, bio, email, password, avatar, Topics } = req.body;
+  let { Name, username, email, password,  Topics } = req.body;
   let verification = await Member.find({ username, isDeleted:false }).count();
   let emailExist = await Member.find({ email ,isDeleted:false }).count();
   if (verification !== 0||emailExist!==0) {
@@ -23,10 +24,10 @@ app.post("/register", async (req, res) => {
           Member.create({
             Name,
             username,
-            bio,
             email,
             password: hash,
-            avatar,
+            avatar:req.body?.avatar||"https://res.cloudinary.com/dz8a9sztc/image/upload/v1709049135/anonymous_dxx1ih.png",
+            bio:`Hello I am new  member ${Name} at Flexzon , I will share fruitfuil and interesting contents about many topics here , Follow me 🙂`,
             interests: Topics,
           })
             .then(async (user) => {
@@ -98,18 +99,15 @@ app.post("/verify", async (req, res) => {
         .catch((err) => {
           console.log(err);
           res
-            .status(StatusCodes.UNAUTHORIZED)
             .json({ success: false, msg: "Invalid credentials" });
         });
     } else {
       res
-        .status(StatusCodes.UNAUTHORIZED)
         .json({ success: false, msg: "Invalid token" });
     }
   } catch (error) {
     console.log(error);
     res
-      .status(StatusCodes.UNAUTHORIZED)
       .json({ success: false, msg: "Invalid credentials" });
   }
 });
@@ -266,7 +264,8 @@ app.put("/Delete", VerifyMember, async (req, res) => {
     let member = await Member.findById(req.AdminId);
     let verify = await bcrypt.compare(password, member.password);
     if (verify) {
-      await Member.findByIdAndUpdate({ _id: req.AdminId }, { isDeleted: true });
+      await Member.findByIdAndDelete({ _id: req.AdminId }, { isDeleted: true });
+      await Comments.deleteMany({ commentor: req.AdminId });
       await Posts.updateMany({ author: req.AdminId }, { isDeleted: true });
       res
         .status(StatusCodes.OK)

@@ -3,7 +3,8 @@ import { PayloadAction } from "@reduxjs/toolkit";
 interface IinsertdataPayload {
     purpose:string,
     Name?:string,bio?:string,email?:string,avatar?:string,Topics?:string[],
-    username?:string, password?:string
+       avatarBlob?:Blob;
+       username?:string, password?:string;
 }
 export const InsertOperationAuth = (
   state: Iauth,
@@ -16,7 +17,8 @@ if (payload.purpose ==="login") {
 }
 else{
     let {register}=state
-    let {Name,email,avatar,Topics,bio}=payload
+    let {Name,email,avatar,Topics,bio,avatarBlob}=payload
+    if (avatarBlob != undefined ) register.avatarBlob =avatarBlob
     if (payload.username != undefined ) register.username =payload.username
     if(payload.password  != undefined ) register.password =payload.password
     if (Name !==undefined) register.Name=Name

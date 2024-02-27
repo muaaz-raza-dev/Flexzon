@@ -2,7 +2,7 @@ const { ObjectId } = require("mongodb");
 const mongoose= require("mongoose");
 const Orderschema = new mongoose.Schema({
     username:{type:String,required:true,unique:true,text:true},
-    avatar:{type:String,},
+    avatar:{type:String,default:"https://res.cloudinary.com/dz8a9sztc/image/upload/v1709049135/anonymous_dxx1ih.png"},
     email:{type:String,required:true,unique:true},
     password:{type:String,required:true},
     Name:{type:String,required:true},
@@ -23,5 +23,7 @@ const Orderschema = new mongoose.Schema({
     OTP:Number,
     profileViews: [{viewer: {type: ObjectId, ref: "Member"}, date: {type: Date, default: Date.now}}],
     notificationSettings:{all:Boolean,follows:Boolean,comments:Boolean,posts:Boolean,likes:Boolean},
+    LastLogin:{type:String} ,// or 20mins ago ,etc
+    Active:{type:Boolean,default:false}
     });
 module.exports = mongoose.model("Member", Orderschema);

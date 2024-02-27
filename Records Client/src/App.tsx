@@ -1,6 +1,6 @@
 import { BrowserRouter } from 'react-router-dom'
 import './App.css'
-import RecordsFile from './RecordsFile'
+import RecordsFile from './FlexzonFile'
 import { QueryClientProvider ,QueryClient } from 'react-query'
 const queryClient = new QueryClient()
 function App() {

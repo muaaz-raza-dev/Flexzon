@@ -10,6 +10,9 @@ import { CommentSliced } from "./Slices/CommentSlice";
 import { BlogState } from "./Slices/BlogSlice";
 import { SettingR } from "./Slices/SettingsSlice";
 import { NotificationState } from "./Slices/Notifications/NotifcationSlice";
+import { MessagingState } from "./Slices/Messaging/MessagingSlice";
+import { ChatState } from "./Slices/Messaging/EachChatSlice";
+import { invitationState } from "./Slices/InvitationSlice";
 
 
 export const Store = configureStore({
@@ -19,7 +22,10 @@ export const Store = configureStore({
     comment:CommentSliced,
     Blog:BlogState,
     settings:SettingR,
-    notifications:NotificationState
+    notifications:NotificationState,
+    messaging:MessagingState,
+    chat:ChatState,
+    Invitation:invitationState
     },
     middleware: (getDefaultMiddleware) => getDefaultMiddleware({ serializableCheck: false}),
 });

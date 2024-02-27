@@ -1,7 +1,7 @@
-import { FC, ReactNode, useEffect } from "react";
+import { FC, ReactNode } from "react";
 import { useAppDispatch, useAppSelector } from "../ReduxHooks";
 
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import { insertion } from "../Slices/LandingSlice";
 
 export function LoginAskModal() {
@@ -45,14 +45,12 @@ md:w-[40vw] max-md:w-[80vw]  bg-white z-[999]  flex-col gap-y-6"
 
 const CreditsGuard: FC<{ children: ReactNode }> = ({ children }) => {
   let Credits = useAppSelector((state) => state.credits);
-  let navigate = useNavigate();
-  useEffect(() => {
-    if (!Credits.isLogined) {
-      navigate("/auth/login");
-    }
-  }, [Credits]);
+
   if (Credits.isLogined) {
     return <main>{children}</main>;
+  }
+  else{
+   return <Navigate to={"/auth/login"}/>
   }
 };
 

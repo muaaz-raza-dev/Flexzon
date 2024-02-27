@@ -8,7 +8,7 @@ const Navbar = () => {
   let navigate= useNavigate()
   let data=useAppSelector(state=>state.credits)
   return (
-    <nav className="w-screen z-50 md:h-[4rem] max-md:h-[5rem] bg-[var(--bg)] md:px-8 max-md:px-4 border-b border-gray-300 flex justify-between">
+    <nav className="w-screen z-50 md:h-[6dvh] max-md:h-[8dvh] bg-[var(--bg)] md:px-8 max-md:px-4 border-b border-gray-300 flex justify-between">
         
       <section className="flex   w-1/2 p-2 h-full items-center object-contain">
     <img src="/images/Records2.png" className="aspect-square p-1 object-contain rounded  cursor-pointer h-full" alt="Records" onClick={()=>navigate("/")}/>
@@ -18,7 +18,7 @@ const Navbar = () => {
   }
       </section>
 
-      <section className="flex items-center  gap-x-8 w-1/2 justify-end ">
+      <section className="flex items-center  gap-x-3 w-1/2 justify-end ">
     {data.isLogined?
 
  <Logined/> :

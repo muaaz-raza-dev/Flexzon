@@ -44,7 +44,7 @@ state.success?
 
 }
         </div>
-    <input className="block w-full p-4 text-lg rounded border-[var(--secondary)] border-2 focus:border-black placeholder:text-gray-500 " type="text" name="username" id="username"  onChange={(e)=>{setusername(e.target.value) 
+    <input className="block w-full p-4 text-lg rounded border-[var(--primary)] border-2 focus:border-black placeholder:text-gray-500 " type="text" name="username" id="username"  onChange={(e)=>{setusername(e.target.value) 
 setState({success:false,loading:true})
 }
 } placeholder="username"/>

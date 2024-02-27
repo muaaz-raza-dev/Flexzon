@@ -6,6 +6,7 @@ import {
   PenBoxIcon,
   BookText,
   Bell,
+  MessageSquareIcon,
 } from "lucide-react";
 import {
   DropdownMenu,
@@ -21,7 +22,7 @@ import {
 
 } from "@/components/ui/command";
 import { KeyboardEvent, useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "@/app/ReduxHooks";
 import { SearchInsert } from "@/app/Slices/SearchSlice";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
@@ -35,9 +36,14 @@ const LoginedOptions = () => {
     <>
       <DropdownMenu>
         <DropdownMenuTrigger className="h-full overflow-hidden  focus-visible:ring-0 object-center md:py-1 max-md:py-3 focus-within:ring-0 outline-0 active:ring-0 ring-0">
-          <img src={info.Info.avatar? info?.Info?.avatar:"/images/muaaz.png"} className="aspect-square rounded-full h-[90%] border border-black" />
+          <img src={info.Info.avatar? info?.Info?.avatar:"/images/muaaz.png"} className="aspect-square rounded-full h-[90%] border border-[var(--primary)]" />
         </DropdownMenuTrigger>
         <DropdownMenuContent className="mx-2 z-[600]">
+        <Link to={"/messaging"} className=" transition-colors cursor-pointer font-normal flex items-center gap-x-1 ">
+            <DropdownMenuItem  className="flex cursor-pointer  gap-x-2 items-center">
+          <MessageSquareIcon size={16} /> Messaging 
+          </DropdownMenuItem>
+        </Link>
             <Link to={`/user/${info.Info._id}`}
                className="cursor-pointer w-full"
              >
@@ -59,6 +65,7 @@ const LoginedOptions = () => {
             <DropdownMenuItem  className="flex cursor-pointer  gap-x-2 items-center">
               <PenBoxIcon size={16} /> Write
             </DropdownMenuItem>
+            
           </Link>
          
         </DropdownMenuContent>
@@ -69,19 +76,28 @@ const LoginedOptions = () => {
 
 const Logined = () => {
   let {notifications}=useAppSelector(state=>state.notifications)
+  let {newMessages}=useAppSelector(state=>state.messaging)
+  let route  = useLocation().pathname
   return (
     <>
-      <ul className="list-none flex gap-x-5  items-center">
-      <Link to={"/notifications"} className="relative text-gray-600 hover:text-black transition-colors cursor-pointer font-normal flex items-center center gap-x-1 max-sm:hidden">
+      <ul className="list-none flex gap-x-2  items-center">
+      <Link to={"/notifications"} className={`relative text-gray-600 p-2 rounded hover:text-[var(--primary)] transition-colors cursor-pointer font-normal flex items-center center gap-x-1 max-sm:hidden  ${route.split("/")[1]=="notifications"&&"bg-[var(--secondary)] text-white hover:text-white"}`}>
         {notifications.filter(elm=>elm.read==false).length!==0&&
-          <p className="absolute -top-2  -right-1.5 bg-black rounded-full w-4 center aspect-square  text-xs text-white ">{notifications.filter(elm=>elm.read==false).length}</p>
+          <p className="absolute top-0  -right-1 bg-[var(--secondary)] rounded-full w-4 center aspect-square  text-xs text-white ">{notifications.filter(elm=>elm.read==false).length}</p>
         }
           <Bell size={20} />
         </Link>
+        <Link to={"/messaging"} className={`relative text-gray-600 hover:text-[var(--secondary)] p-2 rounded transition-colors cursor-pointer font-normal flex items-center gap-x-1 max-sm:hidden ${route.split("/")[1]=="messaging"&&"bg-[var(--secondary)] text-white hover:text-white"}`}>
+        {route.split("/")[1]!=="messaging"&&newMessages!==0&&
+          <p className="absolute top-0  -right-1 bg-[var(--secondary)] rounded-full w-4 center aspect-square  text-xs text-white ">{newMessages}</p>
+        }
+          <MessageSquareIcon size={20} />
+        </Link>
         
-        <Link to={"/write"} className="text-gray-600 hover:text-black transition-colors cursor-pointer font-normal flex items-center gap-x-1 max-sm:hidden">
+        <Link to={"/write"} className={`text-gray-600 hover:text-[var(--secondary)] transition-colors cursor-pointer font-normal flex items-center gap-x-1 p-2 rounded  ${route.split("/")[1]=="write"&&"bg-[var(--secondary)] text-white hover:text-white"}`}>
           <PenBox size={20} />{" "}
         </Link>
+       
       </ul>
       <LoginedOptions />
     </>

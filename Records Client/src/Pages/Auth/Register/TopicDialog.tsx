@@ -13,9 +13,11 @@ import { Label } from "@/components/ui/label"
 import { FC, useState } from "react"
 import { toast } from "react-hot-toast"
 import  Cookies from "js-cookie"
-import { useNavigate } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { LightLoader } from "@/Essentials/Loader"
 import { insertion } from "@/app/Slices/LandingSlice"
+import UploadImage from "@/app/middlewares/functions/ImageUploader"
+import { useToast } from "@/components/ui/use-toast"
   interface TopicDialog {
     title:string,
     loading:boolean,
@@ -23,18 +25,26 @@ import { insertion } from "@/app/Slices/LandingSlice"
 const TopicDialog:FC<TopicDialog> = ({title,loading}) => {
   let data = useAppSelector(state=>state.landing)
   let Auth = useAppSelector(state=>state.auth)
+  let {toast: toastShadcn,}  =useToast()
   let navigate= useNavigate()
   const [Loading, setLoading] = useState<boolean>(false);
   let dispatch = useAppDispatch()
-  let RegisterationSumbit = ()=>{
+  let RegisterationSumbit = async()=>{
     setLoading(true)
-    Registeration(Auth.register).then(data=>{
-      if (data.success===true) {
+   if (Auth.register.avatarBlob ) {
+     await UploadImage(Auth.register.avatarBlob).then(data=>{
+       dispatch(AuthInsertion({purpose:"register", avatar:data.url}))
+       Registeration(Auth.register).then(data=>{
+         if (data.success===true) {
         toast.success("Logined to your account")
+        toastShadcn({    title: "Successfully created your profile .",
+          description: "Now you can personlaize your email , social media handles and more...",
+          action: <Link to={"/profile/settings"} >Go to settings</Link>,})
         Cookies.set("Records_session",data.token,{expires:1.296e+9})
         dispatch(CreditsInsertion({isLogined:true,Info:{...Credits.Info,...data.payload}}))
         dispatch(insertion({tabs:data.payload.interests}))
-          navigate("/")
+        navigate("/")
+        dispatch(AuthInsertion({purpose:"register", Name:"",bio:"",email:"",avatar:"",Topics:[],username:"",password:"",}))
         }
         else{
           toast.error(data.msg)
@@ -44,6 +54,34 @@ const TopicDialog:FC<TopicDialog> = ({title,loading}) => {
       }).finally(()=>{
         setLoading(false)
       })
+    }).catch(()=>{
+      toast.error("Failed to upload, Try again!")
+    })
+    }
+    else{
+      Registeration(Auth.register).then(data=>{
+        if (data.success===true) {
+       toast.success("Logined to your account")
+       toastShadcn({    title: "Successfully created your profile .",
+       description: "Now you can personlaize your email , social media handles and more...",
+       action: <Link to={"/profile/settings"} >Go to settings</Link>,})
+      
+       Cookies.set("Records_session",data.token,{expires:1.296e+9})
+       dispatch(CreditsInsertion({isLogined:true,Info:{...Credits.Info,...data.payload}}))
+       dispatch(insertion({tabs:data.payload.interests}))
+       navigate("/")
+       dispatch(AuthInsertion({purpose:"register", Name:"",bio:"",email:"",avatar:"",Topics:[],username:"",password:"",}))
+       }
+       else{
+         toast.error(data.msg)
+       }
+     }).catch(err=>{
+       toast.error(err.response.data.msg)
+     }).finally(()=>{
+       setLoading(false)
+       
+     })
+    }
 
         }
   return (

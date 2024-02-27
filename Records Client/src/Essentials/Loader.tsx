@@ -62,8 +62,6 @@ bg-opacity="0"
 speed="2" 
 color="white" 
 ></l-ring>
-    
-
   </div>
 )
 }

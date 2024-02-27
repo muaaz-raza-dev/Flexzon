@@ -91,14 +91,7 @@
   }
 }
  
-@layer base {
-  * {
-    @apply border-border;
-  }
-  body {
-    @apply bg-background text-foreground;
-  }
-}
+
 
 
 
@@ -249,4 +242,18 @@ box-shadow: inset -1px -15px 37px -6px rgba(217,217,217,1);
 }
 .CreatorsShadow{
   box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+}
+.ChatBgL{
+  background: url("/public/images/chatbg.jpg"),  var(--secondary);
+  object-position: center;
+  image-resolution:100%;
+  background-position: center;
+  background-blend-mode:multiply;
+}
+.ChatBg{
+  background: url("/public/images/chatbg.jpg"),  #0000002f;
+  object-position: center;
+  image-resolution:100%;
+  background-position: center;
+  background-blend-mode:darken;
 }
