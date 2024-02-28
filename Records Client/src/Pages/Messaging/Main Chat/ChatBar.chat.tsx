@@ -13,9 +13,6 @@ const ChatBar = () => {
   let {mutate ,isLoading}=useSendMessage()
   let socket = useAppSelector(state=>state.messaging.socket)
   let chatId = useAppSelector(state=>state.chat.chatId)
-  useEffect(() => {
-    debounced(Input)
-  }, [Input]);
   const debounced = useDebouncedCallback(
     // function
     ()=>{
@@ -24,6 +21,9 @@ const ChatBar = () => {
     // delay in ms
     1500
   );
+  useEffect(() => {
+    debounced(Input)
+  }, [Input]);
 
   let SendMessage = ()=>{
 if (Input!=="") {
