@@ -1,4 +1,4 @@
-import ChatBar from "./ChatBar..chat"
+import ChatBar from "./ChatBar.chat"
 import Chats from "./Chats.chat"
 import Headerchat from "./Header.chat"
 import { useParams } from "react-router-dom"
