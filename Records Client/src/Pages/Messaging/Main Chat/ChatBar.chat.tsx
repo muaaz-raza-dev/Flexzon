@@ -13,7 +13,7 @@ const ChatBar = () => {
   let {mutate ,isLoading}=useSendMessage()
   let socket = useAppSelector(state=>state.messaging.socket)
   let chatId = useAppSelector(state=>state.chat.chatId)
-  const debounced = useDebouncedCallback(
+  const debounced:any = useDebouncedCallback(
     // function
     ()=>{
         socket.emit("Typing",{Typing:false,chatId})
