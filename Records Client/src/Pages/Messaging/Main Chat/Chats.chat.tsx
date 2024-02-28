@@ -2,7 +2,7 @@ import { SmallLoader } from "@/Essentials/Loader";
 import { useAppSelector } from "@/app/ReduxHooks";
 import { IeachChat } from "@/app/Types/Ichat";
 import moment from "moment";
-import { LegacyRef, useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import useReadMessages from "../Hooks/Chat/useReadMessages";
 import { useParams } from "react-router-dom";
@@ -12,7 +12,7 @@ import TypingLoader from "@/Essentials/TypingLoader";
 import ChatComments from "./ChatComments.chat";
 
 const Chats = () => {
-    let ref:LegacyRef<HTMLDivElement> = useRef(null)
+    let ref = useRef<HTMLDivElement>(null)
     let {id}=useParams()
     let chats = useAppSelector(state=>state.chat)
     let chatLength = NestedLengthCalculator(Object.values(chats.Chats))

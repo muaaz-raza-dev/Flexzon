@@ -1,20 +1,20 @@
 
 import { SmallLoader } from "@/Essentials/Loader";
 import { useAppSelector } from "@/app/ReduxHooks";
-import { IeachChat } from "@/app/Types/Ichat";
 import moment from "moment";
-import { LegacyRef, useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { useParams } from "react-router-dom";
-import { Lock } from "lucide-react";
+import useReadMessages from "../../Hooks/Chat/useReadMessages";
+import { IeachInviteChat } from "@/app/Types/IInvitation";
 
 
 const InvitedChats = () => {
-    let ref:LegacyRef<HTMLDivElement> = useRef(null)
+    let ref = useRef<any>()
     let {id}=useParams()
     let chats = useAppSelector(state=>state.Invitation)
     let chatLength = chats.Chats.length
-    // let {mutate}=useReadMessages(id??"")
+    let {mutate}=useReadMessages(id??"")
     useEffect(() => {
         ref.current&& ref.current.scroll({top:ref.current.scrollHeight})
     }, [chats.Chats]);
@@ -53,7 +53,7 @@ const InvitedChats = () => {
     </div>
   )
 }
-const EachChatBlock =({data}:{data:IeachChat})=>{
+const EachChatBlock =({data}:{data:IeachInviteChat})=>{
     return (
       
     <div className={`max-w-[80%] flex gap-x-2 ${data.sent?"self-end bg-[var(--primary)]":"self-start bg-[var(--secondary)]"} w-max rounded-full text-white px-3 py-2 `}>
@@ -66,12 +66,6 @@ const EachChatBlock =({data}:{data:IeachChat})=>{
     )
 }
 
-const InvitedChats = () => {
-  return (
-    <div>
-      
-    </div>
-  )
-}
+
 
 export default InvitedChats

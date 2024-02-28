@@ -18,7 +18,7 @@ ChatId:{ //Chat Details
     Chatters:{
         username:string;
         avatar:string,
-        Active:string
+        Active:boolean
         _id:string //chatter's id
     }[]
     _id: string //chat_id

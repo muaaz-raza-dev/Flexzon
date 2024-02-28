@@ -9,7 +9,8 @@ export  const InvitationState :IinvitationState = {
     InvitedBy: {
         username: "",
         avatar: "",
-        _id: ""
+        _id: "",
+        Active:""
     },
     InvitedAt: "",
     _id: ""},

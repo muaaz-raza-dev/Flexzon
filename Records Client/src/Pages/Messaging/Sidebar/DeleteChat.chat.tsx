@@ -10,9 +10,8 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog"
-import useDeleteConversation from "../Hooks/Chat/useDeleteConversation"
-const DeleteChat = ({id}:{id:string}) => {
-  let {mutate} = useDeleteConversation()
+const DeleteChat = () => {
+
   return (
     <AlertDialog>
     <AlertDialogTrigger  className="bg-[var(--primary)] w-full  h-full center gap-2 text-red-400 text-x" >

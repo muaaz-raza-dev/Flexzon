@@ -1,7 +1,7 @@
 import moment from "moment"
 import { SmallLoader } from "@/Essentials/Loader";
 import { useAppSelector } from "@/app/ReduxHooks";
-import { LegacyRef, useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import NestedLengthCalculator from "../../Hooks/NestedLengthCalculator";
 import TypingLoader from "@/Essentials/TypingLoader";
@@ -11,7 +11,7 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/comp
 import { IeachInviteChat } from "@/app/Types/IInvitation";
 import ChatComment from "./Comment/ChatComents.chat";
 const InvitedMainChat = () => {
-    let ref:LegacyRef<HTMLDivElement> = useRef(null)
+    let ref = useRef<any>(null)
     let chats = useAppSelector(state=>state.Invitation)
     let chatLength = NestedLengthCalculator(Object.values(chats.Chats))
     let {mutate}=useReadInvitedMessages()

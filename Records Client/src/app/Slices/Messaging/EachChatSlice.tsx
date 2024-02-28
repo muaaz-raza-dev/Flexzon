@@ -9,7 +9,7 @@ export  const InitChatState :IchatsState = {
     Invited:[],
     opponentOnline:false,
     Typing:false,
-    user:{username:"",avatar:"",_id:"",LastLogin:""},
+    user:{username:"",avatar:"",_id:"",LastLogin:"",Active:false},
 }
 export const Post = createSlice({
     name:"Messaging State",

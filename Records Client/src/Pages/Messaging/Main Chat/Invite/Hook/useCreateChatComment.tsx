@@ -11,10 +11,11 @@ const useCreateChatComment = (CommentId?:string,setInputToggle?:any) => {
       mutationFn: ({ChatId,MessageId,Comment}:{ChatId:string,MessageId:string,Comment:string,}) => CreateChatComment(ChatId,MessageId,Comment,CommentId),
       onSuccess({payload}) {
         setInputToggle(false)
-        dispatch(InvitationStateInsertion({Chats:
+        dispatch(InvitationStateInsertion({
+          Chats:
         Chats.map(elm=>{
           if (elm._id ==payload.MessageId) {
-            return {...elm,Commented:true,Comments:{_id:payload._id,Comment:payload.Comment}}
+            return {...elm,Commented:true,Comment:{_id:payload._id,Comment:payload.Comment}}
           }
           else return elm
         })

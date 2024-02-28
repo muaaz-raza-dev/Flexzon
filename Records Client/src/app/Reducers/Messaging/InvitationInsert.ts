@@ -1,11 +1,10 @@
-import { IinvitationState } from "@/app/Types/IInvitation";
-import { IeachChat,} from "@/app/Types/Ichat";
+import { IeachInviteChat, IinvitationState } from "@/app/Types/IInvitation";
 import { Iinvites } from "@/app/Types/Imessaging";
 import { PayloadAction } from "@reduxjs/toolkit/react";
 
 interface IInviteAction{
     Invitation?:Iinvites
-    Chats?:IeachChat[];
+    Chats?:IeachInviteChat[];
     count?:number;
     chatId?:string;
     InvitationId?:string

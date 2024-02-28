@@ -1,7 +1,7 @@
 import { useAppDispatch, useAppSelector } from "@/app/ReduxHooks";
 import { AuthInsertion } from "@/app/Slices/AuthSlice";
 import { Avatar, AvatarImage } from "@/components/ui/avatar"
-import { LegacyRef, useRef, useState } from "react"
+import { useRef, useState } from "react"
 interface IfileType{
 uri:string;
 file?:Blob;
@@ -11,12 +11,12 @@ const AvatarUpload = () => {
     let data=useAppSelector(state=>state.auth)
     const [File, setFile] = useState<IfileType>({uri:data.register.avatar||"",loading:false})
     let dispatch = useAppDispatch()
-    let ref:LegacyRef<HTMLInputElement> = useRef(null)
+    let ref:any = useRef<any>()
   return (
       <div className={`pb-2 pt-4  w-full p-2 px-6 text-lg rounded border-[var(--primary)] center  focus:border-black flex items-center justify-between ${File.loading===true&&"animate-pulse"}`}>
         <div className=" relative">
 
-                <Avatar onClick={()=>ref.current?.click()}  className="w-28 h-28 aspect-sqaure text-xs bg-gray-200 flex items-center justify-center text-white object-contain tracking-tighter border-gray-100 border-2 ">
+                <Avatar onClick={()=>ref?.current?.click()}  className="w-28 h-28 aspect-sqaure text-xs bg-gray-200 flex items-center justify-center text-white object-contain tracking-tighter border-gray-100 border-2 ">
                     <AvatarImage src={File.uri||"/images/anonymous.png"} className=" object-cover"  />
                     {/* <p>Profile picture</p> */}
                     </Avatar>
