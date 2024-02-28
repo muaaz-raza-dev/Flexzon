@@ -27,6 +27,7 @@
     border-bottom: 1px solid red;
   }
 }
+
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -149,8 +150,8 @@ html{
   background-color: var(--primary);
 }
 .Headerlp::-webkit-scrollbar{
-  width: 0.2rem;
-  height: 0.2rem;
+  width: 0rem;
+  height: 0rem;
   border-radius: 20px;
   background-color: var(--light);
   
@@ -256,4 +257,16 @@ box-shadow: inset -1px -15px 37px -6px rgba(217,217,217,1);
   image-resolution:100%;
   background-position: center;
   background-blend-mode:darken;
+}
+
+
+.HeaderRShadow{
+  -webkit-box-shadow: -8px 2px 11px -5px rgba(0,0,0,0.45);
+  -moz-box-shadow: -8px 2px 11px -5px rgba(0,0,0,0.45);
+  box-shadow: -8px 2px 11px -5px rgba(0,0,0,0.45);
+}
+.HeaderLShadow{
+  -webkit-box-shadow: 11px 2px 4px -8px rgba(0,0,0,0.45);
+  -moz-box-shadow: 11px 2px 4px -8px rgba(0,0,0,0.45);
+  box-shadow: 11px 2px 4px -8px rgba(0,0,0,0.45);
 }
