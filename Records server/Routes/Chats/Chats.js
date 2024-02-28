@@ -47,8 +47,8 @@ router.post("/InitializeChat",VerifyMember,async(req,res)=>{
 let {member2}= req.body
 let chat =await Chats.find({Chatters:[req.AdminId,member2]})
 if (chat.length==0){
-await Chats.create({Chatters:[req.AdminId,member2]})
-res.json({ success: true, message: "Chat initialized successfully." });
+let newChat = await Chats.create({Chatters:[req.AdminId,member2]})
+res.json({ success: true, message: "Chat initialized successfully." ,payload:newChat});
 }
 else{
 res.json({ success: true, message: "already in your chatlist" });

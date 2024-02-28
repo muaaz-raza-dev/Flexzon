@@ -10,7 +10,7 @@ const useInitializeChat = () => {
     mutationKey: "adding to chat",
     mutationFn: (member2: string) => InitializeChat(member2),
     onSuccess(data) {
-      dispatch(MessagingInsertion({ chats: [...chats,data.payload],Searched:[] }));
+      dispatch(MessagingInsertion({SearchDialog:{Open:false,purpose:"search"}, chats: [...chats,data.payload],Searched:[]}));
     },
   });
   return { ...mutationState };
