@@ -25,7 +25,7 @@ export interface Iuser{
 export interface IinvitedUserState {InvitedMember:Iuser,_id:string}
 export interface IchatsState{
 user:Iuser
-Chats:IeachChat[];
+Chats:{[key:string]:IeachChat[]};
 Invited:IinvitedUserState[]
 count:number;
 chatId:string;

@@ -3,7 +3,7 @@ import { PayloadAction } from "@reduxjs/toolkit/react";
 
 interface IChatAction{
     user?:Iuser
-    Chats?:IeachChat[];
+    Chats?:{[key:string]:IeachChat[]};
     count?:number;
     chatId?:string;
     totalChats?:number;
@@ -18,7 +18,7 @@ if (payload.user!==undefined) state.user=payload.user
 if (payload.Typing!==undefined) state.Typing=payload.Typing
 
 if (payload.Invited!==undefined) state.Invited=payload.Invited
-if (payload.newMessage!==undefined) state.Chats.push(payload.newMessage)
+if (payload.newMessage!==undefined) state.Chats["Today"].push(payload.newMessage)
 if (payload.opponentOnline!==undefined) state.opponentOnline=payload.opponentOnline
 if (payload.Chats!==undefined) state.Chats=payload.Chats
 if (payload.count!==undefined) state.count=payload.count

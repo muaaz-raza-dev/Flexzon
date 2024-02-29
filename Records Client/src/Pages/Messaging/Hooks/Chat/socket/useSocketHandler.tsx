@@ -1,7 +1,7 @@
 import { useAppDispatch, useAppSelector } from "@/app/ReduxHooks";
 import { ChatInsertion } from "@/app/Slices/Messaging/EachChatSlice";
 import { useEffect } from "react";
-import notificationSound from "../../../../../../public/audio/Notification.mp3"
+
 import useGetAllChats from "@/Pages/Messaging/Sidebar/useGetAllChats";
 import ReturnAllChatsId from "@/Queryfunctions/Hooks/ReturnAllChatsId";
 const useSocketHandler = () => {
@@ -13,7 +13,7 @@ const useSocketHandler = () => {
     let Id =useAppSelector(state=>state.credits.Info._id)
     let isLogined =useAppSelector(state=>state.credits.isLogined)
     useEffect(() => {
-    let audio = new Audio(notificationSound)
+    let audio = new Audio()
   socket.on("message",(data)=>{
     dispatch(ChatInsertion({newMessage:{...data,sent:data.Sender==Id},Typing:false} ))
     audio.play()

@@ -2,6 +2,7 @@ import GetChatMessages from "@/Queryfunctions/Messaging/GetChatMessage";
 import { useAppDispatch, useAppSelector } from "@/app/ReduxHooks";
 import { ChatInsertion } from "@/app/Slices/Messaging/EachChatSlice";
 import { useMutation } from "react-query";
+import OptimizedChat from "./OptimizedChat";
 const useReadMessages = (chatId: string) => {
   let dispatch = useAppDispatch();
   let chats = useAppSelector((state) => state.chat.Chats);
@@ -12,7 +13,7 @@ const useReadMessages = (chatId: string) => {
     onSuccess(resp) {
       dispatch(
         ChatInsertion({
-          Chats: [ ...chats, ...resp.payload ].length<data.totalChats ? [ ...chats, ...resp.payload ] : resp.payload,
+          Chats: resp.count>1 ? OptimizedChat(resp.payload,chats) : resp.payload,
           count: resp.count,
           Invited:resp.Invited,
           user: resp.user,

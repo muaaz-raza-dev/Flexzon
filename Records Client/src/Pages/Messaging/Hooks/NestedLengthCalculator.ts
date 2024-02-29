@@ -1,7 +1,5 @@
-
-
-const NestedLengthCalculator = (arr:any[]) => {
-return length = arr.flat(Infinity).length
+const NestedLengthCalculator = (object:{[key:string]:any[]}) => {
+return length = Object.values(object).flat(Infinity).length
 }
 
 export default NestedLengthCalculator

@@ -17,15 +17,15 @@
 .BFont{
   font-family: 'Patua One',sans-serif;
 }
+.ql-toolbar {
+  border-bottom: 1px solid red;
+}
+.ql-container {
+  border-left: 1px solid red;
+  border-right: 1px solid red;
+  border-bottom: 1px solid red;
+}
 .quill.ql-error {
-  .ql-toolbar {
-    border-bottom: 1px solid red;
-  }
-  .ql-container {
-    border-left: 1px solid red;
-    border-right: 1px solid red;
-    border-bottom: 1px solid red;
-  }
 }
 
 @layer base {
@@ -259,6 +259,12 @@ box-shadow: inset -1px -15px 37px -6px rgba(217,217,217,1);
   background-blend-mode:darken;
 }
 
+.ChatBg::-webkit-scrollbar{
+  background-color: transparent;
+}
+.ChatBg::-webkit-scrollbar-thumb{
+  background-color: transparent;
+}
 
 .HeaderRShadow{
   -webkit-box-shadow: -8px 2px 11px -5px rgba(0,0,0,0.45);

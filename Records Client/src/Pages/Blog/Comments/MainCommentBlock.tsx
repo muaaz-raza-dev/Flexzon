@@ -85,7 +85,7 @@ const MainCommentBlock = () => {
   return (
     <main className='flex flex-col gap-y-4 '>
       <header className='flex items-center gap-x-2 '>Most Recent <ChevronDown size={20}/> </header>
-      <Separator className='shadow-lg sha'/>
+      <Separator className='shadow-lg '/>
     
       <InfiniteScroll
       className="flex flex-col gap-y-4"

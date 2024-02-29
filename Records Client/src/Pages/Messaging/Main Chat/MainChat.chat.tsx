@@ -14,9 +14,11 @@ const MainChat = () => {
   return (
     <div className=" w-full  h-full flex flex-col justify-between">
           <Headerchat/>
-          {
-            isLoading?<SmallLoader/>:<Chats/>
-          }
+         {isLoading&&   <div className="ChatBg flex">
+              <SmallLoader/>
+            
+            </div>}
+              <Chats/>
       <ChatBar/>
     </div>
   )

@@ -6,6 +6,7 @@ const Message = require('../../models/Message');
 const MessageAnalyzer = require('../../middleware/MessageAnalyzer');
 const {mongoose}=require("../../db");
 const Invites = require('../../models/Invites');
+const  ChatRead  = require('./ChatRead.controller');
 const router = express.Router();
 // Define routes here
 router.post("/search/:username",VerifyMember,async(req,res)=>{
@@ -22,8 +23,7 @@ router.post("/search/:username",VerifyMember,async(req,res)=>{
         await Promise.all(Members.map(async elm => {
             if(req.body.chatId){
                 let exist = await Invites.findOne({InvitedMember:elm._id,ChatId:req.body.chatId})
-                console.log(exist)
-                if (!exist) {
+                 if (!exist) {
                     console.log("not exist");
                     searchedusers.push({...elm._doc});
                 }
@@ -73,26 +73,7 @@ router.get("/AllChats",VerifyMember,async(req,res)=>{
 })
 
 
-router.post("/chat",VerifyMember,async(req,res)=>{
-let {chatId,count}=req.body
-let limit = 100
-try {
-    let Totalchats = await Message.countDocuments({chatId})
-    let chats = await Message.find({chatId}).populate({path:"Comments",populate:{path:"UserId",select:"username avatar LastLogin Active"}}).sort({delivered:-1}).limit(limit).skip(count*limit)
-    let chatResult = MessageAnalyzer(chats,req.AdminId,false)
-    let user =await Chats.findById(chatId)
-    let userId= user.Chatters.find(Id=>{
- return Id.toString()!=req.AdminId.toString()
-})
-      await Message.updateMany({chatId,}, {$addToSet: {read: req.AdminId.toString()}});
-    user =await Member.findById(userId).select("username avatar LastLogin Active")
-    const Invited = await Invites.find({ChatId:chatId,Status:"Active"}).populate("InvitedMember")
-    res.json({success:true,payload:chatResult,user, count:Totalchats>(count*limit)?count+1:count,Invited, total:Totalchats, })
-}
-catch (error) {
-    return res.status(500).json({ success: false, message: "Failed to retrieve chats", error: error.message });
-}
-})
+
 
 
 
@@ -146,3 +127,5 @@ router.post("/deleteConversations",VerifyMember,async(req,res)=>{
     }
 })
 module.exports = router;
+
+router.post("/chat",VerifyMember,ChatRead)
