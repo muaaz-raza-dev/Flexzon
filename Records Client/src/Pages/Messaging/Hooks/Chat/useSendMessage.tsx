@@ -13,7 +13,7 @@ const useSendMessage = () => {
     mutationKey:"sending message",
     mutationFn:(content:string)=>SendMessage(content,data.chatId,data.user._id),
  onSuccess(data){
-dispatch(ChatInsertion({Chats:[...chats,data.payload ]} ))
+dispatch(ChatInsertion({Chats:{Today:[...chats['Today'],data.payload ]}} ))
 refetch()
 socket.emit("SendMessage",data.payload  )
  }

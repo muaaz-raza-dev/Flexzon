@@ -3,7 +3,6 @@ import { SmallLoader } from "@/Essentials/Loader";
 import { useAppSelector } from "@/app/ReduxHooks";
 import { useEffect, useRef } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
-import NestedLengthCalculator from "../../Hooks/NestedLengthCalculator";
 import TypingLoader from "@/Essentials/TypingLoader";
 import useReadInvitedMessages from "./Hook/useReadInvitedMessage";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
@@ -13,7 +12,7 @@ import ChatComment from "./Comment/ChatComents.chat";
 const InvitedMainChat = () => {
     let ref = useRef<any>(null)
     let chats = useAppSelector(state=>state.Invitation)
-    let chatLength = NestedLengthCalculator(Object.values(chats.Chats))
+    let chatLength = chats.Chats.length
     let {mutate}=useReadInvitedMessages()
     let Typing = useAppSelector(state=>state.chat.Typing)
     useEffect(() => {

@@ -13,7 +13,7 @@ const useClearChat = () => {
         onSuccess() {
           dispatch(
             ChatInsertion({
-              Chats:  [  ] ,
+              Chats:  {} ,
               count: 0,
               totalChats: 0,
             })

@@ -2,7 +2,7 @@ import ChatInsert from "@/app/Reducers/Messaging/EachChatReducer"
 import { IchatsState } from "@/app/Types/Ichat"
 import {createSlice} from "@reduxjs/toolkit"
 export  const InitChatState :IchatsState = {
-    Chats:[],
+    Chats:{},
     chatId:"",
     totalChats:0,
     count:0,
