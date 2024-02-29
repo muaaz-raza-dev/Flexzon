@@ -10,10 +10,13 @@ import useSocketHandler from "./Pages/Messaging/Hooks/Chat/socket/useSocketHandl
 const LandingFile = lazy(() => import("./Pages/Landing page/LandingFile"));
 const ProfileFile = lazy(() => import("./Pages/Profile/ProfileFile"));
 const BlogFile = lazy(() => import("./Pages/Blog/BlogFile"));
+
+import { SpeedInsights } from "@vercel/speed-insights/react"
 const SearchedPageFile = lazy(
   () => import("./Pages/Searched/SearchedPageFile")
 );
 import { Toaster as ToastShdcn } from "@/components/ui/toaster"
+import { Analytics } from "@vercel/analytics/react";
 
 const AuthFile = lazy(() => import("./Pages/Auth/AuthFile"));
 const WriteFile = lazy(() => import("./Pages/Write/WriteFile"));
@@ -28,6 +31,8 @@ const FlexzonRoutes = () => {
     <main>
     <Navbar />
     <Toaster />
+    <Analytics/>  {/* vercel Analytics */}
+    <SpeedInsights/> {/* vercel Speed insights */}
     <ToastShdcn/>
     {state.ValidModal === true && <LoginAskModal />}
     <Routes>
