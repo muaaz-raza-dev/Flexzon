@@ -1,13 +1,11 @@
-
-import { useEffect, useState } from "react";
+import { Suspense, lazy, useEffect, useState } from "react";
 import { FetchStarter } from "@/Queryfunctions/Hooks/useFetchStarter";
 import { insertion } from "./app/Slices/LandingSlice";
 import { RecordsLoader } from "./Essentials/Loader";
 import { useAppDispatch, useAppSelector } from "./app/ReduxHooks";
 import { useMutation } from "react-query";
 import useValidate from "./Queryfunctions/Hooks/useValidate";
-import FlexzonRoutes from "./FlexzonRoutes";
-
+const FlexzonRoutes = lazy(() => import("./FlexzonRoutes"));
 
 const RecordsFile = () => {
   let state = useAppSelector((state) => state.landing);
@@ -43,7 +41,9 @@ const RecordsFile = () => {
   } else {
     if (!Loading) {
       return (
+        <Suspense fallback={<RecordsLoader/>}>
         <FlexzonRoutes/>
+        </Suspense>
       );
     } else {
       return <RecordsLoader />;
