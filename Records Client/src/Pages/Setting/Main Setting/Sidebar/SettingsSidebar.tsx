@@ -11,7 +11,7 @@ const SettingsSidebar = () => {
         let dispatch =useAppDispatch()
         // let navigate =useNavigate()
   return (
-    <div className="h-[95vh] sticky top-0  lg:w-[35vw] max-lg:w-[25vw] max-md:w-[15vw] px-4 md:py-12 max-md:py-4  gap-y-4 border-r flex flex-col">
+    <div className="h-[95vh] sticky top-0  lg:w-[35vw] max-lg:w-[25vw] max-md:w-[13vw] px-4 md:py-12 max-md:py-4  gap-y-4 border-r flex flex-col">
         <h1 className="text-3xl hFont max-md:hidden">Settings</h1>
         {
                 tabs.map(elm=>{

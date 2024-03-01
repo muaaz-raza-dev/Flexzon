@@ -27,6 +27,8 @@ import { useNavigate } from "react-router-dom"
 import ContactNumberDetails, { GenderDetails, IchangeHandlerInput, SocialMediaDetails, WebsiteDetails } from "./InputDetails"
 import InputInterests from "./InputInterests"
 import { InitialCreditsState } from "@/app/middlewares/functions/InitialCreditsState"
+import useTrackChanges from "@/Queryfunctions/Hooks/useTrackChanges"
+
 
 
 const PersonalInfoFile = () => {
@@ -42,8 +44,9 @@ const PersonalInfoFile = () => {
     gender:{value:"",display:false},
     dob:{value:"",display:false},
   });
+  let {changes,ChangeInitialState} = useTrackChanges(InputState)
   useEffect(() => {
-    setInputState({    Name:Info.Name,
+    setInputState({Name:Info.Name,
     username:Info.username,
     email:Info.email,
     contact:Info.contact||{value:"",display:false},
@@ -53,6 +56,9 @@ const PersonalInfoFile = () => {
     gender:Info.gender||{value:"",display:false},
     dob:Info.dob||{value:"",display:false},})
   }, [Info]);
+  useEffect(() => {
+ChangeInitialState(InputState)
+  }, [InputState.Name]);
 const [ImageState, setImageState] = useState<{uri:string,blob?:any}>({uri:"",});
   let dispatch = useAppDispatch()
   let {avatar} =Info
@@ -73,8 +79,8 @@ function ChangeHandler <T>({e,payload}:IchangeHandlerInput<T>){
   }
 }
   return (
-    <div className="flex justify-center w-full py-12 ">
-        <div className="md:w-[90%] flex flex-col gap-y-8">
+    <div className="flex justify-center w-full  py-12 ">
+        <div className="md:w-[90%] max-md:px-4 flex flex-col gap-y-8">
       <h1 className="text-3xl hFont"> Edit Profile</h1>
       <section className="flex flex-col gap-x-4">
     <div className="bg-gray-200   md:w-[85%] justify-between p-4 rounded flex gap-x-6 items-center ">
@@ -144,7 +150,7 @@ function ChangeHandler <T>({e,payload}:IchangeHandlerInput<T>){
         </div>
       </section>
 
-      <Button className="w-[20%]  text-md  bg-[var(--secondary)] hover:bg-[var(--primary)] hover:text-white text-white" variant={"outline"}  onClick={()=>mutate()}>
+      <Button className={`w-[20%]  text-md  bg-[var(--secondary)] hover:bg-[var(--primary)] hover:text-white text-white ${!changes&&" grayscale-0"} `}variant={"outline"} disabled={!changes} onClick={()=>mutate()}>
 {isLoading?<LightLoader/>:"Save"}
   </Button>
   <Separator/>

@@ -7,7 +7,7 @@ import SettingsNotification from "./Notification/SettingsNotification"
 
 const MainSettingFile = () => {
   return (
-    <div className="w-full flex gap-x-8 ">
+    <div className="w-full flex  ">
       <SettingsSidebar/>
       <Routes>
 <Route path="/" element={<PersonalInfoFile/>}/>
