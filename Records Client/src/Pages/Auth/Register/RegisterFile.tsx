@@ -16,7 +16,7 @@ const RegisterFile = () => {
      
     }
   return (
-    <section  className="min-h-[94vh] flex items-stretch text-white ">
+    <section  className="min-h-[94vh] flex items-stretch text-white  ">
     <div className="lg:flex w-1/2 hidden to-[var(--primary)] from-[var(--secondary)] bg-gradient-to-l  bg-no-repeat bg-cover relative items-center shadow-lg" >
         <div className="absolute inset-0 z-0 bg-black opacity-60"></div>
         <div className="z-10 w-full px-12">
@@ -25,9 +25,11 @@ const RegisterFile = () => {
         </div>
         
     </div>
-    <div className="lg:w-1/2 bg-[var(--secondary)]    text-black w-full flex items-center justify-center text-center md:px-16 px-0 z-0" >
+    <div className="lg:w-1/2 relative heroShadow overflow-hidden before:absolute before:top-0 before:start-[0%] before:bg-[url('https://preline.co/assets/svg/examples/polygon-bg-element.svg')] before:bg-no-repeat before:bg-top before:bg-cover before:w-full before:h-full before:-z-[1]    text-black w-full flex items-center justify-center text-center md:px-16 px-0 z-0" >
      
-        <div className="z-20 w-full py-6">
+  
+        <div className="z-20 w-full py-6 ">
+ <h1 className="text-6xl hFont text-transparent bg-clip-text max-md:block md:hidden bg-gradient-to-r from-[var(--primary)]  to-purple-800 text-clip">Join Flexzon </h1>
           
           
             <form  className="sm:[75%] w-full px-2 lg:px-0 mx-auto" onSubmit={(e)=>e.preventDefault()}>
