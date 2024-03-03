@@ -21,7 +21,7 @@ import moment from "moment"
 export const PostBox: FC<IblogProp> = ({ data ,Follower}) => {
 
   return (
-    <>
+  
       <section className="flex flex-col CardBoxShadow justify-between w-full py-2 md:px-4 rounded-lg  max-md:px-2 ">
         <Link
           to={`/user/${data?.author?._id ? data?.author?._id : ""}`}
@@ -59,17 +59,18 @@ export const PostBox: FC<IblogProp> = ({ data ,Follower}) => {
               <h1 className="BFont md:text-2xl max-md:text-xl">
                 {data?.title}
               </h1>
+              {data.subTitle? 
               <p className="md:text-[1rem] w-full max-md:hidden break-words max-md:text-[.7rem] text-gray-700 text-ellipsis  overflow-hidden">
                 {data?.subTitle?.slice(0, 150)}...
               </p>
-              {!data.subTitle && (
+              :
                 <p
-                  className="whitespace-pre-wrap break-words"
+                  className="md:text-[1rem] w-full max-md:hidden break-words max-md:text-[.7rem] text-gray-700 text-ellipsis  overflow-hidden"
                   dangerouslySetInnerHTML={{
-                    __html: data.content.slice(0, 150),
+                    __html: data.content.slice(0, 150)
                   }}
                 ></p>
-              )}
+               } 
             </Link>
             <section className="flex items-center justify-between w-full gap-x-4">
               <div className="flex items-center gap-x-2">
@@ -105,7 +106,7 @@ export const PostBox: FC<IblogProp> = ({ data ,Follower}) => {
           </Link>
         </main>
       </section>
-    </>
+    
   );
 };
 
