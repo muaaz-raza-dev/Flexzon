@@ -24,18 +24,16 @@ const BlogFile = () => {
 refetchOnWindowFocus: false
 } 
   )  
-  if (isLoading) {
-    return <BlogSkeleton/>
-  }
   if (isError) {
     return <ErrorPage/>
   }
-    
     return (
-
       <div className="w-full flex flex-col items-center justify-center md:pt-16 max-md:pt-4">
     <div className="md:w-[80%] max-md:w-[95%] flex flex-col gap-y-3 my-8">
-        <BlogSkeleton/>
+      {
+        isLoading?
+ <BlogSkeleton/>:
+<>
     <BlogHeader  />
     <MainBlog  />
     <Separator className="text-black my-4"/>
@@ -45,6 +43,8 @@ refetchOnWindowFocus: false
        <ArrowLeft/> See more recommendations
     </Button>
     </Link>
+</>
+}
     </div>
   </div>
   )
