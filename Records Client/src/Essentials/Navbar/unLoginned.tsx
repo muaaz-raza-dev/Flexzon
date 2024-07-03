@@ -6,7 +6,7 @@ const UnLoginned = () => {
   return (
     <>
     <ul className="list-none flex gap-x-8 items-center ">
-    <Link to={"/auth/login"} className="cursor-pointer max-sm:hidden font-normal" >
+    <Link to={"/auth/login"} className="cursor-pointer max-sm:hidden font-bold hover:scale-105 transition-transform" >
       Login
       </Link>
   <Link to={"/auth/register"}>

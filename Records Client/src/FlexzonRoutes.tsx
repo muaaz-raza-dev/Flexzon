@@ -1,5 +1,5 @@
 import { lazy,Suspense } from "react";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 import CreditsGuard, { LoginAskModal } from "./app/middlewares/CreditsGuard";
 import Navbar from "./Essentials/Navbar/Navbar";
 const MessagingFile = lazy(() => import("./Pages/Messaging/MessagingFile"));
@@ -26,10 +26,14 @@ const NotificationFile = lazy(
 );
 const FlexzonRoutes = () => {
     let state = useAppSelector((state) => state.landing);
+    let logined =useAppSelector(s=>s.credits.isLogined)
+    let {pathname}  = useLocation()
+    console.log(logined);
+    
     useSocketHandler()
   return (
     <main>
-    <Navbar />
+      {logined === false && pathname != "/" && <Navbar /> }
     <Toaster />
     <Analytics/>  {/* vercel Analytics */}
     <SpeedInsights/> {/* vercel Speed insights */}

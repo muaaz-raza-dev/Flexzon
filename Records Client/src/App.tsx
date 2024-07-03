@@ -1,4 +1,6 @@
+
 import { BrowserRouter } from 'react-router-dom'
+import 'react-loading-skeleton/dist/skeleton.css'
 import './App.css'
 import RecordsFile from './FlexzonFile'
 import { QueryClientProvider ,QueryClient } from 'react-query'

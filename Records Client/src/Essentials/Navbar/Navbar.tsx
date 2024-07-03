@@ -8,7 +8,7 @@ const Navbar = () => {
   let navigate= useNavigate()
   let data=useAppSelector(state=>state.credits)
   return (
-    <nav className="w-screen z-50 md:h-[6dvh] max-md:h-[8dvh] bg-[var(--bg)] md:px-8 max-md:px-4 border-b border-gray-300 flex justify-between">
+    <nav className="w-full z-50 md:h-[6dvh] max-md:h-[8dvh] bg-[var(--bg)] md:px-8 max-md:px-4  flex justify-between morphismBg">
         
       <section className="flex   w-1/2 p-2 h-full items-center object-contain">
     <img src="/images/Records2.png" className="aspect-square p-1 object-contain rounded  cursor-pointer h-full" alt="Records" onClick={()=>navigate("/")}/>
