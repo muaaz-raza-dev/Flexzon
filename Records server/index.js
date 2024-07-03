@@ -36,6 +36,6 @@ app.use("/api/notifications",require("./Routes/Notifications/Notifications"))
 
 
 server.listen(Port, () => {
-  console.log(`records server is listening on http://localhost:${Port}`);
+  // console.log(`records server is listening on http://localhost:${Port}`);
 });
 MongoConnection()
