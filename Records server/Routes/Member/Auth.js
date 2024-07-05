@@ -12,7 +12,7 @@ app.post("/register", async (req, res) => {
   let { Name, username, email, password,  Topics } = req.body;
   let verification = await Member.find({ username, isDeleted:false }).count();
   let emailExist = await Member.find({ email ,isDeleted:false }).count();
-  if (verification !== 0||emailExist!==0) {
+  if (verification != 0||emailExist!=0) {
     res
       .status(StatusCodes.NOT_ACCEPTABLE)
       .json({ success: false, msg: "username or email already exists" });

@@ -369,7 +369,8 @@ app.post("/starter", async (req, res) => {
           "author.Name": 1,
           "author.followers": 1,
           "author.avatar": 1,
-          "posts":1
+          "posts":1,
+          "author.bio":1
         },
       },
       {
