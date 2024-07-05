@@ -1,6 +1,5 @@
 import { useAppSelector } from "@/app/ReduxHooks"
 import { Itopic } from "@/app/Types/Ilanding"
-import { TrendingUp } from "lucide-react"
 import { FC } from "react"
 import { Link } from "react-router-dom"
 interface Itopics {
@@ -13,7 +12,7 @@ interface Itopics {
 export const TopicBox:FC<Itopics>=({data})=>{
     
     return (
-        <Link to={`/topic/${data.topic._id}`} className="flex p-2  min-w-[20%] text-white font-medium border-2  bg-[var(--primary)] items-center justify-center rounded-xl cursor-pointer text-sm transition">
+        <Link to={`/topic/${data.topic._id}`} className="flex p-2 px-5    text-black font-medium    bg-[#e2e2e2] items-center justify-center rounded-3xl cursor-pointer text-sm  hover:rounded-2xl transition-all">
             {data._id}
         </Link>
     )
@@ -21,14 +20,16 @@ export const TopicBox:FC<Itopics>=({data})=>{
 export const RecommendedTopics = () => {
     let data = useAppSelector(state=>state.landing)
   return (
-    <div className="w-full max-md:hidden">
-        <h1 className="text-xl BFont flex gap-x-2 py-2 items-center "> Trending Topics today <TrendingUp size={16} />  </h1>
+    <div className="w-full  flex flex-col gap-4">
+            <h1 className="flex items-center  hFont font-bold text-xl tracking-wide gap-x-2"> 
+            Topic Recommendations  </h1>
         <div className="flex gap-2 justify-start   max-md:w-full flex-wrap">
 {
     data.Topics.slice(0,6).map((elm)=><TopicBox data={elm}/>)
 }
 
     </div>
+   
     </div>
   )
 }

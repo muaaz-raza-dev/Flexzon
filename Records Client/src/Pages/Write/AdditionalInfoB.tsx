@@ -37,14 +37,14 @@ const ReadCountCaculator = (plainText: string) => {
       <Input
         placeholder="Title"
         name="title"
-        className="my-2 font-bold border border-black focus-visible:ring-0 text-md placeholder:font-bold"
+        className="my-2 font-bold border  focus-visible:ring-0 text-md placeholder:font-bold"
         onChange={(e) => InputHandler(e)}
         value={writeState.title}
       />
       <Textarea
       placeholder="Sub-title or teaser "
       name="subtitile"
-        className="my-2 text-sm border border-black focus-visible:ring-0"
+        className="my-2 text-base border  focus-visible:ring-0"
         onChange={(e) => InputHandler(e)}
         value={writeState.subtitile}
         />
@@ -53,7 +53,7 @@ const ReadCountCaculator = (plainText: string) => {
           <Input
             placeholder="Topic i.e Programming or Entertaiment"
             name="topic"
-            className="font-bold outline-none  focus-visible:ring-0 border border-black my-2 text-[0.85rem] "
+            className="font-bold outline-none  focus-visible:ring-0 border  my-2 text-[0.85rem] "
             onChange={(e) => InputHandler(e)}
             value={writeState.topic}
           />

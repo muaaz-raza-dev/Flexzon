@@ -9,7 +9,9 @@ export const HeaderLabels:FC<{value:string}> = ({value}) => {
   let Credits=useAppSelector(state=>state.credits)
   let dispatch=useAppDispatch()
 return (
-      <div  className={`  mt-1 ${ data.selectedTabs===value&&'!text-white !bg-[var(--primary)]'} flex items-center text-sm h-full bg-gray-200 p-2 px-3 rounded-lg text-gray-600 text-nowrap cursor-pointer hover:text-[var(--primary)] transition-colors `} onClick={()=>{
+      <div  className={`  mt-1 ${ data.selectedTabs===value&&'!text-white !bg-[var(--primary)]'} flex items-center text-sm h-full 
+        bg-[var(--accent)] font-medium tracking-wider hover:bg-[#c0bfbf] p-2 px-4 rounded-2xl text-black text-nowrap cursor-pointer hover:text-[var(--primary)] transition-colors `} 
+      onClick={()=>{
         dispatch(insertion({selectedTabs:value,Blogs:[],count:0}))
           FetchBlogs<typeof dispatch>({...data,selectedTabs:value,Blogs:[],count:0},dispatch,Credits)
   }}>
@@ -42,11 +44,9 @@ HandleSlide(0)
     else if (containerscrollR-offset>50&&containerscrollL+offset>50) setRightorLeft("both")
     else if (containerscrollR-offset<50) setRightorLeft("Left")
     else if (containerscrollL+offset<50) setRightorLeft("Right")
-console.log(containerscrollL+offset,containerscrollR+offset+"R",Containerwidth);
-
   }
   return (
-    <div className="flex w-screen center  sticky top-0 h-14   bg-[var(--bg)] z-[30] ">
+    <div className="flex w-full center  sticky top-0 h-14   max-md:pl-2 rounded-md z-[30] ">
     
        
   
@@ -54,7 +54,7 @@ console.log(containerscrollL+offset,containerscrollR+offset+"R",Containerwidth);
         <button onClick={()=>HandleSlide(-200)} className=" rounded bg-[var(--primary)] text-white hover:bg-slate-600 z-20  aspect-square HeaderLShadow   p-2 "><ChevronRight size={16}/></button>
       </div>
     <section className=" px-1 overflow-x-auto relative  overflow-y-hidden pt-3   py-2 flex gap-x-4 
-    bg-[var(--bg)]  scroll-smooth  w-screen Headerlp  border-b items-center   " ref={ContainerRef}>
+   scroll-smooth  w-screen Headerlp rounded-md items-center   " ref={ContainerRef}>
   
 
 

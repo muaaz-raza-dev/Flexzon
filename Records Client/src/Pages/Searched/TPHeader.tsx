@@ -9,7 +9,7 @@ const TPHeader = () => {
   if (TopicSearch===true) {
   return (
     <header className="flex flex-col gap-y-4 h-[30vh] center">
-    <h1 className="text-5xl hFont">
+    <h1 className="text-5xl hFont font-bold">
         {Topic.title}
     </h1>
     <div className="flex gap-x-2 text-lg">

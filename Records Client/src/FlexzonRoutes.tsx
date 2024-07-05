@@ -17,6 +17,7 @@ const SearchedPageFile = lazy(
 );
 import { Toaster as ToastShdcn } from "@/components/ui/toaster"
 import { Analytics } from "@vercel/analytics/react";
+import LpSidebarFile from "./Pages/Landing page/sidebar/LpSidebarFile";
 
 const AuthFile = lazy(() => import("./Pages/Auth/AuthFile"));
 const WriteFile = lazy(() => import("./Pages/Write/WriteFile"));
@@ -28,12 +29,11 @@ const FlexzonRoutes = () => {
     let state = useAppSelector((state) => state.landing);
     let logined =useAppSelector(s=>s.credits.isLogined)
     let {pathname}  = useLocation()
-    console.log(logined);
-    
     useSocketHandler()
   return (
     <main>
-      {logined === false && pathname != "/" && <Navbar /> }
+      {logined === true  ? <Navbar />  : pathname == "/" ? null : <Navbar/>}
+
     <Toaster />
     <Analytics/>  {/* vercel Analytics */}
     <SpeedInsights/> {/* vercel Speed insights */}
@@ -45,6 +45,14 @@ const FlexzonRoutes = () => {
         element={
           <Suspense fallback={<RecordsLoader />}>
             <LandingFile />
+          </Suspense>
+        }
+      />
+      <Route
+        path="/recommendations"
+        element={
+          <Suspense fallback={<RecordsLoader />}>
+            <LpSidebarFile />
           </Suspense>
         }
       />

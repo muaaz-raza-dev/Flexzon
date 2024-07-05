@@ -52,7 +52,7 @@ function inputHandler(purpose:string,e:ChangeEvent<HTMLInputElement>) {
       <div className="lg:w-1/2 l relative heroShadow overflow-hidden before:absolute before:top-0 before:start-[0%] before:bg-[url('https://preline.co/assets/svg/examples/polygon-bg-element.svg')] before:bg-no-repeat before:bg-top before:bg-cover before:w-full before:h-full before:-z-[1]    text-black w-full flex items-center justify-center text-center md:px-16 px-0 z-0 bg-[var(--bg)] ">
       
         <div className="z-20 w-full py-6">
-          <h1 className="text-5xl hFont text-transparent bg-clip-text my-4 bg-gradient-to-r from-[var(--primary)]  to-purple-700 text-clip">Login to Flexzon</h1>
+          <h1 className="text-5xl hFont text-transparent bg-clip-text my-4 bg-gradient-to-r from-[var(--primary)]  to-purple-700 text-clip font-bold">Login to Flexzon</h1>
 
           <form onSubmit={(e)=>{
             e.preventDefault()

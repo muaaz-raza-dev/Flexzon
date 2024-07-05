@@ -2,7 +2,7 @@ import SaveFn from "@/Queryfunctions/Posts/Save"
 import { useAppDispatch, useAppSelector } from "@/app/ReduxHooks"
 import { CreditsInsertion } from "@/app/Slices/CredentialSlice"
 import CreditsValidator from "@/app/middlewares/functions/CreditsValidator"
-import { BookmarkPlus } from "lucide-react"
+import { Bookmark } from "lucide-react"
 import { toast } from "react-hot-toast"
 import { useMutation } from "react-query"
 
@@ -20,7 +20,7 @@ const SaveBtn = ({_id,size}:{_id:string,size?:number}) => {
     
   return (
 
-<BookmarkPlus fill={isLoading?"black": Info.saved.length!==0? Info?.saved?.some(elm=>elm?._id===_id)?"black":"transparent":"transparent"} className={` ${!Info?.saved?.some(elm=>elm?._id===_id)?"text-[#6B6B6B]":"text-transparent"}  hover:text-[var(--primary)] text-[#6B6B6B] p-0.5 ${isLoading&&"animate-pulse "}  cursor-pointer`} size={size} onClick={()=>{CreditsValidator<typeof mutate,typeof dispatch>(credits,mutate,dispatch)}} />
+<Bookmark fill={isLoading?"#333333": Info.saved.length!==0? Info?.saved?.some(elm=>elm?._id===_id)?"black":"transparent":"transparent"} className={` ${!Info?.saved?.some(elm=>elm?._id===_id)?"text-[#6B6B6B]":"text-transparent"}  hover:text-[var(--primary)] text-[#6B6B6B] p-0.5 ${isLoading&&"animate-pulse "}  cursor-pointer`} size={size} onClick={()=>{CreditsValidator<typeof mutate,typeof dispatch>(credits,mutate,dispatch)}} />
       
 
   )

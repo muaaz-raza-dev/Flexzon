@@ -4,9 +4,9 @@ import {
   Settings,
   UserCircle2,
   PenBoxIcon,
-  BookText,
   Bell,
   MessageSquareIcon,
+  Hash,
 } from "lucide-react";
 import {
   DropdownMenu,
@@ -36,7 +36,7 @@ const LoginedOptions = () => {
     <>
       <DropdownMenu>
         <DropdownMenuTrigger className="h-full overflow-hidden  focus-visible:ring-0 object-center md:py-1 max-md:py-3 focus-within:ring-0 outline-0 active:ring-0 ring-0">
-          <img src={info.Info.avatar? info?.Info?.avatar:"/images/muaaz.png"} className="aspect-square rounded-full h-[90%] border border-[var(--primary)]" />
+          <img src={info.Info.avatar? info?.Info?.avatar:"/images/muaaz.png"} className="aspect-square rounded-full h-[70%] border border-[var(--primary)]" />
         </DropdownMenuTrigger>
         <DropdownMenuContent className="mx-2 z-[600]">
         <Link to={"/messaging"} className=" transition-colors cursor-pointer font-normal flex items-center gap-x-1 ">
@@ -134,7 +134,7 @@ if (e.key =="Enter") {
         className="lg:w-[45%] max-lg:w-[30%]  max-md:w-[20%] flex rounded-md h-full items-center gap-x-2 text-sm cursor-pointer lg:mx-2 max-lg:ml-1 lg:bg-[#eceaea] lg:p-2"
         onClick={() => setOpen(!open)}
       >
-        <Search className="max-md:text-gray-600" />
+        <Search className="max-md:text-gray-600" size={22} />
         <p className="text-gray-800 max-lg:hidden">{data.input||"Search"}</p>
       </div>
       <CommandDialog open={open}   onOpenChange={setOpen}>
@@ -143,8 +143,8 @@ if (e.key =="Enter") {
         <CommandInput placeholder="Type a topic or author's name..." className="w-full" value={data.input}  onValueChange={(e)=>dispatch(SearchInsert({input:e})) } 
         onKeyDown={(e)=>Searcher(e)} >
           </CommandInput>
-          <Link to={`/search/${data.input}`} onClick={()=>setOpen(false)}  className={`my-3 mr-8 p-1  cursor-pointer aspect-square transition-colors hover:bg-gray-300 rounded-full `} >
-  <Search size={18} onClick={()=>dispatch(SearchedInsert({TopicSearch:false}))}/>
+          <Link to={`/search/${data.input}`} onClick={()=>setOpen(false)}  className={`my-3 mr-8 p-1  cursor-pointer aspect-square transition-colors hover:bg-[var(--primary)] hover:text-white rounded-full `} >
+  <Search size={16} onClick={()=>dispatch(SearchedInsert({TopicSearch:false}))}/>
     </Link>
         </div>
 {
@@ -198,15 +198,15 @@ if (e.key =="Enter") {
 export default Logined;
 
 export function Topic({topic,}:{topic:string}){
-return <div   className="flex w-full  cursor-pointer items-center">
-  <BookText  className="text-[#474747] p-0.5" />
-<h1 className="text-md">{topic}</h1>
+return <div   className="flex w-full px-4 cursor-pointer items-center gap-1">
+  <Hash className="text-[#474747] p-0.5" size={22}/>
+<h1 className="text-md font-medium">{topic}</h1>
 
 </div>
 }
 
 export function User({avatar,username,id,setOpen}:{avatar:string,id:string,username:string,setOpen:any}){
-  return <Link to={`/user/${id}`} onClick={()=>setOpen(false)} className="flex gap-x-5 cursor-pointer items-center">
+  return <Link to={`/user/${id}`} onClick={()=>setOpen(false)} className="flex gap-x-5 cursor-pointer items-center px-4">
     <Avatar>
       <AvatarImage src={avatar} />
     </Avatar>

@@ -1,33 +1,38 @@
 import { useAppDispatch, useAppSelector } from "@/app/ReduxHooks";
 import Axios from "../axios";
 import { insertion } from "@/app/Slices/LandingSlice";
-import {  Itopic } from "@/app/Types/Ilanding";
+import { useMutation } from "react-query";
 
-const useFetchStarter = async () => {
-    
-  let data = useAppSelector((state) => state.landing);
-
+const useFetchStarter = () => {
+  let state = useAppSelector((state) => state.landing);
+  let Info = useAppSelector((state) => state.credits);
   let dispatch = useAppDispatch();
-  if (data.Blogs.length===0&&data.selectedTabs==="For you") {
-    
-      let response = await Axios.post(`/posts/starter`, {count: data.count, interests:data.Topics||[] });
+  return  useMutation({
+    mutationKey: "Topics",
+    onSuccess(data) {
       dispatch(
-          insertion({
-              count: data.count + 1,
-              Blogs:[ ...data.Blogs, ...response.data?.payload?.Blogs],
-              Topics:response.data?.payload?.Topics,
-      Trendings: response.data?.payload?.Trendings,
-    })
-    );
+        insertion({
+          count: state?.count + 1,
+          Blogs: [...state.Blogs, ...data?.payload?.Blogs] || [],
+          Topics: data?.payload?.Topics || [],
+          tabs: data?.payload?.Topics.map((e:any)=>e.topic),
+          Trendings: data?.payload?.Trendings || [],
+          TopCreators: data?.payload.TopCreators || [],
+        })
+      );
+    },
+    mutationFn: () => FetchStarter(state.count, Info.Info.interests),
+  });
 
-}
 
 
 };
 
-export let FetchStarter  = async(count:number,Topics:Itopic[])=>{
-  let response = await Axios.post(`/posts/starter`, {count: count, interests:Topics.map(elm=>elm.title)||[] });
+export let FetchStarter  = async(count:number,Topics:any)=>{
+  let response = await Axios.post(`/posts/starter`, {count: count, interests:Topics.map((elm:any)=>elm.title)||[] });
   return response.data
 }
+
+
 
 export default useFetchStarter;

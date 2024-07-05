@@ -27,7 +27,7 @@ const TPMain = () => {
       let credits = useAppSelector(state=>state.credits)
   return (
     <div className="flex flex-col items-center w-full gap-y-4 py-4 ">
-        <h1 className="hFont text-2xl">{searchedState.TopicSearch?"Top Stories":"Search Results"}</h1>    
+        <h1 className="hFont text-xl font-bold">{searchedState.TopicSearch?"Top Articles":"Search Results"}</h1>    
         <div className="lg:w-[80%] max-lg:w-[85%] max-md:w-[90%] flex flex-col gap-y-2">
           {
             searchedState.Blogs.length!==0?
@@ -45,8 +45,7 @@ const TPMain = () => {
               <SmallLoader/>
               
             }
-            endMessage={<h1 className="text-md font-bold py-6 text-center">You all caught up! Thanks for scrolling through Records; stay tuned for more, as your curiosity is our fuel!
-            </h1>}
+      
           >
             {
               searchedState.Blogs.map(elm=><PostBox data={elm} Follower={elm.FollowerOnly&&(credits.isLogined&& credits.Info.following.some(Elm=>Elm._id==elm._id) )}/>)

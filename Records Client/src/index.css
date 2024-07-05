@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Oleo+Script&family=Work+Sans&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Oleo+Script&family=Patua+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -12,10 +13,10 @@
   font-family: 'Work Sans', sans-serif;
 }
 .hFont{
-  font-family: 'Patua One',sans-serif;
+  font-family: 'Roboto',sans-serif;
 }
 .BFont{
-  font-family: 'Patua One',sans-serif;
+  font-family: 'Roboto',sans-serif;
 }
 .ql-toolbar {
   border-bottom: 1px solid red;
@@ -25,8 +26,7 @@
   border-right: 1px solid red;
   border-bottom: 1px solid red;
 }
-.quill.ql-error {
-}
+
 
 @layer base {
   :root {
@@ -101,13 +101,15 @@
   --secondary:#31304D;
   --bg:#f4f4f4;
   --light:#B6BBC4;
+  --accent:#e2e2e2;
 }
 body{
   width: 100vw;
+  background:  #F8F8FF  ;
   overflow-x: hidden;
   min-height: 100vh;
-  background: var(--bg);
-  font-family: 'Work Sans';
+  font-family: 'Roboto';
+  font-weight: 400;
   scroll-behavior: smooth;
 }
 html{
@@ -283,4 +285,12 @@ box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
 backdrop-filter: blur( 5px );
 -webkit-backdrop-filter: blur( 5px );
 border-radius: 10px;
+}
+
+.HeadlineBG{
+  
+  background:#f03d5a ;
+  object-position: center;
+  image-resolution:100%;
+  background-position: center;
 }

@@ -69,6 +69,7 @@ export interface ItopCreators{
   avatar:string,
   followers:string[],
   Name:string,
+  bio:string;
   posts:number
 }
 export interface Ilanding{
