@@ -1,5 +1,5 @@
-./Records server/node_modules
-./Records Client/node_modules
-./Records Client/.env
-./Records server/.env
+./server/node_modules
+./client/node_modules
+./client/.env
+./server/.env
 .MongoConfig.js

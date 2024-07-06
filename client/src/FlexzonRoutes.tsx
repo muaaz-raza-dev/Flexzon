@@ -3,7 +3,7 @@ import { Route, Routes, useLocation } from "react-router-dom";
 import CreditsGuard, { LoginAskModal } from "./app/middlewares/CreditsGuard";
 import Navbar from "./Essentials/Navbar/Navbar";
 const MessagingFile = lazy(() => import("./Pages/Messaging/MessagingFile"));
-import { RecordsLoader } from "./Essentials/Loader";
+import { FileLoader} from "./Essentials/Loader";
 import { Toaster } from "react-hot-toast";
 import { useAppSelector } from "./app/ReduxHooks";
 import useSocketHandler from "./Pages/Messaging/Hooks/Chat/socket/useSocketHandler";
@@ -43,7 +43,7 @@ const FlexzonRoutes = () => {
       <Route
         path="/"
         element={
-          <Suspense fallback={<RecordsLoader />}>
+          <Suspense fallback={<FileLoader />}>
             <LandingFile />
           </Suspense>
         }
@@ -51,7 +51,7 @@ const FlexzonRoutes = () => {
       <Route
         path="/recommendations"
         element={
-          <Suspense fallback={<RecordsLoader />}>
+          <Suspense fallback={<FileLoader />}>
             <LpSidebarFile />
           </Suspense>
         }
@@ -59,7 +59,7 @@ const FlexzonRoutes = () => {
       <Route
         path="*"
         element={
-          <Suspense fallback={<RecordsLoader />}>
+          <Suspense fallback={<FileLoader />}>
             <LandingFile />
           </Suspense>
         }
@@ -67,7 +67,7 @@ const FlexzonRoutes = () => {
       <Route
         path="/user/:id"
         element={
-          <Suspense fallback={<RecordsLoader />}>
+          <Suspense fallback={<FileLoader />}>
             <ProfileFile />
           </Suspense>
         }
@@ -75,7 +75,7 @@ const FlexzonRoutes = () => {
       <Route
         path="/notifications"
         element={
-          <Suspense fallback={<RecordsLoader />}>
+          <Suspense fallback={<FileLoader />}>
             <CreditsGuard>
               <NotificationFile />
             </CreditsGuard>
@@ -85,7 +85,7 @@ const FlexzonRoutes = () => {
       <Route
         path="/blog/:id"
         element={
-          <Suspense fallback={<RecordsLoader />}>
+          <Suspense fallback={<FileLoader />}>
             <BlogFile />
           </Suspense>
         }
@@ -93,7 +93,7 @@ const FlexzonRoutes = () => {
       <Route
         path="/topic/:topic"
         element={
-          <Suspense fallback={<RecordsLoader />}>
+          <Suspense fallback={<FileLoader />}>
             <SearchedPageFile />
           </Suspense>
         }
@@ -101,7 +101,7 @@ const FlexzonRoutes = () => {
       <Route
         path="/search/:q"
         element={
-          <Suspense fallback={<RecordsLoader />}>
+          <Suspense fallback={<FileLoader />}>
             <SearchedPageFile />
           </Suspense>
         }
@@ -109,7 +109,7 @@ const FlexzonRoutes = () => {
       <Route
         path="/auth/*"
         element={
-          <Suspense fallback={<RecordsLoader />}>
+          <Suspense fallback={<FileLoader />}>
             <AuthFile />
           </Suspense>
         }
@@ -117,7 +117,7 @@ const FlexzonRoutes = () => {
       <Route
         path="/write/*"
         element={
-          <Suspense fallback={<RecordsLoader />}>
+          <Suspense fallback={<FileLoader />}>
             <CreditsGuard>
               <WriteFile />
             </CreditsGuard>
@@ -127,7 +127,7 @@ const FlexzonRoutes = () => {
       <Route
         path="/profile/*"
         element={
-          <Suspense fallback={<RecordsLoader />}>
+          <Suspense fallback={<FileLoader />}>
             <CreditsGuard>
               <SettingFile />
             </CreditsGuard>
@@ -138,7 +138,7 @@ const FlexzonRoutes = () => {
      <Route
         path="/messaging/*"
         element={
-            <Suspense fallback={<RecordsLoader />}>
+            <Suspense fallback={<FileLoader />}>
           <CreditsGuard>
               <MessagingFile />
               </CreditsGuard>

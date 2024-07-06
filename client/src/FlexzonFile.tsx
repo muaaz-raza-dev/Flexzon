@@ -1,6 +1,6 @@
 import { Suspense, lazy, useEffect, useState } from "react";
 import useFetchStarter from "@/Queryfunctions/Hooks/useFetchStarter";
-import { RecordsLoader } from "./Essentials/Loader";
+import { FileLoader, RecordsLoader } from "./Essentials/Loader";
 import useValidate from "./Queryfunctions/Hooks/useValidate";
 const FlexzonRoutes = lazy(() => import("./FlexzonRoutes"));
 
@@ -23,12 +23,12 @@ const {mutate ,isLoading}=useFetchStarter()
     if (!Loading) {
       return (
 
-        <Suspense fallback={<RecordsLoader/>}>
+        <Suspense fallback={<FileLoader/>}>
         <FlexzonRoutes/>
         </Suspense>
       );
     } else {
-      return <RecordsLoader />;
+      return <FileLoader />;
     }
   }
 };

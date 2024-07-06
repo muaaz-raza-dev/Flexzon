@@ -10,8 +10,9 @@ const server = require('http').createServer(app)
 Socket(server)
 app.use(express.json())
 app.use(cors({
-  origin:["http://localhost:5173","https://flexzon.vercel.app","https://recordss.vercel.app"],
+  origin:["http://localhost:5173","https://flexzon.vercel.app"],
   credentials:true,
+  
 }))
 
 app.use("/api/auth",require("./Routes/Member/Auth"))

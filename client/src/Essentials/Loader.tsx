@@ -69,13 +69,11 @@ color="white"
 
 
 export const RecordsLoader=()=>{
-  useEffect(() => {
-
+useEffect(() => {
 bouncy.register()
-
 }, []);
   return(
-  <div className="center ">
+  <div className="center fixed w-screen h-screen  ">
     <l-bouncy
     size="105"
     speed="1.75"
@@ -84,4 +82,19 @@ bouncy.register()
     </div>
     )
 }
+export const FileLoader=()=>{
+useEffect(() => {
+  ring.register()
+}, [])
+
+return <div className="w-screen fixed z-[999] h-screen center bg-[#00000060]">
+ <l-ring
+  size="40"
+  stroke="5"
+  bg-opacity="0"
+  speed="2" 
+  color="black" 
+></l-ring>
+  </div>
+  }
 export default Loader
