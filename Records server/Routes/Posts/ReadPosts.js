@@ -511,8 +511,9 @@ app.post("/starter", async (req, res) => {
           },
         },
       ]).limit(limit)
-   
-    res.json({success: true, payload: {Topics, Trendings, Blogs:Post,TopCreators}})
+   let Creators = await Member.find().select("avatar").limit(3)
+   let totalCreators = await Member.countDocuments()
+    res.json({success: true, payload: {Topics, Trendings, Blogs:Post,TopCreators ,Creators:{docs:Creators,total:totalCreators }}})
   } catch (error) {
     console.log(error);
     return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ success: false, msg: 'Internal server error' });
