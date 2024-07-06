@@ -16,14 +16,14 @@ setIsFollower(data.FollowerOnly&&(credits.isLogined&& credits.Info.following.som
 
   
   return (
-    <main  className="flex flex-col p-2 shadow lg:w-[40%] gap-y-4 border max-lg:w-[35%] max-md:w-[95%]  md:h-[21rem] max-md:h-[27rem] border-b   px-5 ">
+    <main  className="flex flex-col py-2  lg:w-[30%] gap-y-6  max-lg:w-[35%] max-md:w-[95%]  md:h-[21rem] max-md:h-[27rem]    ">
 
-        <Link    to={!data.FollowerOnly?`/blog/${data?._id}`:IsFollower?`/blog/${data?._id}`:`/user/${data?.author._id}`} className="flex justify-center object-fill w-full h-[40%] p-2 bg-[var(--accent)] border-b">
+        <Link    to={!data.FollowerOnly?`/blog/${data?._id}`:IsFollower?`/blog/${data?._id}`:`/user/${data?.author._id}`} className="flex justify-center object-fill w-full h-[50%]  ">
 
               <img
                 src={data?.banner || "/images/Records.png"}
                 alt=""
-                className="object-contain w-full rounded "
+                className="object-cover w-full rounded h-full "
                 loading="lazy"
 
               />
@@ -34,7 +34,7 @@ setIsFollower(data.FollowerOnly&&(credits.isLogined&& credits.Info.following.som
      <Link to={!data.FollowerOnly?`/blog/${data?._id}`:IsFollower?`/blog/${data?._id}`:`/user/${data?.author._id}`} className="h-[40%]">
         <h1 className="text-2xl   font-bold ">{data?.title}</h1>
      </Link>
-        <p className=" h-[60%] overflow-hidden break-words">{data?.subTitle.slice(0,120)|| ""}...</p>
+        <p className=" h-[60%] text-gray-600 text-lg overflow-hidden break-words">{data?.subTitle.slice(0,120)|| ""}...</p>
         </div>
         <div className="flex w-full">
 
@@ -42,7 +42,7 @@ setIsFollower(data.FollowerOnly&&(credits.isLogined&& credits.Info.following.som
         <section className="flex items-center w-full py-2 gap-x-2">
         <Link to={`/topic/${data?.topic?._id}`} className=" px-2 whitespace-nowrap py-0.5 bg-gray-200 rounded-md  text-sm">{data?.topic?.title}</Link>
       
-<p className="tracking-tighter text-gray-800 md:text-sm max-md:text-xs whitespace-nowrap">{moment(data.publishDate).fromNow()||"-"}</p>
+<p className="tracking-tighter text-gray-800 md:text-sm max-md:text-xs whitespace-nowrap">{moment(data.publishDate).format("D MMMM YY")||"-"}</p>
 
         </section>
     <div className="flex items-center justify-end w-full gap-">

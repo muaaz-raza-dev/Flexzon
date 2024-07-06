@@ -24,7 +24,7 @@ const PublishBlog = () => {
   let writeState = useAppSelector((state) => state.write);
   let dispatch=useAppDispatch()
   let { mainContent, title,  Banner, topic } = writeState;
-  let {mutate,isLoading}=useUploadPost()
+  let {mutate,isLoading,}=useUploadPost()
   let DialogRef = useRef<any>(null);
   const [Loading, setLoading] = useState<Boolean>(false);
   let validateInputs = () => {
@@ -58,6 +58,8 @@ const PublishBlog = () => {
             "Publish"
             }
           </Button>
+
+
       <Dialog>
         <DialogTrigger className="w-full" ref={DialogRef}>
         </DialogTrigger>
@@ -90,8 +92,6 @@ const PublishBlog = () => {
               <button
                 onClick={() =>{
                 mutate(false)
-
-               
                 }}
                 className=" block w-full p-1 text-lg rounded-full bg-[var(--primary)] hover:bg-[black] text-white transition-colors focus:outline-none"
               >
@@ -104,4 +104,9 @@ const PublishBlog = () => {
     </>
   );
 };
+
+
+
+
+
 export default PublishBlog;

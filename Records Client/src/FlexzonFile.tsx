@@ -22,6 +22,7 @@ const {mutate ,isLoading}=useFetchStarter()
   } else {
     if (!Loading) {
       return (
+
         <Suspense fallback={<RecordsLoader/>}>
         <FlexzonRoutes/>
         </Suspense>

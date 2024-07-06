@@ -75,7 +75,7 @@ bouncy.register()
 
 }, []);
   return(
-  <div className="center w-screen h-screen">
+  <div className="center ">
     <l-bouncy
     size="105"
     speed="1.75"
