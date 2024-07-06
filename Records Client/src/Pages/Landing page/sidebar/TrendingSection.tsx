@@ -13,7 +13,7 @@ export const ShortCard:FC<ITrendingProp> = ({data})=>{
   return(<div className="flex flex-col md:w-[90%] gap-2 max-md:min-w-[98%] my-1 py-2 p-1  ">
     <Link to={`/user/${data.author._id}`} className="flex items-center  gap-x-2">
         <Avatar className="h-full w-max">
-    <AvatarImage   src={data?.author?.avatar||"/images/muaaz.png"} className="w-6 h-6 bg-black rounded-full  aspect-square"/>
+    <AvatarImage   src={data?.author?.avatar||"/images/muaaz.png"} className="w-6 h-6 bg-black rounded-full  aspect-square object-contain"/>
   </Avatar>
 <h1 className="font-bold">{data?.author?.username||"Anonymous"}</h1>
 </Link>

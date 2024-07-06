@@ -36,7 +36,7 @@ const LoginedOptions = () => {
     <>
       <DropdownMenu>
         <DropdownMenuTrigger className="h-full overflow-hidden  focus-visible:ring-0 object-center md:py-1 max-md:py-3 focus-within:ring-0 outline-0 active:ring-0 ring-0">
-          <img src={info.Info.avatar? info?.Info?.avatar:"/images/muaaz.png"} className="aspect-square rounded-full h-[70%] border border-[var(--primary)]" />
+          <img src={info.Info.avatar? info?.Info?.avatar:"/images/muaaz.png"} className="aspect-square rounded-full h-[70%] bg-black object-contain " />
         </DropdownMenuTrigger>
         <DropdownMenuContent className="mx-2 z-[600]">
         <Link to={"/messaging"} className=" transition-colors cursor-pointer font-normal flex items-center gap-x-1 ">

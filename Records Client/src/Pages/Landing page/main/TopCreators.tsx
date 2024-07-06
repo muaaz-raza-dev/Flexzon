@@ -11,7 +11,7 @@ const TopCreators = () => {
   return (
     <div className="w-full h-full rounded ">
       <h1 className=" max-md:flex my-3  text-xl hFont font-bold items-center flex gap-x-2">
-        Top Writers
+        Top Creators
       </h1>
       <div className="flex gap-1">
         {TopCreators.map((elm) => <EachCreatorComponent data={elm} key={elm?._id} />)}
@@ -32,7 +32,7 @@ const EachCreatorComponent: FC<{ data: ItopCreators }> = ({ data }) => {
         <div className="flex px-2  justify-center items-center gap-x-2 h-full">
           <div className="flex items-start h-full w-[80%] gap-x-2">
             <img src={data?.avatar || "/images/muaaz.png"}
-              className=" w-6 h-6  rounded-full aspect-square my-1  object-cover  bg-[#ffffff57]" />
+              className=" w-6 h-6  rounded-full aspect-square my-1  object-contain bg-black " />
             <div className="">
               <h1 className="md:text-xl max-md:text-md font-semibold hFont ">
                 {data?.Name}

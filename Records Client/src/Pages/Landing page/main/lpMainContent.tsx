@@ -10,11 +10,11 @@ import LikeBtn from "./LikeBtn";
 import SaveBtn from "./SaveBtn";
 import RestrictionIcon from "./RestrictionIcon";
 import PostBlockRenderer from "./FollowerRestrictionValidator";
+import moment from "moment"
 interface IblogProp {
   data: Iblog;
   Follower:boolean
 }
-import moment from "moment"
 
 export const PostBox: FC<IblogProp> = ({ data ,Follower}) => {
 
@@ -25,10 +25,10 @@ export const PostBox: FC<IblogProp> = ({ data ,Follower}) => {
           to={`/user/${data?.author?._id ? data?.author?._id : ""}`}
           className="flex items-center    gap-x-2 h-full"
         >
-          <Avatar className="z-20 w-6 h-6 bg-black object-cover aspect-square">
+          <Avatar className="z-20 w-7 h-7 bg-black object-contain aspect-square">
             <AvatarImage
               src={data?.author?.avatar || "/images/anonymous.png"}
-              className="z-10 rounded-full h-full aspect-square"
+              className="z-10 rounded-full h-full aspect-square object-contain"
               loading="lazy"
             />
           </Avatar>
@@ -59,15 +59,15 @@ export const PostBox: FC<IblogProp> = ({ data ,Follower}) => {
           </Link>
         </Link>
 
-        <main className="flex w-full  max-md:items-center gap-x-4 flex-row md:h-[7rem] max-md:h-[6rem] ">
+        <main className="flex w-full  max-md:items-center gap-x-4 flex-row md:h-[8rem] max-md:max-h-[8rem] ">
           <section className="flex  flex-col   max-md:w-[75%] h-full lg:min-w-[80%]  justify-between">
             <Link to={!data.FollowerOnly?`/blog/${data?._id}`:Follower?`/blog/${data?._id}`:`/user/${data?.author._id}`} className="cursor-pointer h-[60%] ">
-              <h1 className="BFont font-black tracking-wider md:text-3xl max-md:text-xl">
+              <h1 className="BFont font-black max-h-[90%] w-full overflow-clip  md:text-3xl max-md:text-xl">
                 {data?.title}
               </h1>
               {data.subTitle? 
-              <p className="text-[1.2rem] w-full break-words text-gray-600 text-ellipsis  overflow-hidden">
-                {data?.subTitle?.slice(0, 50)}...
+              <p className="md:text-[1.2rem] max-md:text-[1rem] w-full break-words text-gray-600 text-ellipsis  overflow-hidden">
+                {data?.subTitle?.slice(0, 70)}...
                
               </p>
               :
@@ -103,19 +103,13 @@ export const PostBox: FC<IblogProp> = ({ data ,Follower}) => {
 
 <Link to={!data.FollowerOnly?`/blog/${data?._id}`:Follower?`/blog/${data?._id}`:`/user/${data?.author._id}`} className=" 
  w-[20%] h-full">
-          <div className="bg-[var(--accent)] w-full  object-fit h-full  center rounded flex overflow-hidden  justify-start aspect-square items-start  ">
-          
-            {["mp3", "mp4"].includes(data?.banner.split(".")[3]) ? (
-              <video className=" aspect-square rounded " src={data.banner} loop autoPlay muted 
-              ></video>
-            ) : (
-              <img
+          <div className=" w-full bg-[var(--primary)]  object-fit h-full  center rounded flex overflow-hidden  justify-start aspect-square items-start  ">
+          <img
               src={data?.banner }
               alt=""
-              className="object-fit aspect-square rounded w-full h-full"
+              className="object-fit aspect-w-4 aspect-h-3 rounded "
               loading="lazy"
               />
-            )}
             </div>  
           </Link>
         </main>
@@ -132,7 +126,6 @@ export const LpMainContent = () => {
   let dispatch = useAppDispatch();
   return (
     <div className="flex flex-col w-full gap-y-1 ">
-      
       <InfiniteScroll
         className="overflow-hidden overflow-x-hidden ZeroScroll justify-center items-center  flex flex-col gap-y-4"
         dataLength={Data.Blogs.length}

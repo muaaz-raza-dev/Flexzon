@@ -76,6 +76,7 @@ export interface Ilanding{
   Blogs:Iblog[];
   Trendings:Iblog[];
   TopCreators:ItopCreators[];
+  Creators:{docs:{avatar:string}[],total:number}
   Topics: {_id:string,  topic:{_id:string,title:string},result:number}[];
   count:number;
   tabs:Itopic[];

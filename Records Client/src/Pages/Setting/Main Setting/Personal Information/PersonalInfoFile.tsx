@@ -27,12 +27,12 @@ import { useNavigate } from "react-router-dom"
 import ContactNumberDetails, { GenderDetails, IchangeHandlerInput, SocialMediaDetails, WebsiteDetails } from "./InputDetails"
 import InputInterests from "./InputInterests"
 import { InitialCreditsState } from "@/app/middlewares/functions/InitialCreditsState"
-import useTrackChanges from "@/Queryfunctions/Hooks/useTrackChanges"
 
 
 
 const PersonalInfoFile = () => {
   let {Info} = useAppSelector(state=>state.credits)
+const [ImageState, setImageState] = useState<{uri:string,blob?:any}>({uri:Info.avatar,});
   const [InputState, setInputState] = useState({
     Name:"",
     username:"",
@@ -44,22 +44,19 @@ const PersonalInfoFile = () => {
     gender:{value:"",display:false},
     dob:{value:"",display:false},
   });
-  let {changes,ChangeInitialState} = useTrackChanges(InputState)
   useEffect(() => {
-    setInputState({Name:Info.Name,
-    username:Info.username,
-    email:Info.email,
-    contact:Info.contact||{value:"",display:false},
-    bio:Info.bio,
-    website:Info.website||{url:"",altText:""},
-    Links:Info.Links||{fb:"",insta:"",linkedIn:''},
-    gender:Info.gender||{value:"",display:false},
-    dob:Info.dob||{value:"",display:false},})
+    let payload ={Name:Info.Name,
+      username:Info.username,
+      email:Info.email,
+      contact:Info.contact||{value:"",display:false},
+      bio:Info.bio,
+      website:Info.website||{url:"",altText:""},
+      Links:Info.Links||{fb:"",insta:"",linkedIn:''},
+      gender:Info.gender||{value:"",display:false},
+      dob:Info.dob||{value:"",display:false},}
+    setInputState(payload)
   }, [Info]);
-  useEffect(() => {
-ChangeInitialState(InputState)
-  }, [InputState.Name]);
-const [ImageState, setImageState] = useState<{uri:string,blob?:any}>({uri:"",});
+
   let dispatch = useAppDispatch()
   let {avatar} =Info
   let {username,email,bio,Name,contact,dob,website,gender,Links}=InputState
@@ -87,7 +84,7 @@ function ChangeHandler <T>({e,payload}:IchangeHandlerInput<T>){
         <div className="flex items-center gap-x-2">
 
         <Avatar className="w-16 h-16 ">
-            <AvatarImage src={ImageState.uri||avatar} className="object-fill w-full "/>
+            <AvatarImage src={ImageState.uri} className="object-contain bg-[var(--primary)] w-full "/>
             </Avatar>
             <input type="file" hidden id="ImageUpload" onChange={(e)=>{
               if (e.target.files) {
@@ -95,7 +92,7 @@ function ChangeHandler <T>({e,payload}:IchangeHandlerInput<T>){
                setImageState({uri:ImageURI,blob:e.target.files[0]})
               }
             }}/>
-            <input onChange={(e)=>ChangeHandler({e})} className="p-1 bg-transparent border-black outline-none md:text-xl max-md:text-sm focus:border-b "  name="Name" defaultValue={Info.Name}/>
+            <input onChange={(e)=>ChangeHandler({e})} className="p-1 font-bold bg-transparent border-black outline-none md:text-xl max-md:text-sm focus:border-b "  name="Name" defaultValue={Info.Name}/>
         </div>
         <div className="flex gap-x-1">
 
@@ -105,14 +102,12 @@ function ChangeHandler <T>({e,payload}:IchangeHandlerInput<T>){
                 </label>
   </Button>
         {
-          ImageState.uri&&
+          ImageState.uri!=Info.avatar&&
           <Button  className="bg-[var(--secondary)] hover:bg-[var(--primary)] hover:text-white text-white" onClick={()=>UploadImage(ImageState.blob).then(data=>{
           dispatch(CreditsInsertion({avatar:data.url})) 
-          setImageState({uri:"",blob:""})}
+          setImageState({uri:data.url,blob:""})}
           )}>
-
          Upload Photo
-  
 </Button>
             }
             </div>
@@ -130,7 +125,6 @@ function ChangeHandler <T>({e,payload}:IchangeHandlerInput<T>){
         <label htmlFor="email" className="py-2 text-xl hFont" >Email</label>
         <div className="md:w-[80%]  flex  flex-col gap-y0.5 justify-center">
 <Input onChange={(e)=>ChangeHandler({e})} type="email" id="email" className="border focus-visible:ring-0 focus-visible:border-black" name="email" placeholder="Email" defaultValue={Info.email}/>
-  <p className="text-xs tracking-tighter text-gray-500">This won't visible on your profile</p>
         </div>
       </section>
 
@@ -150,7 +144,8 @@ function ChangeHandler <T>({e,payload}:IchangeHandlerInput<T>){
         </div>
       </section>
 
-      <Button className={`w-[20%]  text-md  bg-[var(--secondary)] hover:bg-[var(--primary)] hover:text-white text-white ${!changes&&" grayscale-0"} `}variant={"outline"} disabled={!changes} onClick={()=>mutate()}>
+      <Button className={`w-[20%]  text-md  bg-[var(--secondary)] hover:bg-[var(--primary)] hover:text-white text-white
+         ${" grayscale-0"} `} variant={"outline"}   onClick={()=>mutate()}>
 {isLoading?<LightLoader/>:"Save"}
   </Button>
   <Separator/>

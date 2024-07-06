@@ -4,9 +4,13 @@ import MainChat from "./Main Chat/MainChat.chat"
 import LandingChatPage from "./Main Chat/LandingPage.chat"
 import useGetAllChats from "./Sidebar/useGetAllChats"
 import InviteChatFile from "./Main Chat/Invite/InviteChatFile.chat"
+import { useAppSelector } from "@/app/ReduxHooks"
 
 const MessagingFile = () => {
+  let {isLogined} =useAppSelector(s=>s.credits)
+  if(isLogined===true){
   useGetAllChats()
+}
  
   return (
 <main className="w-screen md:h-[94vh] max-md:h-[92vh] flex ">

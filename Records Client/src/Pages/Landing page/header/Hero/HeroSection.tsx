@@ -11,6 +11,7 @@ import { GitHubLogoIcon } from "@radix-ui/react-icons"
 import AvatarCircles from "@/components/magicui/avatar-circles"
 const HeroSection = () => {
   let {isLogined}=useAppSelector(state=>state.credits)
+  let {Creators} =useAppSelector(s=>s.landing)
   if (!isLogined) {
     return (
       <div className="relative md:h-[90vh] max-md:h-[70vh] overflow-hidden before:absolute before:top-0 before:start-1/2 before:bg-[url('/images/mesh-gradient.png')] before:bg-no-repeat before:bg-top before:bg-cover before:w-full before:h-full before:-z-[1] before:transform before:-translate-x-1/2 
@@ -43,10 +44,10 @@ const HeroSection = () => {
     
     </div>
     <div className="center my-7 gap-3">
-      <AvatarCircles avatarUrls={["images/chat.png","images/anonymous.png","images/muaaz.png","images/404.png"]}/>
+      <AvatarCircles avatarUrls={Creators.docs.map(e=>e.avatar)}/>
       <div className="font-semibold leading-tight flex items-end justify-end flex-col">
-      <h1 className=" leading-tight">Over 100+ </h1>
-      <p  className=" leading-tight"> Active users</p>
+      <h1 className=" leading-tight">Over {Creators.total-1}+ </h1>
+      <p  className=" leading-tight"> Active Creators</p>
       </div>
     </div>
 

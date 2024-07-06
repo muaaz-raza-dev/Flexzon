@@ -21,11 +21,10 @@ const DeletePost:React.FC<{id:string}> = ({id}) => {
 
   return (
     <button  className="flex gap-x-2 items-center text-red-500 text-xs" onClick={()=>mutate()}>
-    <Trash2 size={16}/>
     {
-        isLoading?
-        <Loader/>:
-    "Delete"
+      isLoading?
+      <Loader/>:
+      <Trash2 size={20}/>
     }
   </button>
   )

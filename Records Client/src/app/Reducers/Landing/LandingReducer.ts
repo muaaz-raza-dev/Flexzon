@@ -4,6 +4,7 @@ interface IinsertdataPayload {
   Blogs?: Iblog[];
   Topics?: {_id:string,  topic:{_id:string,title:string},result:number}[];
   Trendings?: Iblog[];
+  Creators?:{docs:{avatar:string}[],total:number}
   count?: number;
   tabs?: Itopic[];
   selectedTabs?: string;
@@ -17,6 +18,9 @@ export const InsertData = (
 ) => {
   if (action.payload.Blogs) {
     state.Blogs = action.payload.Blogs;
+  }
+  if(action.payload.Creators){
+    state.Creators = action.payload.Creators;
   }
   if (action.payload.TopCreators) {
     state.TopCreators = action.payload.TopCreators;

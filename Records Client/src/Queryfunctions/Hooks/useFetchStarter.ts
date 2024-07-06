@@ -18,6 +18,7 @@ const useFetchStarter = () => {
           tabs: data?.payload?.Topics.map((e:any)=>e.topic),
           Trendings: data?.payload?.Trendings || [],
           TopCreators: data?.payload.TopCreators || [],
+          Creators:data.payload?.Creators
         })
       );
     },

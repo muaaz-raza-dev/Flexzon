@@ -1,25 +1,39 @@
-import {useState,useEffect} from "react"
-function useTrackChanges  <T>(comparableValue:T) {
+import { useState, useEffect } from "react";
+import lodash from "lodash";
+
+function useTrackChanges<T>(comparableValue: T) {
   const [InititalState, setInititalState] = useState<any>(null);
-  let changes:boolean;
+  const [changes, setChanges] = useState<boolean>(false);
+
   useEffect(() => {
-    if (InititalState==null) {
-        setInititalState(comparableValue)
+    if (InititalState == null) {
+      setInititalState(comparableValue);
     }
   }, []);
-if (JSON.stringify(InititalState)==JSON.stringify(comparableValue)) {
-    changes=false
-}
-else{
-    changes=true
+
+  useEffect(() => {
+    setChanges(
+      !(lodash.isEqual(
+        JSON.stringify(InititalState),
+        JSON.stringify(comparableValue)
+      ))
+    );
+  }, [comparableValue,InititalState]);
+
+  useEffect(() => {
+    console.log(
+      lodash.isEqual(
+        JSON.stringify(InititalState),
+        JSON.stringify(comparableValue)
+      )
+    );
+  }, [changes]);
+
+  let ChangeInitialState = (updatedState: any) => {
+    setInititalState(updatedState);
+  };
+
+  return { changes, ChangeInitialState };
 }
 
-let ChangeInitialState = (updatedState:any)=>{
-  setInititalState(updatedState)
-}
-
-return {changes ,ChangeInitialState }  
-
-}
-
-export default useTrackChanges
+export default useTrackChanges;

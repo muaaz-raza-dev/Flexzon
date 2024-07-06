@@ -29,7 +29,7 @@ const FlexzonRoutes = () => {
     let state = useAppSelector((state) => state.landing);
     let logined =useAppSelector(s=>s.credits.isLogined)
     let {pathname}  = useLocation()
-    useSocketHandler()
+    if(logined){useSocketHandler()}
   return (
     <main>
       {logined === true  ? <Navbar />  : pathname == "/" ? null : <Navbar/>}
