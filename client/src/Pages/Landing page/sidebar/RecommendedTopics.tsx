@@ -27,7 +27,6 @@ export const RecommendedTopics = () => {
 {
     data.Topics.slice(0,6).map((elm)=><TopicBox data={elm}/>)
 }
-
     </div>
    
     </div>

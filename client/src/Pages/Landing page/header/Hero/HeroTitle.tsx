@@ -1,4 +1,4 @@
-import BlurIn from '@/components/magicui/blur-in'
+import WordPullUp from '@/components/magicui/word-pull-up'
 import { useEffect, useState } from 'react'
 const HeroTitle = () => {
   const [Word, setWord] = useState<string>("")
@@ -16,7 +16,7 @@ const HeroTitle = () => {
   Share your
   </h1>
       <div className="min-w-[20%] md:mx-4 flex gap-2">
-      <BlurIn word={Word} className='md!text-7xl max-md:text-6xl items-start'/>
+        <WordPullUp words={Word} className='md!text-7xl max-md:text-6xl items-start'/>
       </div>
     </div>
       

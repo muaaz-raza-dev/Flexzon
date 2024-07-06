@@ -5,7 +5,7 @@ const PUserPost = () => {
   let data=useAppSelector(state=>state.userDetails)
   let credits=useAppSelector(state=>state.credits)
   return (
-    <section className="flex justify-center items-center gap-3  my-3 flex-wrap w-[95%]">
+    <section className="flex justify-center items-center gap-5  my-3 flex-wrap w-[95%]">
      {
       data.isAdmin==true?
       data.selectedTab=="Anonymous"?

@@ -73,7 +73,7 @@ useEffect(() => {
 bouncy.register()
 }, []);
   return(
-  <div className="center fixed w-screen h-screen  ">
+  <div className="center fixed w-screen h-screen   z-[999]">
     <l-bouncy
     size="105"
     speed="1.75"
@@ -87,7 +87,7 @@ useEffect(() => {
   ring.register()
 }, [])
 
-return <div className="w-screen fixed z-[999] h-screen center bg-[#00000060]">
+return <div className="w-screen fixed z-[999] h-screen center">
  <l-ring
   size="40"
   stroke="5"

@@ -3,7 +3,7 @@ import {MessageCircle, MonitorSmartphone, PenLine } from "lucide-react"
 
 const HeroDisplay_animations = () => {
   return (
-    <div className="h-[40%] max-lg:hidden  overflow-visible flex items-center gap-4  justify-center ">
+    <div className="  max-lg:hidden  overflow-visible flex items-center gap-4  justify-center ">
   <div className="w-[30%] rounded flex flex-col  px-6  morphismBg py-8 relative h-32">
     <BorderBeam size={300}/>
     <div className="flex gap-x-1 items-center">

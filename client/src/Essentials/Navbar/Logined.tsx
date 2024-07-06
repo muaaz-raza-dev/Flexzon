@@ -7,6 +7,7 @@ import {
   Bell,
   MessageSquareIcon,
   Hash,
+  LogOut,
 } from "lucide-react";
 import {
   DropdownMenu,
@@ -30,18 +31,20 @@ import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { useDebouncedCallback } from "use-debounce";
 import { SearchQuery } from "@/Queryfunctions/Landing/SearchQuery";
 import { SearchedInsert } from "@/app/Slices/SearchedSlice";
+import useLogout from "@/Queryfunctions/Hooks/useLogout";
 const LoginedOptions = () => {
   let info=useAppSelector(state=>state.credits)
+  let logout =useLogout()
   return (
     <>
       <DropdownMenu>
         <DropdownMenuTrigger className="h-full overflow-hidden  focus-visible:ring-0 object-center md:py-1 max-md:py-3 focus-within:ring-0 outline-0 active:ring-0 ring-0">
-          <img src={info.Info.avatar? info?.Info?.avatar:"/images/muaaz.png"} className="aspect-square rounded-full h-[70%] bg-black object-contain " />
+          <img src={info.Info.avatar? info?.Info?.avatar:"/images/muaaz.png"} className="aspect-square rounded-full h-[70%] bg-black object-cover" />
         </DropdownMenuTrigger>
         <DropdownMenuContent className="mx-2 z-[600]">
         <Link to={"/messaging"} className=" transition-colors cursor-pointer font-normal flex items-center gap-x-1 ">
             <DropdownMenuItem  className="flex cursor-pointer  gap-x-2 items-center">
-          <MessageSquareIcon size={16} /> Messaging 
+          <MessageSquareIcon size={20} /> Messaging 
           </DropdownMenuItem>
         </Link>
             <Link to={`/user/${info.Info._id}`}
@@ -50,7 +53,7 @@ const LoginedOptions = () => {
           <DropdownMenuItem 
                className="cursor-pointer flex gap-x-2 items-center"
           >
-              <UserCircle2 size={16} />
+              <UserCircle2 size={20} />
               Profile
           </DropdownMenuItem>
             </Link>
@@ -58,15 +61,21 @@ const LoginedOptions = () => {
               to={"/profile/settings"}
               className="cursor-pointer w-full" >
           <DropdownMenuItem className="flex cursor-pointer  gap-x-2 items-center">
-              <Settings size={16} /> Settings
+              <Settings size={20} /> Settings
           </DropdownMenuItem>
             </Link>
           <Link to={"/write"} className="cursor-pointer w-full">
             <DropdownMenuItem  className="flex cursor-pointer  gap-x-2 items-center">
-              <PenBoxIcon size={16} /> Write
+              <PenBoxIcon size={20} /> Write
             </DropdownMenuItem>
             
           </Link>
+          <button onClick={()=>logout()}  className="cursor-pointer w-full">
+            <DropdownMenuItem  className="flex cursor-pointer  gap-x-2 items-center">
+              <LogOut size={20} /> Logout
+            </DropdownMenuItem>
+            
+          </button>
          
         </DropdownMenuContent>
       </DropdownMenu>
@@ -144,7 +153,7 @@ if (e.key =="Enter") {
         onKeyDown={(e)=>Searcher(e)} >
           </CommandInput>
           <Link to={`/search/${data.input}`} onClick={()=>setOpen(false)}  className={`my-3 mr-8 p-1  cursor-pointer aspect-square transition-colors hover:bg-[var(--primary)] hover:text-white rounded-full `} >
-  <Search size={16} onClick={()=>dispatch(SearchedInsert({TopicSearch:false}))}/>
+  <Search size={20} onClick={()=>dispatch(SearchedInsert({TopicSearch:false}))}/>
     </Link>
         </div>
 {

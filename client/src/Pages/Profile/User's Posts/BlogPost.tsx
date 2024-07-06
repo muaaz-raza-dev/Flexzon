@@ -16,9 +16,9 @@ setIsFollower(data.FollowerOnly&&(credits.isLogined&& credits.Info.following.som
 
   
   return (
-    <main  className="flex flex-col py-2  lg:w-[30%] gap-y-6  max-lg:w-[35%] max-md:w-[95%]  md:h-[21rem] max-md:h-[27rem]    ">
+    <main  className="flex flex-col rounded  lg:w-[30%] gap-y-2  max-lg:w-[35%] max-md:w-[95%]  md:h-[21rem] max-md:h-[27rem]    ">
 
-        <Link    to={!data.FollowerOnly?`/blog/${data?._id}`:IsFollower?`/blog/${data?._id}`:`/user/${data?.author._id}`} className="flex justify-center object-fill w-full h-[50%]  ">
+        <Link    to={!data.FollowerOnly?`/blog/${data?._id}`:IsFollower?`/blog/${data?._id}`:`/user/${data?.author._id}`} className="flex justify-center object-fill w-full h-[45%]  ">
 
               <img
                 src={data?.banner || "/images/Records.png"}
@@ -29,14 +29,14 @@ setIsFollower(data.FollowerOnly&&(credits.isLogined&& credits.Info.following.som
               />
            
         </Link>
-<div className="h-[50%]">
+<div className="h-[45%] ">
 
      <Link to={!data.FollowerOnly?`/blog/${data?._id}`:IsFollower?`/blog/${data?._id}`:`/user/${data?.author._id}`} className="h-[40%]">
         <h1 className="text-2xl   font-bold ">{data?.title}</h1>
      </Link>
-        <p className=" h-[60%] text-gray-600 text-lg overflow-hidden break-words">{data?.subTitle.slice(0,120)|| ""}...</p>
+        <p className=" h-[60%] text-gray-600 text-lg overflow-hidden break-words">{data?.subTitle.slice(0,60)|| ""}...</p>
         </div>
-        <div className="flex w-full">
+        <div className="flex w-full h-[10%]">
 
        
         <section className="flex items-center w-full py-2 gap-x-2">

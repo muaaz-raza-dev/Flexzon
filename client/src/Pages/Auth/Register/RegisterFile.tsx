@@ -13,7 +13,6 @@ const RegisterFile = () => {
     let data=useAppSelector(state=>state.auth)
     function inputHandler(purpose:string,e:ChangeEvent<HTMLInputElement|HTMLTextAreaElement>) {
           dispatch(AuthInsertion({purpose,[e.target.name]:e.target.value}))
-     
     }
   return (
     <section  className="min-h-[94vh] flex items-stretch text-white  ">
@@ -60,7 +59,7 @@ const RegisterFile = () => {
                 </div>
 
             </form>
-                        <Link to={"/auth/login"} className="font-bold text-white underline">Sign in to your account </Link>
+                        <Link to={"/auth/login"} className="font-bold max-md:text-white  md:text-black underline">Sign in to your account </Link>
         </div>
     </div>
 </section>

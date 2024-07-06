@@ -14,12 +14,12 @@ const HeroSection = () => {
   let {Creators} =useAppSelector(s=>s.landing)
   if (!isLogined) {
     return (
-      <div className="relative md:h-[90vh] max-md:h-[70vh] overflow-hidden before:absolute before:top-0 before:start-1/2 before:bg-[url('/images/mesh-gradient.png')] before:bg-no-repeat before:bg-top before:bg-cover before:w-full before:h-full before:-z-[1] before:transform before:-translate-x-1/2 
+      <div className="relative md:h-[80vh] max-md:h-[50vh] overflow-hidden before:absolute before:top-0 before:start-1/2 before:bg-[url('/images/mesh-gradient.png')] before:bg-no-repeat before:bg-top before:bg-cover before:w-full before:h-full before:-z-[1] before:transform before:-translate-x-1/2 
       dark:before:bg-[url('/images/mesh-gradient.png')] backdrop-blur-sm">
         <div className="my-2  mx-5 z-[999]">
         <Navbar transparent/>
         </div>
-  <div className=" max-w-[85rem] max-lg:h-full lg:h-[60%] mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-10">
+  <div className=" max-w-[85rem] max-lg:h-full mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-4">
  <HeroTitle/>
           <Meteors number={25}/>
     <div className="mt-5 max-w-3xl text-center mx-auto z-40">

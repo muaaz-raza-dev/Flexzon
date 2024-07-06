@@ -1,4 +1,4 @@
-import { Lock } from "lucide-react"
+import { Clover} from "lucide-react"
 import {
   Tooltip,
   TooltipContent,
@@ -11,7 +11,7 @@ const RestrictionIcon:React.FC<{Info:boolean}> = ({Info}) => {
             <TooltipProvider>
     <Tooltip>
       <TooltipTrigger asChild>
-    <Lock  color="gray" size={20}/> 
+    <Clover   color="gray" size={20}/> 
       </TooltipTrigger>
       <TooltipContent>
         <p>{Info?"Blog is restricred for only followers , Follow to access blog":"fasdf"}</p>

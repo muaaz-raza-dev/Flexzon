@@ -19,16 +19,13 @@ interface IblogProp {
 export const PostBox: FC<IblogProp> = ({ data ,Follower}) => {
 
   return (
-  
       <section className="flex flex-col border-b pb-6 justify-between md:w-full max-md:w-[95%] items-start rounded-lg gap-2 ">
-        <Link
-          to={`/user/${data?.author?._id ? data?.author?._id : ""}`}
-          className="flex items-center    gap-x-2 h-full"
-        >
+        <Link to={`/user/${data?.author?._id ? data?.author?._id : ""}`}
+          className="flex items-center    gap-x-2 h-full" >
           <Avatar className="z-20 w-7 h-7 bg-black object-contain aspect-square">
             <AvatarImage
               src={data?.author?.avatar || "/images/anonymous.png"}
-              className="z-10 rounded-full h-full aspect-square object-contain"
+              className="z-10 rounded-full h-full aspect-square object-cover"
               loading="lazy"
             />
           </Avatar>
@@ -65,21 +62,10 @@ export const PostBox: FC<IblogProp> = ({ data ,Follower}) => {
               <h1 className="BFont font-black max-h-[90%] w-full overflow-clip  md:text-3xl max-md:text-xl">
                 {data?.title}
               </h1>
-              {data.subTitle? 
               <p className="md:text-[1.2rem] max-md:text-[1rem] w-full break-words text-gray-600 text-ellipsis  overflow-hidden">
-                {data?.subTitle?.slice(0, 70)}...
-               
+                {data.subTitle ? data?.subTitle?.slice(0, 70) :data.content.slice(0, 150)  }...
               </p>
-              :
-                <p
-                  className="text-[1.2rem] w-full  break-words text-gray-700 text-ellipsis  overflow-hidden"
-                  dangerouslySetInnerHTML={{
-                    __html: data.content.slice(0, 150)
-                  }}
-                ></p>
-               } 
             </Link>
-
             <section className="flex items-end h-[40%]  justify-between w-full gap-x-4">
               <div className="flex items-center gap-x-3">
                 <p className=" px-2 py-0.5  rounded-md ">
@@ -89,9 +75,7 @@ export const PostBox: FC<IblogProp> = ({ data ,Follower}) => {
              
               </div>
               <section className="flex items-center gap-x-4">
-                {data.FollowerOnly&&
-<RestrictionIcon Info={data.FollowerOnly}/>
-                }
+                {data.FollowerOnly&&  <RestrictionIcon Info={data.FollowerOnly}/> }
                 <SaveBtn _id={data._id} size={20}/>
                 <div className="flex items-center gap-1 text-gray-600">
                 <LikeBtn _id={data._id} size={20}/>

@@ -59,6 +59,7 @@ const [ImageState, setImageState] = useState<{uri:string,blob?:any}>({uri:Info.a
 
   let dispatch = useAppDispatch()
   let {avatar} =Info
+  const [loading, setloading] = useState(false)
   let {username,email,bio,Name,contact,dob,website,gender,Links}=InputState
   let {mutate,isLoading} =useMutation({mutationKey:"Save",mutationFn:()=>EditInfo({Name,username,bio,email,avatar,contact,dob,website,gender,Links,interests:Info.interests}) ,
 onSuccess() {
@@ -84,7 +85,7 @@ function ChangeHandler <T>({e,payload}:IchangeHandlerInput<T>){
         <div className="flex items-center gap-x-2">
 
         <Avatar className="w-16 h-16 ">
-            <AvatarImage src={ImageState.uri} className="object-contain bg-[var(--primary)] w-full "/>
+            <AvatarImage src={ImageState.uri} className="object-cover bg-[var(--primary)] w-full h-full"/>
             </Avatar>
             <input type="file" hidden id="ImageUpload" onChange={(e)=>{
               if (e.target.files) {
@@ -103,11 +104,21 @@ function ChangeHandler <T>({e,payload}:IchangeHandlerInput<T>){
   </Button>
         {
           ImageState.uri!=Info.avatar&&
-          <Button  className="bg-[var(--secondary)] hover:bg-[var(--primary)] hover:text-white text-white" onClick={()=>UploadImage(ImageState.blob).then(data=>{
+          <Button  disabled={loading} className="bg-[var(--secondary)] hover:bg-[var(--primary)] hover:text-white text-white" onClick={()=>
+            {setloading(true)
+              UploadImage(ImageState.blob).then(data=>{
           dispatch(CreditsInsertion({avatar:data.url})) 
-          setImageState({uri:data.url,blob:""})}
-          )}>
-         Upload Photo
+          setImageState({uri:data.url,blob:""})
+        }
+      ).finally(()=>{
+        setloading(false)
+        mutate()
+      })
+    }
+          }>
+            {loading? <LightLoader/>:
+         "Upload Photo"
+            }
 </Button>
             }
             </div>

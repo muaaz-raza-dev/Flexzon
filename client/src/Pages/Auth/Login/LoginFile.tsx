@@ -8,20 +8,19 @@ import Cookies from "js-cookie";
 import { ChangeEvent } from "react";
 import { toast } from "react-hot-toast";
 import { useMutation } from "react-query";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 
 const LoginFile = () => {
   let dispatch = useAppDispatch();
   let dataAuth=useAppSelector(state=>state.auth)
-  let navigate= useNavigate()
   let {mutate,isLoading}= useMutation({mutationKey:"Login",mutationFn:()=>Login(dataAuth.login),onSuccess:(data)=>{
  if (data.success===true) {
         toast.success("Logined to your account")
         Cookies.set("Records_session",data.token,{expires: new Date(Date.now() + 2.628e9)})
         dispatch(CreditsInsertion({isLogined:true,Info:{...Credits.Info,...data.payload}}))
         dispatch(insertion({tabs:data.payload.interests}))
-        navigate("/")
+        location.pathname="/"
       }
       else{
         toast.error(data.msg)
@@ -84,8 +83,9 @@ function inputHandler(purpose:string,e:ChangeEvent<HTMLInputElement>) {
               />
             </div>
             <div className="flex justify-between w-full text-right">
-              <Link to={"/auth/register"} className="underline">Create new account</Link>
-              <Link to={"/auth/Forgot"} className="cursor-pointer">Forgot password?</Link>
+              
+              <Link to={"/auth/register"} className="cursor pointer font-bold max-md:text-white  md:text-black underline">Create new account</Link>
+              <Link to={"/auth/Forgot"} className="cursor-pointer font-bold max-md:text-white  md:text-black underline">Forgot password?</Link>
               </div>
               </div>
 

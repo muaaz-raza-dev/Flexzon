@@ -1,10 +1,8 @@
+import useLogout from "@/Queryfunctions/Hooks/useLogout"
 import { useAppDispatch, useAppSelector } from "@/app/ReduxHooks"
-import { CreditsInsertion } from "@/app/Slices/CredentialSlice"
 import { SettingInsert } from "@/app/Slices/SettingsSlice"
-import { InitialCreditsState } from "@/app/middlewares/functions/InitialCreditsState"
-import Cookies from "js-cookie"
 import {BarChart4,  BellRing, Briefcase, LogOut, User } from "lucide-react"
-import { Link, useNavigate } from "react-router-dom"
+import { Link } from "react-router-dom"
 
 const SettingsSidebar = () => {
         let{tabs,selectedTab} =useAppSelector(state=>state.settings)
@@ -42,15 +40,9 @@ else if (route =="/notifications") {
   }
 }
 const LogOutBtn = ()=>{
-  let dispatch =useAppDispatch()
-        let navigate =useNavigate()
+  let logout =useLogout()
 return (
-        <button onClick={()=>{
-              Cookies.remove("Records_session")
-              dispatch(CreditsInsertion({isLogined:false,Info: InitialCreditsState   }))
-              navigate("/")
-        }
-        } className="w-full flex gap-x-2 hover:bg-gray-200 transition md:p-2 max-md:p-0.5 rounded    text-red-500 "><LogOut/> 
+        <button onClick={()=>logout()} className="w-full flex gap-x-2 hover:bg-gray-200 transition md:p-2 max-md:p-0.5 rounded    text-red-500 "><LogOut/> 
         <p className="max-md:hidden">
 Log out
         </p>

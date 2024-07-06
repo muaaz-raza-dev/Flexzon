@@ -36,15 +36,14 @@ const TopicDialog:FC<TopicDialog> = ({title,loading}) => {
        dispatch(AuthInsertion({purpose:"register", avatar:data.url}))
        Registeration(Auth.register).then(data=>{
          if (data.success===true) {
-        toast.success("Logined to your account")
         toastShadcn({    title: "Successfully created your profile .",
           description: "Now you can personlaize your email , social media handles and more...",
           action: <Link to={"/profile/settings"} >Go to settings</Link>,})
         Cookies.set("Records_session",data.token,{expires:1.296e+9})
         dispatch(CreditsInsertion({isLogined:true,Info:{...Credits.Info,...data.payload}}))
         dispatch(insertion({tabs:data.payload.interests}))
-        navigate("/")
         dispatch(AuthInsertion({purpose:"register", Name:"",bio:"",email:"",avatar:"",Topics:[],username:"",password:"",}))
+        location.pathname ="/"
         }
         else{
           toast.error(data.msg)

@@ -46,11 +46,8 @@ HandleSlide(0)
     else if (containerscrollL+offset<50) setRightorLeft("Right")
   }
   return (
-    <div className="flex w-full center  sticky top-0 h-14   max-md:pl-2 rounded-md z-[30] ">
-    
-       
-  
-   <div className={` px-4 bg-white z-10 absolute left-2 w-8 center  ${   ( RightorLeft=="Left"||RightorLeft=="both")?" visible":"invisible"}`}>
+    <div className="flex w-full center  sticky top-0 h-14   max-md:pl-2 rounded-md z-[30] bg-[var(--bg)]">
+   <div className={` px-4 bg-[var(--bg)] z-10 absolute left-2 w-8 center  ${   ( RightorLeft=="Left"||RightorLeft=="both")?" visible":"invisible"}`}>
         <button onClick={()=>HandleSlide(-200)} className=" rounded bg-[var(--primary)] text-white hover:bg-slate-600 z-20  aspect-square HeaderLShadow   p-2 "><ChevronRight size={16}/></button>
       </div>
     <section className=" px-1 overflow-x-auto relative  overflow-y-hidden pt-3   py-2 flex gap-x-4 

@@ -16,7 +16,7 @@ const PuserInfoFile:FC = () => {
         <section className="lg:w-[75%] max-lg:w-[85%] max-md:w-[95%] max-sm:w-[100%] flex justify-between max-md:flex-col items-center gap-y-4 ">
 <div className="w-1/2 flex justify-center ">
 <div className=" w-48 aspect-square rounded-full bg-gray-400">
-<img src={userState.Info.avatar||"/images/muaaz.png"} alt="profile picture" className="w-full aspect-square rounded-full" />
+<img src={userState.Info.avatar||"/images/muaaz.png"} alt="profile picture" className="w-full aspect-square rounded-full object-cover" />
 </div>
 </div>
 
@@ -34,13 +34,13 @@ const PuserInfoFile:FC = () => {
   </Button>
 <ProfileDetails/>
         </div>
-        <div className="flex max-md:w-[95%] md:w-[80%] justify-between">
-    <b>{userState.Posts.length} blogs   </b>
+        <div className="flex max-md:w-[95%] md:w-[80%] gap-5">
+    <b className="">{userState.Posts.length} blogs   </b>
     <FollowerandFollowingDialog data={userState.Follower} >
-    <b>{userState.Follower.length} Follower{userState.Follower.length>1&&"s"}</b>
+    <b className="hover:underline transition-all underline-offset-1">{userState.Follower.length} Follower{userState.Follower.length>1&&"s"}</b>
     </FollowerandFollowingDialog>
     <FollowerandFollowingDialog data={userState.Following}>
-    <b>{userState.Following.length} Following</b>
+    <b className="hover:underline transition-all underline-offset-1">{userState.Following.length} Following</b>
     </FollowerandFollowingDialog>
 </div>
 <p className="text-gray-500">
