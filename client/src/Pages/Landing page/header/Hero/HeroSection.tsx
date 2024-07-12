@@ -19,11 +19,11 @@ const HeroSection = () => {
         <div className="my-2  mx-5 z-[999]">
         <Navbar transparent/>
         </div>
-  <div className=" max-w-[85rem] max-lg:h-full mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-4">
+  <div className=" max-w-[85rem] max-lg:h-full mx-auto px-4 sm:px-6 lg:px-8 max-md:pt-12 md:pt-24 pb-4">
  <HeroTitle/>
           <Meteors number={25}/>
     <div className="mt-5 max-w-3xl text-center mx-auto z-40">
-      <p className="md:text-lg max-md:text-md text-black lg:text-xl"> Your flexible platform for sparking ideas, sharing blogs, and connecting with creators. Craft effortlessly and share seamlessly – your creative journey simplified.</p>
+      <p className="md:text-xl max-md:text-md text-black font-medium lg:text-xl"> Your flexible platform for sparking ideas, sharing blogs, and connecting with creators. Craft effortlessly and share seamlessly – your creative journey simplified.</p>
     </div>
 
     {/* <!-- Buttons --> */}

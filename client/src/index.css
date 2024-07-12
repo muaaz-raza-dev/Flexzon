@@ -287,9 +287,15 @@ backdrop-filter: blur( 5px );
 -webkit-backdrop-filter: blur( 5px );
 border-radius: 10px;
 }
-
+.heroCardsBg {
+  background-color: rgba(255, 250, 240, 0.11);
+  color: var(--primary);
+  box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+  backdrop-filter: blur( 5px );
+  -webkit-backdrop-filter: blur( 5px );
+  border-radius: 10px;
+  }
 .HeadlineBG{
-  
   background:#f03d5a ;
   object-position: center;
   image-resolution:100%;
