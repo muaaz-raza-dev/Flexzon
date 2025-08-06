@@ -3,15 +3,13 @@ import { Link } from "react-router-dom"
 import './Hero.css'
 
 import Navbar from "@/Essentials/Navbar/Navbar"
-import Meteors from "@/components/magicui/meteors"
 import HeroTitle  from "./HeroTitle"
 import HeroDisplay_animations from "./HeroDisplay_animations"
 import ShimmerButton from "@/components/magicui/shimmer-button"
 import { GitHubLogoIcon } from "@radix-ui/react-icons"
-import AvatarCircles from "@/components/magicui/avatar-circles"
+
 const HeroSection = () => {
   let {isLogined}=useAppSelector(state=>state.credits)
-  let {Creators} =useAppSelector(s=>s.landing)
   if (!isLogined) {
     return (
       <div className="relative md:h-[100vh] max-md:h-[50vh] overflow-hidden before:absolute before:top-0 before:start-1/2 before:bg-[url('/images/mesh-gradient.png')] before:bg-no-repeat before:bg-top before:bg-cover before:w-full before:h-full before:-z-[1] before:transform before:-translate-x-1/2 
@@ -21,7 +19,6 @@ const HeroSection = () => {
         </div>
   <div className=" max-w-[85rem] max-lg:h-full mx-auto px-4 sm:px-6 lg:px-8 max-md:pt-12 md:pt-24 pb-4">
  <HeroTitle/>
-          <Meteors number={25}/>
     <div className="mt-5 max-w-3xl text-center mx-auto z-40">
       <p className="md:text-xl max-md:text-md text-black font-medium lg:text-xl"> Your flexible platform for sparking ideas, sharing blogs, and connecting with creators. Craft effortlessly and share seamlessly – your creative journey simplified.</p>
     </div>
