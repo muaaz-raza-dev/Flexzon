@@ -12,7 +12,7 @@ const HeroSection = () => {
   let {isLogined}=useAppSelector(state=>state.credits)
   if (!isLogined) {
     return (
-      <div className="relative md:h-[100vh] max-md:h-[50vh] overflow-hidden before:absolute before:top-0 before:start-1/2 before:bg-[url('/images/mesh-gradient.png')] before:bg-no-repeat before:bg-top before:bg-cover before:w-full before:h-full before:-z-[1] before:transform before:-translate-x-1/2 
+      <div className="relative md:h-[80vh] max-md:h-[50vh] overflow-hidden before:absolute before:top-0 before:start-1/2 before:bg-[url('/images/mesh-gradient.png')] before:bg-no-repeat before:bg-top before:bg-cover before:w-full before:h-full before:-z-[1] before:transform before:-translate-x-1/2 
       dark:before:bg-[url('/images/mesh-gradient.png')] backdrop-blur-sm">
         <div className="my-2  mx-5 z-[999]">
         <Navbar transparent/>
